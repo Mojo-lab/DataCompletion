@@ -44,6 +44,20 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+.parallax_three {
+  /* The image used */
+  background-image: url("static/images/image4.jpg");
+  /* Set a specific height */
+  min-height: 730px;
+  height:100%;
+  width:100%;
+  /* Create the parallax scrolling effect */
+  background-color: red;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .container_text {
   position: relative;
   text-align: center;
@@ -56,31 +70,50 @@
   background: rgb(0, 0, 0); /* Fallback color */
   background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
   color: #f1f1f1; /* Grey text */
-  width: 90%; /* Full width */
-  padding: 70px; /* Some padding */
+  width: 100%; /* Full width */
+<!--  padding: 70px; /* Some padding */-->
+
+}
+
+.container_text .center {
+ position: absolute; /* Position the background text */
+  top: 30; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  width: 100%; /* Full width */
+<!--  padding: 20px; /* Some padding */-->
 
 }
 
 </style>
-  <body style="font-family:Times New Roman;background-image: url(static/images/background.jpg);background-repeat: no-repeat;background-size: contain;">
-  <br>
-  <br>
+  <body style="font-family:Times New Roman;">
     <center>
-      <div class="user_testimony">
+      <div style="background-image: url(static/images/background.jpg);height:100%;width:100%;background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+        <div class="user_testimony">
     <img style="border-radius:50%;width:90px;height:90px;background-size:90px 0px;" src="static/images/logo.png" alt="ValueFill Logo">
-    <h1 style="font-size: 35px;">ValueFill</h1>
+    <h1 style="font-size: 35px;color:white;">ValueFill</h1>
         </div>
-      <h1 style="font-size: 65px;color:white;">Increrase data accuracy with ValueFill</h1>
-    <p style="font-size: 35px;color:white;">Get the most accurate predictions from your datasets.</p>
-    <br>
+    <div class="container_text">
+      <div class="center">
+      <h1 style="font-size: 65px;">Increase data accuracy with ValueFill</h1>
+    <p style="font-size: 35px;">Missing values are like missing puzzle pieces, we help you get the most accurate predictions from your datasets.</p>
+      <br>
       <br>
       <div class="email">
       <form action="action_page.php">
-        <input style="font-size: 35px;" type="text" id="email" name="email" value="Enter your email..."><br><br>
+        <input style="font-size: 20px;" type="text" id="email" name="email" value="Enter your email..."><br><br>
   <input style="font-size: 20px;" type="submit" value="Join our waitlist">
       </form>
     </div>
-      <br><br>
+    </div>
+
+      </div>
+        </div>
+<!--      <br><br>-->
     <div class="user_testimony">
       <div class="user_image">
     <img style="border-radius:50%;width:160px;height:160px;background-size:90px 0px;" src="static/images/gova.png" alt="govardhan">
@@ -107,7 +140,7 @@
 </div>
         </div>
       <div class="container_text">
-  <div class="parallax_two"></div>
+  <div class="parallax_three"></div>
         <div class="client2testimony" style="background-color:red;width:50%;">
   <div class="content">
     <h3 style="padding-left: 40px;">"I now get the most accurate results with a fraction of the effort."</h3>
