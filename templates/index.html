@@ -1,45 +1,111 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ValueFill</title>
   </head>
   <style>
       .user_testimony {
         display: flex;
       }
-
       .user_image {
-<!--        flex-basis: 5%;-->
         padding-left:40px;
       }
       .user_text {
         font-size: 20px;
         padding-left: 40px;
       }
-    </style>
-  <body style="background-color:#FFFAFA;font-family:Times New Roman;">
-    <center>
-    <h1>ValueFill</h1>
-      <h1>Increrase data accuracy with ValueFill</h1>
-    <p>Get the most accurate predictions from your datasets.</p>
 
+      .parallax {
+  /* The image used */
+  background-image: url("static/images/image2.jpg");
+  /* Set a specific height */
+  width:100%;
+  height:100%;
+  min-height: 730px;
+
+  /* Create the parallax scrolling effect */
+  background-color: red;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.parallax_two {
+  /* The image used */
+  background-image: url("static/images/image1.jpg");
+  /* Set a specific height */
+  min-height: 730px;
+  height:100%;
+  width:100%;
+  /* Create the parallax scrolling effect */
+  background-color: red;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.container_text {
+  position: relative;
+  text-align: center;
+  color: white;
+
+}
+.container_text .content {
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+<!--  width: 100%; /* Full width */-->
+  padding: 40px; /* Some padding */
+
+}
+
+</style>
+  <body style="font-family:Times New Roman;background-image: url(static/images/background.jpg);background-repeat: no-repeat;background-size: contain;">
+  <br>
+  <br>
+    <center>
+      <div class="user_testimony">
+    <img style="border-radius:50%;width:90px;height:90px;background-size:90px 0px;" src="static/images/logo.png" alt="ValueFill Logo">
+    <h1 style="font-size: 35px;">ValueFill</h1>
+        </div>
+      <h1 style="font-size: 65px;color:white;">Increrase data accuracy with ValueFill</h1>
+    <p style="font-size: 35px;color:white;">Get the most accurate predictions from your datasets.</p>
+    <br>
+      <br>
+      <div class="email">
+      <form action="action_page.php">
+        <input style="font-size: 35px;" type="text" id="email" name="email" value="Enter your email..."><br><br>
+  <input style="font-size: 20px;" type="submit" value="Join our waitlist">
+      </form>
+    </div>
+      <br><br>
     <div class="user_testimony">
       <div class="user_image">
     <img style="border-radius:50%;width:160px;height:160px;background-size:90px 0px;" src="static/images/gova.png" alt="govardhan">
     </div>
       <div class="user_text">
-      <h3>"ValueFill has revolutionized my data analysis process."</h3>
-        <p>- Govardhan</p>
+      <h3 style="font-size: 35px;">"ValueFill has revolutionized my data analysis process."</h3>
+        <p style="font-size: 25px;">- Govardhan</p>
         </div>
     </div>
-      <img style="border-radius:5%;" src="static/images/dashboard.png" alt="dashboard">
-    <h1>Improve data accuracy.</h1>
-  <p>ValueFill helps to eliminate missing values and increase accuracy in datasets. Our algorithm identifies potential issues and automatically fills in missing values.</p>
-  <img style="border-radius:5%;" src="static/images/cube_ai.png" alt="Cube AI">
-  <h1>Streamline data analysis.</h1>
-  <p>ValueFill ensures that your data analysis is more accurate, reliable, and efficient.</p>
-  <p>With our algorithm, you get faster, more accurate results.</p>
-  <img style="border-radius:5%;" src="static/images/ai.png" alt="AI">
-    <br></br>
+      <div class="container_text">
+      <div class="parallax"></div>
+
+    <div class="content" >
+      <h1>Improve data accuracy.</h1>
+  <p>
+    ValueFill helps to eliminate missing values and increase accuracy in datasets. Our algorithm identifies potential issues and automatically fills in missing values.</p>
+      </div>
+      </div>
+      <div class="container_text">
+        <div class="parallax_two"></div>
+        <div class="content">
+  <h1 >Streamline data analysis.</h1>
+  <p >ValueFill ensures that your data analysis is more accurate, reliable, and efficient.With our algorithm, you get faster, more accurate results.</p>
+</div>
+        </div>
   <div class="client2testimony" style="background-color:red;width:50%;">
   <h3 style="padding-left: 40px;">"I now get the most accurate results with a fraction of the effort."</h3>
   <img style="border-radius:50%;width:160px;height:160px;background-size:90px 0px;" src="static/images/gova.png" alt="govardhan">
