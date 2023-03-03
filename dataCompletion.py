@@ -76,6 +76,20 @@ def homepage():
                         except:
                             raise Exception
 
+                    def eod_impute(data_pure, numerical_features):
+                        try:
+                            for i in numerical_features:
+                                std_before_eod_replacement = np.round(data_pure[i].std(), 4)
+                                mean = data_pure[i].mean()
+                                extreme = mean + 3 * data_pure[i].std()
+                                data_pure[i].fillna(extreme, inplace=True)
+                                std_After_eod_replacement = np.round(data_pure[i].std(), 4)
+                                print(
+                                    "replaced the feature {} with End of Distribution and the standard deviation befor applying is: {} and after applying is: {}".format(
+                                        i, std_before_eod_replacement, std_After_eod_replacement))
+                        except:
+                            raise Exception
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
