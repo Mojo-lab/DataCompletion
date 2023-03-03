@@ -41,7 +41,37 @@ def demo():
                 df = pd.read_excel(filepath,engine="openpyxl")
             print("***"*30)
             print(df)
-            return render_template('eda.html')
+            null_values = pd.DataFrame(df.isnull().sum(),columns = ['values'])
+            print(null_values)
+            null_values = null_values[null_values['values'] != 0]
+            xValues = list(null_values.index)
+            yValues = list(null_values['values'])
+            piedata = {"xValues":xValues,"yValues":yValues,
+                    "barColors":["#b91d47","#00aba9","#2b5797","#e8c3b9","#1e7145"]}
+
+            bardata = {"xValues":["Not Null Values","Null Values"],"yValues":[(df.shape[0]*df.shape[1])-sum(yValues),sum(yValues)],
+                    "barColors":["#b91d47","#2b5797"]}
+
+            group_not_null_values = []
+            for idx in yValues:
+                group_not_null_values.append(len(df) - idx)
+
+            groupedbardata = [
+                {
+                    "label": 'Not Null Values',
+                    "data": group_not_null_values,
+                    "borderColor": "#b91d47",
+                    "backgroundColor": "#b91d47"
+                },
+                {
+                    "label": 'Null Values',
+                    "data": yValues,
+                    "borderColor": "#2b5797",
+                    "backgroundColor": "#2b5797"
+                }]
+
+            data = {"bardata":bardata,"piedata":piedata,'groupedbardata':groupedbardata,'grouplabels':xValues}
+            return render_template('eda.html',data = data)
         else:
             flash("Wrong file format!!!")
             return redirect(request.url)

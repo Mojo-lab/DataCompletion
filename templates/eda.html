@@ -6,18 +6,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
+<center>
 <h1>ValueFill's Analysis</h1>
+
+<canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+ <script>
+var xValues = {{ data.bardata.xValues|tojson }};
+var yValues = {{ data.bardata.yValues|tojson }};
+var barColors = {{ data.bardata.barColors|tojson }};
+
+new Chart("myChart1", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues,
+      borderWidth: 1
+    }]
+  },
+  options: {
+  legend: {
+        display: false
+    },
+    title: {
+      display: true,
+      text: "Comparision of null values in the dataset"
+    }
+  }
+});
+ </script>
 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 <script>
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yValues = [55, 49, 44, 24, 15];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
+var xValues = {{ data.piedata.xValues|tojson }};
+var yValues = {{ data.piedata.yValues|tojson }};
+var barColors = {{ data.piedata.barColors|tojson }};
 
 new Chart("myChart", {
   type: "doughnut",
@@ -29,13 +52,56 @@ new Chart("myChart", {
     }]
   },
   options: {
+  legend: {
+        display: true,
+        position: 'right'
+    },
     title: {
       display: true,
       text: "Missing Values Proportion"
+    },
+  }
+});
+</script>
+<canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+<script>
+var datagroup = {{ data.groupedbardata|tojson }};
+var grouplabels = {{ data.grouplabels|tojson }};
+new Chart("myChart2", {
+  type: "horizontalBar",
+  data: {
+    labels: grouplabels,
+    datasets: datagroup
+  },
+  options: {
+  scales: {
+            xAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 100
+                }
+            }],
+            yAxes: [{
+                stacked: false
+            }]
+        },
+  indexAxis: 'y',
+  legend: {
+        display: true,
+        position: 'right'
+    },
+  elements: {
+      bar: {
+        borderWidth: 2,
+      }
+    },
+    title: {
+      display: true,
+      text: "Missing values in each columns"
     }
   }
 });
 </script>
-
+</center>
 </body>
 </html>
