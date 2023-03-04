@@ -78,6 +78,17 @@ def demo():
     else:
         return render_template("demo.html")
 
+@app.route('/fillna',methods = ['GET','POST'])
+def fillnaValue():
+    colours = ['Mean','Median','Mode','None']
+    cols = ['ColA','ColB','ColC','ColD']
+    if request.method == 'POST':
+        fill_methods = []
+        for val in request.values.items():
+            fill_methods.append(val)
+        print("%%"*30)
+        print(fill_methods)
+    return render_template('fillna.html',colours=colours,cols=cols)
 
 if __name__ == '__main__':
     app.debug = True
