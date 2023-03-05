@@ -3,6 +3,10 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import re
 from werkzeug.utils import secure_filename
 import pandas as pd
+<<<<<<< HEAD
+=======
+from flask import Flask, jsonify, request
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from urllib.parse import quote
@@ -21,6 +25,10 @@ app.secret_key = config.secret_key
 
 db = SQLAlchemy(app)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
 class signup(db.Model):
     __tablename__ = 'signup'
     id = db.Column('id',db.Integer, primary_key = True)
@@ -35,6 +43,10 @@ class signup(db.Model):
         self.name = name
         self.password = password
         self.usr_id = usr_id
+<<<<<<< HEAD
+=======
+
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -44,7 +56,10 @@ def allowed_file(filename):
 def homepage():
     return render_template('index.html')
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
 def is_valid_email(email):
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     if re.match(pattern, email):
@@ -52,7 +67,10 @@ def is_valid_email(email):
     else:
         return False
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
 def is_valid_username(username):
     pattern = r'[^A-Za-z]+'
     print(re.findall(pattern, username))
@@ -67,7 +85,11 @@ def check_password_strength(password):
     if len(password) < 8:
         msg = "Password must be at least 8 characters long"
         return False, msg
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
     # Check complexity
     if not re.search(r'[A-Z]', password):
         msg = "Password must contain at least one uppercase letter"
@@ -79,17 +101,98 @@ def check_password_strength(password):
         msg = "Password must contain at least one digit"
         return False, msg
     if not re.search(r'[@#$%^&+=]', password):
+<<<<<<< HEAD
         msg = "Password must contain at least one special character (@#$%^&+=)"
         return False, msg
 
+=======
+        msg =  "Password must contain at least one special character (@#$%^&+=)"
+        return False, msg
+    
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
     # Check exclusions
     if re.search(r'password', password, re.IGNORECASE):
         msg = "Password must not contain the word 'password'"
         return False, msg
+<<<<<<< HEAD
 
     # All checks passed
     return True, "Password is strong"
 
+=======
+    
+    # All checks passed
+    return True, "Password is strong"
+
+@app.route('/register', methods =['GET', 'POST'])
+def register():
+    msg = ''
+    '''Check if all required fields are entered if not pop-up not entered condition'''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
+        username = request.form['username']
+        psw = request.form['password']
+        email = request.form['email']
+        UserId = request.form['UserId']
+        '''Check whether the email is a valid email or not if not make them enter the valid email'''
+        if is_valid_username(username):
+            if is_valid_email(email):
+                res,msg = check_password_strength(psw)
+                if res:
+                    flag = 0
+                    for i,d in enumerate(db.session.query(signup).all()):
+                        dd = d.__dict__
+                        if dd['email_id'] == email:
+                            msg = 'Account already exists Email Id taken!'
+                            flag = 1
+                            break
+                        if dd['usr_id'] == UserId:
+                            msg = "Username is already Taken"
+                            flag = 1
+                            break
+                    if flag == 0:
+                        pp = signup(
+                            usr_id = UserId,
+                            email_id = email,
+                            name = username,
+                            password = psw
+                        )
+                        db.session.add(pp)
+                        db.session.commit()
+                        msg = 'You have successfully registered !'
+            else:
+                msg = "Please enter a valid email address"
+        else:
+            msg = "Please enter a valid username. Only support character not interger or special characters"
+    elif request.method == 'POST':
+        msg = 'Please fill all the required fields from the form !'
+    return render_template('register.html', msg=msg)
+
+@app.route('/login', methods =['GET', 'POST'])
+def login():
+    msg = ''
+    flag = 0
+    print("Jellp login")
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+        email_id = request.form['email']
+        psw = request.form['password']
+        for i,d in enumerate(db.session.query(signup).all()):
+            dd = d.__dict__
+            if dd['email_id'] == email_id:
+                flag = 1
+                if dd['password'] == psw:
+                    msg = "Logged in successfully!"
+                    print(msg)
+                else:
+                    msg = "Password Incorrect"
+                    print(msg)
+        if flag == 0:
+            msg = "Unable to find the email ID. Please register if not"
+            print(msg)
+
+
+       
+    return render_template('login.html', msg=msg)
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
 
 
 @app.route("/demo", methods=['GET','POST'])
@@ -159,6 +262,7 @@ def demo():
 @app.route('/fillna',methods = ['GET','POST'])
 def fillnaValue():
     colours = ['Mean','Median','Mode','None']
+<<<<<<< HEAD
     col = session.get("Column_names")
     print(col)
     folder_path = session.get('folder_path')
@@ -166,6 +270,13 @@ def fillnaValue():
     download_file_status = ""
     downloadlink = ''
     downloadmessage = ''
+=======
+    cols = ['ColA','ColB','ColC','ColD']
+    col = session.get("Column_names")
+    folder_path = session.get('folder_path')
+    cols = eval(col)
+
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
     if request.method == 'POST':
         fill_methods = []
         print(request.values)
@@ -176,6 +287,7 @@ def fillnaValue():
             fill_methods.append(val)
         df = dataCompletion_fill.main(folder_path, col, fill_methods)
         print(df.isnull().sum())
+<<<<<<< HEAD
         df.to_csv(folder_path,index = False)
         download_file_status = "Download File"
         downloadlink = '/getdata'
@@ -276,9 +388,20 @@ def register():
 @app.route("/pricing")
 def pricing():
     return render_template("pricing.html")
+=======
+    else:
+        print("Method GET")   
+        # print(df.isnull().sum())
+
+    return render_template('fillna.html',colours=colours,cols=cols)
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
 
 if __name__ == '__main__':
     app.debug = True
     app.run()
     db.create_all()
+<<<<<<< HEAD
     app.app_context().push()
+=======
+    app.app_context().push()  
+>>>>>>> 25ffb132b27c942766182d9d71b604fe2db4f0b6
