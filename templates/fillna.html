@@ -51,29 +51,31 @@ tr:nth-child(even) {
     <form action = "/fillna" method = "post" enctype="multipart/form-data">
     <table>
         <tr>
-    <th>Column</th>
-    <th>Filling Method</th>
-  </tr>
-    {% for col in cols %}
+            <th>Column Name</th>
+                <th>Filling Method</th>
+        </tr>
+        {% for col in cols %}
         <tr>
-            <td>
-        <p>{{col}}</p>
-                </td>
-            <td>
-        <select name="{{col}}" method="GET" action="/">
-        {% for colour in colours %}
-            <option value="{{colour}}" SELECTED>{{colour}}</option>"
+            <th>
+                {{ col }}
+            </th>
+            <th>
+            {% for colour in colours %}
+                <input type="radio" id="{{colour}}__{{col}}" name="{{col}}" value="{{colour}}__{{col}}">
+                <label>{{colour}}</label>
+            {% endfor %}
+            </th>
+        </tr>
         {% endfor %}
-        </select>
-            </td>
-            </tr>
-    {% endfor %}
-        </table>
+    </table>
         <br><br>
         <input  type = "submit" value="Upload">
     </form>
     <br><br>
-<a href="/"><button class="button buttonblack">Home</button></a>
+    <h3>{{downloadmessage}}</h3>
+    <a href="{{ downloadlink }}">{{filestatus}}</a>
+    <br><br>
+    <a href="/"><button class="button buttonblack">Home</button></a>
 </center>
 </body>
 </html>
