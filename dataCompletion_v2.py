@@ -7,7 +7,7 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from urllib.parse import quote
-import config
+import config, dataCompletion_fill
 from sqlalchemy.dialects.mysql import LONGTEXT
 
 
@@ -176,8 +176,12 @@ def demo():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            try:
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            except PermissionError:
+                print("File already opened in another software")
             filepath = f'static/file_uploads/{filename}'
+            session['folder_path'] = filepath
             if 'csv' in filename:
                 df = pd.read_csv(filepath)
             else:
@@ -187,6 +191,7 @@ def demo():
             null_values = null_values[null_values['values'] != 0]
             xValues = list(null_values.index)
             yValues = list(null_values['values'])
+            session["Column_names"] = str(xValues)
             piedata = {"xValues":xValues,"yValues":yValues,
                     "barColors":["#b91d47","#00aba9","#2b5797","#e8c3b9","#1e7145"]}
 
@@ -223,12 +228,24 @@ def demo():
 def fillnaValue():
     colours = ['Mean','Median','Mode','None']
     cols = ['ColA','ColB','ColC','ColD']
+    col = session.get("Column_names")
+    folder_path = session.get('folder_path')
+    cols = eval(col)
+
     if request.method == 'POST':
         fill_methods = []
+        print(request.values)
+        folder_path = session.get('folder_path')
+        col = session.get("Column_names")
+        print(col)
         for val in request.values.items():
             fill_methods.append(val)
-        print("%%"*30)
-        print(fill_methods)
+        df = dataCompletion_fill.main(folder_path, col, fill_methods)
+        print(df.isnull().sum())
+    else:
+        print("Method GET")   
+        # print(df.isnull().sum())
+
     return render_template('fillna.html',colours=colours,cols=cols)
 
 if __name__ == '__main__':
