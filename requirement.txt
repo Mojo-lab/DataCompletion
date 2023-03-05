@@ -4,3 +4,5 @@ Flask-SQLAlchemy
 Werkzeug
 openpyxl
 Flask-Cors
+mysql-python
+mysqlclient
