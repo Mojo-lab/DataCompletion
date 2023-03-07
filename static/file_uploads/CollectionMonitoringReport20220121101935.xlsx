@@ -1,33 +1,33 @@
 Error,Name,Matter name,Status,Requested by,Schedule,Next scheduled date,Start Date,Type,File count,Data source assessed or collected,Reference ID
 NO,"Test Slack Connect (New data source  copy/paste workspace, select channel from dropdown)",USAID,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Jan 17, 2022 11:11 PM",Standalone Collection,612 (499.4 MB),1/1,CI403
-NO,Test Slack Connect (New data source  separate collection profile),USAID,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Jan 11, 2022 10:58 PM",Standalone Collection,1 (6.4 MB),1/1,CI402
-NO,Test Slack Connect (New data source),USAID,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Jan 11, 2022 10:56 PM",Standalone Collection,1 (6.4 MB),1/1,CI401
-YES,People Matter  MMT Email Collection  RITM4180387,People Matter  MMT Slack Collection  RITM4180387,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jan 11, 2022 12:13 AM",Matter Collection,1 (6.4 MB),0/1,CI400
+NO,Test Slack Connect (New data source  separate collection profile),USAID,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Jan 11, 2022 10:58 PM",Standalone Collection,,1/1,CI402
+NO,Test Slack Connect (New data source),USAID,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Jan 11, 2022 10:56 PM",Standalone Collection,,1/1,CI401
+YES,People Matter  MMT Email Collection  RITM4180387,People Matter  MMT Slack Collection  RITM4180387,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jan 11, 2022 12:13 AM",Matter Collection,,0/1,CI400
 NO,People Matter  MMT Slack Collection  RITM4180387,People Matter  MMT Slack Collection  RITM4180387,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jan 08, 2022 01:07 AM",Matter Collection,"4,602 (1.0 GB)",1/1,CI399
 NO,Slack Connect Test #7,USAID,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Dec 17, 2021 07:31 PM",Standalone Collection,488 (18.9 MB),1/1,CI398
-YES,Slack Connect Test #6,USAID,Failed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Dec 16, 2021 07:18 PM",Standalone Collection,1 (6.4 MB),0/1,CI397
+YES,Slack Connect Test #6,USAID,Failed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Dec 16, 2021 07:18 PM",Standalone Collection,,0/1,CI397
 NO,test slack connect #5,USAID,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Dec 13, 2021 09:46 PM",Standalone Collection,546 (21.4 MB),1/1,CI396
-YES,Nethys_RITM408562 wildcarded,Nethys,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Dec 08, 2021 03:16 AM",Matter Collection,1 (6.4 MB),0/67,CI395
+YES,Nethys_RITM408562 wildcarded,Nethys,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Dec 08, 2021 03:16 AM",Matter Collection,,0/67,CI395
 NO,test slack connect #4,TEST MATTER  Disregard!,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Dec 07, 2021 01:20 AM",Matter Collection,86 (5.2 MB),1/1,CI393
 NO,Nethys_RITM4085962 (3),Nethys,Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Dec 04, 2021 02:02 AM",Matter Collection,"30,109 (20.4 GB)",67/67,CI392
-YES,Nethys_RITM4085962 (2),Nethys,Partially Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Dec 04, 2021 01:37 AM",Matter Collection,1 (6.4 MB),0/67,CI391
-YES,Nethys_RITM4085962,Nethys,Not Started,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Dec 04, 2021 01:12 AM",Matter Collection,1 (6.4 MB),0/67,CI389
-NO,test slack connect #3,TEST MATTER  Disregard!,Not Started,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Dec 04, 2021 12:21 AM",Matter Assessment,1 (6.4 MB),0/1,AI390
+YES,Nethys_RITM4085962 (2),Nethys,Partially Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Dec 04, 2021 01:37 AM",Matter Collection,,0/67,CI391
+YES,Nethys_RITM4085962,Nethys,Not Started,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Dec 04, 2021 01:12 AM",Matter Collection,,0/67,CI389
+NO,test slack connect #3,TEST MATTER  Disregard!,Not Started,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Dec 04, 2021 12:21 AM",Matter Assessment,,0/1,AI390
 NO,test slack connect #2,TEST MATTER  Disregard!,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Dec 01, 2021 07:39 PM",Matter Collection,532 (21.7 MB),1/1,CI387
 YES,RITM4032090_AG (2),RITM4032090_Email_req_for_DKarp,Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Nov 23, 2021 05:07 PM",Matter Collection,"230,314 (131.1 GB)",1/1,CI386
 NO,RITM4032090_RP (2),RITM4032090_Email_req_for_DKarp,Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Nov 23, 2021 05:07 PM",Matter Collection,"265,956 (137.8 GB)",1/1,CI385
 NO,RITM4032090_AB (2),RITM4032090_Email_req_for_DKarp,Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Nov 23, 2021 05:06 PM",Matter Collection,"231,694 (119.6 GB)",1/1,CI384
-YES,RITM4032090_AB,RITM4032090_Email_req_for_DKarp,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 20, 2021 01:39 AM",Matter Collection,1 (6.4 MB),0/1,CI383
-YES,RITM4032090_RP,RITM4032090_Email_req_for_DKarp,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 20, 2021 01:37 AM",Matter Collection,1 (6.4 MB),0/1,CI382
-YES,RITM4032090_AG,RITM4032090_Email_req_for_DKarp,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 20, 2021 01:35 AM",Matter Collection,1 (6.4 MB),0/1,CI381
+YES,RITM4032090_AB,RITM4032090_Email_req_for_DKarp,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 20, 2021 01:39 AM",Matter Collection,,0/1,CI383
+YES,RITM4032090_RP,RITM4032090_Email_req_for_DKarp,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 20, 2021 01:37 AM",Matter Collection,,0/1,CI382
+YES,RITM4032090_AG,RITM4032090_Email_req_for_DKarp,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 20, 2021 01:35 AM",Matter Collection,,0/1,CI381
 NO,20200724a_CollectionForAnalysis,RITM2444212,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 24, 2020 10:52 PM",Matter Collection,"131,287 (86.4 GB)",2/2,CI36
-NO,test slack connect,TEST MATTER  Disregard!,Failed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Nov 15, 2021 07:47 PM",Matter Collection,1 (6.4 MB),0/1,CI380
+NO,test slack connect,TEST MATTER  Disregard!,Failed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Nov 15, 2021 07:47 PM",Matter Collection,,0/1,CI380
 NO,PBronx_PD_Slack_20211021v3,Project Bronx,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Oct 22, 2021 10:14 PM",Matter Collection,128 (12.0 MB),1/1,CI377
-NO,PBronx_PD_Slack_20211021v2,Project Bronx,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Oct 22, 2021 01:44 AM",Matter Collection,1 (6.4 MB),0/1,CI376
-YES,PBronx_PD_Slack_20211021,Project Bronx,Failed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Oct 21, 2021 09:25 PM",Matter Collection,1 (6.4 MB),0/1,CI375
+NO,PBronx_PD_Slack_20211021v2,Project Bronx,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Oct 22, 2021 01:44 AM",Matter Collection,,0/1,CI376
+YES,PBronx_PD_Slack_20211021,Project Bronx,Failed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Oct 21, 2021 09:25 PM",Matter Collection,,0/1,CI375
 NO,PBronxPDSlack_Collection,Project Bronx,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Oct 07, 2021 01:24 AM",Matter Collection,"1,336 (267.3 MB)",1/1,CI374
 NO,Project Bronx_OneDrive Collection Default Profile,Project Bronx,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Sep 30, 2021 10:23 PM",Matter Collection,"37,108 (27.0 GB)",1/1,CI373
-YES,Project Bronx_OneDrive Collection,Project Bronx,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Sep 30, 2021 02:23 AM",Matter Collection,1 (6.4 MB),0/1,CI372
+YES,Project Bronx_OneDrive Collection,Project Bronx,Failed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Sep 30, 2021 02:23 AM",Matter Collection,,0/1,CI372
 YES,RITM3838211_Search#1,RITM3838211,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Sep 23, 2021 03:21 AM",Matter Collection,"85,025 (60.6 GB)",3/3,CI371
 NO,CKC_Mindy_Zhou_Box_Assessment,USAID,Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Sep 09, 2021 09:45 PM",Standalone Assessment,"441,905 (311.8 GB)",1/1,AI369
 NO,CKC_Violet_Chung_Box_Assessment,USAID,Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Sep 09, 2021 09:43 PM",Standalone Assessment,"989,153 (939.4 GB)",1/1,AI368
@@ -36,19 +36,19 @@ NO,RITM3745541_Slack_Export,RITM3745541_Slack_Export,Completed,Lauren Kaplan,Imm
 NO,CanooBox_Folders20210830,Canoo Inc.,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Aug 31, 2021 03:48 AM",Matter Collection,"33,002 (36.7 GB)",1/1,CI365
 YES,Canoo_Slack_20210818v2Static Collector,Canoo Inc.,Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Aug 22, 2021 01:42 PM",Matter Collection,"18,046 (5.2 GB)",7/7,CI364
 NO,CKC_Slack_Collection_20210818v2 Static collector,CKC Matter,Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Aug 22, 2021 12:53 PM",Matter Collection,746 (100.4 MB),3/3,CI363
-NO,Canoo_Slack_20210818v2,Canoo Inc.,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Aug 20, 2021 11:06 PM",Matter Collection,1 (6.4 MB),0/7,CI362
+NO,Canoo_Slack_20210818v2,Canoo Inc.,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Aug 20, 2021 11:06 PM",Matter Collection,,0/7,CI362
 NO,CKC_Slack_Collection_20210818v2,CKC Matter,Partially Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Aug 20, 2021 11:04 PM",Matter Collection,154 (7.2 MB),0/3,CI361
-YES,Canoo_Slack_20210818,Canoo Inc.,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Aug 19, 2021 04:32 AM",Matter Collection,1 (6.4 MB),0/8,CI357
-YES,New York State Covid19_FMNO_111369_July_1_2021_present,New York State Covid19,Failed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Aug 02, 2021 11:05 PM",Matter Collection,1 (6.4 MB),0/1,CI353
-NO,CKC_Slack_Collection_20210818,CKC Matter,Partially Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Aug 19, 2021 12:49 AM",Matter Collection,1 (6.4 MB),0/3,CI355
+YES,Canoo_Slack_20210818,Canoo Inc.,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Aug 19, 2021 04:32 AM",Matter Collection,,0/8,CI357
+YES,New York State Covid19_FMNO_111369_July_1_2021_present,New York State Covid19,Failed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Aug 02, 2021 11:05 PM",Matter Collection,,0/1,CI353
+NO,CKC_Slack_Collection_20210818,CKC Matter,Partially Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Aug 19, 2021 12:49 AM",Matter Collection,,0/3,CI355
 NO,Jigsaw_TFountain_20200120210730,Project Jigsaw,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jul 30, 2021 08:24 PM",Matter Collection,"182,740 (88.8 GB)",1/1,CI352
 NO,J. Alix v McKinsey,J Alix v McKinsey,Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Mar 31, 2021 07:27 PM",Matter Collection,525 (45.9 MB),1/1,CI300
-YES,USAIDpstcollectionforreview Michael Conway,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jun 25, 2021 05:15 PM",Matter Collection,1 (6.4 MB),0/1,CI336
-YES,USAIDpstcollectionforreview Michael Fleming,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jun 26, 2021 01:28 AM",Matter Collection,1 (6.4 MB),0/1,CI337
-YES,USAIDpstcollectionforreview Qi Xu,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,1 (6.4 MB),0/1,CI338
-YES,USAIDpstcollectionforreview Qi Xu rerun,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 01, 2021 10:41 PM",Matter Collection,1 (6.4 MB),0/1,CI344
-YES,USAIDpstcollectionforreview Qi Xu rerun 02,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 06, 2021 09:07 PM",Matter Collection,1 (6.4 MB),0/1,CI347
-NO,USAIDOneNote files from Box,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 02, 2021 03:01 AM",Matter Collection,1 (6.4 MB),0/1,CI346
+YES,USAIDpstcollectionforreview Michael Conway,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jun 25, 2021 05:15 PM",Matter Collection,,0/1,CI336
+YES,USAIDpstcollectionforreview Michael Fleming,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jun 26, 2021 01:28 AM",Matter Collection,,0/1,CI337
+YES,USAIDpstcollectionforreview Qi Xu,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,,0/1,CI338
+YES,USAIDpstcollectionforreview Qi Xu rerun,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 01, 2021 10:41 PM",Matter Collection,,0/1,CI344
+YES,USAIDpstcollectionforreview Qi Xu rerun 02,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 06, 2021 09:07 PM",Matter Collection,,0/1,CI347
+NO,USAIDOneNote files from Box,USAID,Closed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 02, 2021 03:01 AM",Matter Collection,,0/1,CI346
 NO,USAIDOneNote files from Box,USAID,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 15, 2021 11:49 PM",Matter Collection,19 (31.6 MB),1/1,CI350
 NO,PParenthood_Exch_Im_DB,Planned Parenthood,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jul 10, 2021 07:29 AM",Matter Collection,"235,265 (129.9 GB)",1/1,CI349
 NO,USAIDpstcollectionforreview Qi Xu inactive,USAID,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jul 10, 2021 03:40 AM",Matter Collection,"98,415 (79.9 GB)",1/1,CI348
@@ -62,77 +62,77 @@ NO,USAIDpstcollectionforreview Leah Kaplow,USAID,Completed,Steven Gwost,Immediat
 NO,USAIDpstcollectionforreview Damla Ozdalga,USAID,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jun 25, 2021 05:49 AM",Matter Collection,"31,569 (23.0 GB)",1/1,CI334
 NO,USAIDpstcollectionforreview Adam Sabow,USAID,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jun 24, 2021 06:19 PM",Matter Collection,"505,043 (193.5 GB)",1/1,CI333
 NO,Whist_JPaschal_Box_20210622,Whistleblower Inquiry,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 23, 2021 02:07 AM",Matter Collection,"28,341 (135.3 GB)",1/1,CI332
-NO,Whist_JPaschal_Box_20210621,Whistleblower Inquiry,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 22, 2021 05:45 AM",Matter Collection,1 (6.4 MB),0/1,CI331
-NO,Janna Paschal,Whistleblower Inquiry,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 22, 2021 04:40 AM",Matter Collection,1 (6.4 MB),0/1,CI330
+NO,Whist_JPaschal_Box_20210621,Whistleblower Inquiry,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 22, 2021 05:45 AM",Matter Collection,,0/1,CI331
+NO,Janna Paschal,Whistleblower Inquiry,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 22, 2021 04:40 AM",Matter Collection,,0/1,CI330
 NO,Everbright PSC Exchange  Hui Hui Qiu,Everbright  PSC Investigtion,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 08, 2021 01:44 AM",Matter Collection,"16,853 (20.9 GB)",1/1,CI329
 NO,PeopleMatterCSlaterExCollection20210607,People Matter  Catherine Slater,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 07, 2021 10:14 PM",Matter Collection,"423,631 (201.9 GB)",8/8,CI328
-YES,Google 2021  Slack Recurring,USAID,Indexing InProgress,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Standalone Collection,"32,335 (7.8 GB)",0/7,CI282
-YES,PeopleMatterCSlaterExCollection20210603,People Matter  Catherine Slater,Failed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 04, 2021 12:18 AM",Matter Collection,1 (6.4 MB),0/8,CI326
-NO,Churchill Capital Corp. IV (3295VC)_01,Churchill Capital Corp. IV (3295VC),Not Started,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","May 28, 2021 01:32 AM",Matter Collection,1 (6.4 MB),0/8,CI325
-YES,OpLitMallinckrodt(MWT005/023/024/027)Slack20210525,"Opioid Litigation  Mallinckrodt (MWT005, MWT023, MWT024, MWT027)",Completed,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"37,711 (7.2 GB)",20/20,CI324
-YES,Telegram Case  v2,RITM3232297,Closed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Apr 26, 2021 07:44 PM",Matter Collection,1 (6.4 MB),0/4,CI315
-YES,A2A_Slack_20210519_Rec,A2A,Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"24,442 (3.3 GB)",12/12,CI323
+YES,Google 2021  Slack Recurring,USAID,Indexing InProgress,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Standalone Collection,"32,335 (7.8 GB)",0/7,CI282
+YES,PeopleMatterCSlaterExCollection20210603,People Matter  Catherine Slater,Failed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jun 04, 2021 12:18 AM",Matter Collection,,0/8,CI326
+NO,Churchill Capital Corp. IV (3295VC)_01,Churchill Capital Corp. IV (3295VC),Not Started,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","May 28, 2021 01:32 AM",Matter Collection,,0/8,CI325
+YES,OpLitMallinckrodt(MWT005/023/024/027)Slack20210525,"Opioid Litigation  Mallinckrodt (MWT005, MWT023, MWT024, MWT027)",Completed,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"37,711 (7.2 GB)",20/20,CI324
+YES,Telegram Case  v2,RITM3232297,Closed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Apr 26, 2021 07:44 PM",Matter Collection,,0/4,CI315
+YES,A2A_Slack_20210519_Rec,A2A,Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"24,442 (3.3 GB)",12/12,CI323
 NO,20210429_Slack_Channel_CollectionCanooImmediate,Canoo Inc.,Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Apr 29, 2021 09:17 PM",Matter Collection,"1,419 (84.3 MB)",3/3,CI321
-YES,20210428_Slack_Channel_CollectionCanoo,Canoo Inc.,Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,237 (10.4 MB),6/3,CI320
+YES,20210428_Slack_Channel_CollectionCanoo,Canoo Inc.,Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,237 (10.4 MB),6/3,CI320
 YES,New York State Covid19 test collection,New York State Covid19,Partially Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Apr 28, 2021 09:42 PM",Matter Collection,"71,263 (136.8 GB)",14/15,CI319
 NO,Omer  Test for personnel risk,USAID,Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Apr 26, 2021 09:59 PM",Standalone Assessment,104 (264.8 MB),1/1,AI318
-NO,Omer  Test for personnel risk,USAID,Not Started,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Apr 26, 2021 09:10 PM",Standalone Assessment,1 (6.4 MB),0/1,AI317
+NO,Omer  Test for personnel risk,USAID,Not Started,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Apr 26, 2021 09:10 PM",Standalone Assessment,,0/1,AI317
 NO,Telegram Case  All 4 Custodians,RITM3232297,Completed,Harpreet Singh,Immediate,"Jan 25, 2022 10:30 AM","Apr 26, 2021 11:14 AM",Matter Collection,"101,322 (67.6 GB)",4/4,CI314
 NO,Everbright PSC Search,Everbright  PSC Investigtion,Indexing InProgress,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Apr 14, 2021 10:56 PM",Matter Collection,"139,500 (103.2 GB)",7/9,CI306
 NO,Exchange Collection for E. Schlichting,NYC DOHMH Covid19 Response Activities,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Apr 16, 2021 07:01 PM",Matter Collection,285 (66.1 MB),1/1,CI308
 YES,CKC Matter  Collection 01  Slack,CKC Matter,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Apr 17, 2021 03:48 AM",Matter Collection,"2,959 (705.9 MB)",8/8,CI309
-YES,Pinterest (employee complaints process),Pinterest (employee complaints process),Partially Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"5,207 (898.6 MB)",3/4,CI298
+YES,Pinterest (employee complaints process),Pinterest (employee complaints process),Partially Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"5,207 (898.6 MB)",3/4,CI298
 YES,Everbright PSC Search (minus highlighted terms),Everbright  PSC Investigtion,Processing,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Apr 21, 2021 10:23 PM",Matter Collection,"22,813 (21.4 GB)",3/5,CI312
 YES,LandOLakes_Slack_20210420,Land O' Lakes Inc. 2021,Indexing InProgress,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Apr 20, 2021 07:14 PM",Matter Collection,"6,628 (2.3 GB)",1/2,CI311
-YES,People Matter  Manan Paul  EEOC,People Matter  Manan Paul  EEOC,Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"5,441 (1,011.1 MB)",5/5,CI310
-YES,Purged Email Collection from Emily Schlichting,NYC DOHMH Covid19 Response Activities,Failed,Angela Nucci,Immediate,"Jan 25, 2022 10:30 AM","Apr 16, 2021 01:59 AM",Matter Collection,1 (6.4 MB),0/1,CI307
+YES,People Matter  Manan Paul  EEOC,People Matter  Manan Paul  EEOC,Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"5,441 (1,011.1 MB)",5/5,CI310
+YES,Purged Email Collection from Emily Schlichting,NYC DOHMH Covid19 Response Activities,Failed,Angela Nucci,Immediate,"Jan 25, 2022 10:30 AM","Apr 16, 2021 01:59 AM",Matter Collection,,0/1,CI307
 NO,J. Alix v McKinsey,J Alix v McKinsey,Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Mar 31, 2021 07:25 PM",Matter Collection,"11,784 (2.0 GB)",1/1,CI299
-YES,NYC DOHMH Covid19 Response Activities,NYC DOHMH Covid19 Response Activities,Partially Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"42,890 (7.6 GB)",11/26,CI305
+YES,NYC DOHMH Covid19 Response Activities,NYC DOHMH Covid19 Response Activities,Partially Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"42,890 (7.6 GB)",11/26,CI305
 YES,NYSC19Sck04,New York State Covid19,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Apr 13, 2021 10:43 PM",Matter Collection,730 (321.3 MB),6/6,CI304
 YES,LandOLakes_Slack_20210413,Land O' Lakes Inc. 2021,Indexing InProgress,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Apr 13, 2021 10:20 PM",Matter Collection,"21,636 (4.1 GB)",5/111,CI303
-NO,American Tire Distributors,American Tire Distributors,Not Started,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Apr 09, 2021 02:29 AM",Matter Collection,1 (6.4 MB),0/10,CI302
+NO,American Tire Distributors,American Tire Distributors,Not Started,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Apr 09, 2021 02:29 AM",Matter Collection,,0/10,CI302
 NO,DuckCreek_Slack,Duck Creek,Crawling InProgress,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Mar 31, 2021 11:42 PM",Matter Collection,"1,290 (319.0 MB)",1/5,CI301
-YES,CKC_Slack_20210326,CKC Matter,Indexing InProgress,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"36,968 (6.4 GB)",7/29,CI297
+YES,CKC_Slack_20210326,CKC Matter,Indexing InProgress,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"36,968 (6.4 GB)",7/29,CI297
 YES,BelgianFedGovC19_Slack_20210301v2,Belgian Federal Government  Covid 19,Indexing InProgress,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Mar 26, 2021 07:08 PM",Matter Collection,"7,185 (1.9 GB)",3/19,CI296
 NO,Everbright  PSC Investigation,Everbright  PSC Investigtion,Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Mar 25, 2021 02:19 AM",Matter Collection,959 (275.8 MB),1/1,CI295
 NO,SOC_Sandbox Box Collection with Versions,SOC_Sandbox,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Mar 25, 2021 12:07 AM",Matter Collection,4 (237.5 KB),1/1,CI294
 YES,NYSC19Slack,NYSCov19Slack Only,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Mar 18, 2021 11:01 PM",Matter Collection,"25,855 (5.5 GB)",10/10,CI293
 NO,Everbright  PSC Investigation,Everbright  PSC Investigtion,Partially Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Mar 18, 2021 02:49 AM",Matter Collection,"6,923 (1.5 GB)",1/4,CI291
-NO,GoogleSlack Channel20210316,Google 2021,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Mar 17, 2021 01:59 AM",Matter Collection,1 (6.4 MB),0/1,CI290
-YES,New York State Covid19,New York State Covid19,Indexing InProgress,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"322,013 (51.9 GB)",8/134,CI287
+NO,GoogleSlack Channel20210316,Google 2021,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Mar 17, 2021 01:59 AM",Matter Collection,,0/1,CI290
+YES,New York State Covid19,New York State Covid19,Indexing InProgress,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"322,013 (51.9 GB)",8/134,CI287
 NO,Government of the Netherlands  Slack Collection,Government of the Netherlands  Covid19 Work,Partially Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Mar 12, 2021 03:25 AM",Matter Collection,"7,163 (1.4 GB)",2/15,CI288
-YES,NYS Cov19_Slack_20210219,New York State Covid19,Indexing InProgress,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"283,156 (50.9 GB)",3/73,CI266
-YES,Pinterest 2021 DE&I Study (Pinterest Shareholder Derivative Suit – discrimination claims),USAID,Indexing InProgress,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Standalone Collection,"61,204 (11.3 GB)",1/7,CI278
-YES,Morgan Stanley  DE&I,USAID,Partially Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Standalone Collection,"31,890 (7.1 GB)",4/7,CI284
-YES,20200825a_Slack_Ghatak_Elling,Opioid Litigation,Completed,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"19,651 (3.9 GB)",2/2,CI56
+YES,NYS Cov19_Slack_20210219,New York State Covid19,Indexing InProgress,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"283,156 (50.9 GB)",3/73,CI266
+YES,Pinterest 2021 DE&I Study (Pinterest Shareholder Derivative Suit – discrimination claims),USAID,Indexing InProgress,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Standalone Collection,"61,204 (11.3 GB)",1/7,CI278
+YES,Morgan Stanley  DE&I,USAID,Partially Completed,Lauren Kaplan,Recurring,"Jan 25, 2022 10:30 AM",,Standalone Collection,"31,890 (7.1 GB)",4/7,CI284
+YES,20200825a_Slack_Ghatak_Elling,Opioid Litigation,Completed,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"19,651 (3.9 GB)",2/2,CI56
 YES,Google 2021,USAID,Partially Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Mar 05, 2021 02:16 AM",Standalone Collection,"25,635 (4.8 GB)",4/34,CI279
 NO,AlixCONFIDENTIALSearch request_20210301,J Alix v McKinsey,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Mar 02, 2021 02:04 AM",Matter Collection,"584,343 (216.3 GB)",3/3,CI276
-YES,BelgianFedGovC19_Slack_20210301,Belgian Federal Government  Covid 19,Failed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Mar 02, 2021 01:28 AM",Matter Collection,1 (6.4 MB),0/16,CI275
-NO,Westmoreland Court Order Deletion 20210225 OneDrive full,Westmoreland Court Order Deletion,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Feb 25, 2021 11:32 PM",Matter Collection,1 (6.4 MB),4/4,CI274
-NO,Westmoreland Court Order Deletion 20210225 OneDrive,Westmoreland Court Order Deletion,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Feb 25, 2021 10:37 PM",Matter Collection,1 (6.4 MB),4/4,CI273
+YES,BelgianFedGovC19_Slack_20210301,Belgian Federal Government  Covid 19,Failed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Mar 02, 2021 01:28 AM",Matter Collection,,0/16,CI275
+NO,Westmoreland Court Order Deletion 20210225 OneDrive full,Westmoreland Court Order Deletion,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Feb 25, 2021 11:32 PM",Matter Collection,,4/4,CI274
+NO,Westmoreland Court Order Deletion 20210225 OneDrive,Westmoreland Court Order Deletion,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Feb 25, 2021 10:37 PM",Matter Collection,,4/4,CI273
 NO,Apollo Investments Limited  APA 20210224 Slack,Apollo Investments Limited – APA,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Feb 25, 2021 02:28 AM",Matter Collection,395 (74.3 MB),1/1,CI272
 NO,KRitikesh_20210223,USAID,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Feb 24, 2021 04:40 AM",Standalone Collection,"81,645 (37.6 GB)",1/1,CI271
-NO,KRitikesh_20210217,USAID,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Feb 17, 2021 11:24 PM",Standalone Collection,1 (6.4 MB),0/1,CI263
+NO,KRitikesh_20210217,USAID,Not Started,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Feb 17, 2021 11:24 PM",Standalone Collection,,0/1,CI263
 NO,Apollo Investments Limited  APA 20210222 Slack,Apollo Investments Limited – APA,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Feb 23, 2021 04:24 AM",Matter Collection,"8,835 (1.4 GB)",5/5,CI270
 YES,Apollo Investments Limited  APA 20210222 Box,Apollo Investments Limited – APA,Partially Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Feb 23, 2021 04:19 AM",Matter Collection,"6,345,617 (11.1 TB)",25/50,CI267
 NO,TEST  Sharepoint Collection,TEST MATTER  Disregard!,Closed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Feb 19, 2021 07:51 PM",Matter Collection,569 (18.5 GB),1/1,CI265
-YES,CIBCoalition_Slack_Batch2_20210218,Project C  CIBi solution  Coalition Letter,Indexing InProgress,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"118,162 (27.7 GB)",4/31,CI264
+YES,CIBCoalition_Slack_Batch2_20210218,Project C  CIBi solution  Coalition Letter,Indexing InProgress,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"118,162 (27.7 GB)",4/31,CI264
 YES,NY Slack (3/2/20207/31/2020),New York State Covid19,Closed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Jan 14, 2021 02:04 AM",Matter Collection,"84,949 (22.5 GB)",38/38,CI249
 NO,Manifesto,Westmoreland Court Order Deletion,Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Feb 11, 2021 10:33 PM",Matter Collection,"6,735 (26.4 GB)",2/2,CI259
 NO,OneDrive_from_SGwost,SOC_Sandbox,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jan 29, 2021 12:24 AM",Matter Collection,551 (11.3 GB),1/1,CI258
-NO,One Drive Backup Collection Test,SOC_Sandbox,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 24, 2020 02:00 AM",Matter Collection,1 (6.4 MB),1/1,CI236
-YES,FOMBSlackv320210125,FOMB  Master Case,Partially Completed,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"29,879 (5.4 GB)",4/7,CI256
+NO,One Drive Backup Collection Test,SOC_Sandbox,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 24, 2020 02:00 AM",Matter Collection,,1/1,CI236
+YES,FOMBSlackv320210125,FOMB  Master Case,Partially Completed,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"29,879 (5.4 GB)",4/7,CI256
 NO,TEST Collection,TEST MATTER  Disregard!,Closed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Jan 13, 2021 07:58 PM",Matter Collection,"1,089,305 (993.1 GB)",1/1,CI247
-YES,GrailIllumina_Slack_20210121,GrailIllumina FTC Subpoena,Indexing InProgress,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"154,640 (36.0 GB)",5/35,CI255
-YES,GoPRFOMBSiona SharmaSlack2021/01/21,FOMB  Master Case,Not Started,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"8,284 (1.4 GB)",0/1,CI254
-YES,GPRSlack20210113,FOMB  Master Case,Indexing InProgress,Alvaro Zuniga,Recurring,"Jan 28, 2022 06:13 AM","Jun 27, 2021 07:34 PM",Matter Collection,"900,591 (196.5 GB)",23/236,CI250
+YES,GrailIllumina_Slack_20210121,GrailIllumina FTC Subpoena,Indexing InProgress,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"154,640 (36.0 GB)",5/35,CI255
+YES,GoPRFOMBSiona SharmaSlack2021/01/21,FOMB  Master Case,Not Started,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"8,284 (1.4 GB)",0/1,CI254
+YES,GPRSlack20210113,FOMB  Master Case,Indexing InProgress,Alvaro Zuniga,Recurring,"Jan 28, 2022 06:13 AM",,Matter Collection,"900,591 (196.5 GB)",23/236,CI250
 NO,G_Kuznetsov_20210114,RITM2759970,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jan 15, 2021 12:16 AM",Matter Collection,"162,366 (68.8 GB)",1/1,CI253
 NO,J_Alemani_20210114,RITM2759970,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Jan 15, 2021 12:14 AM",Matter Collection,"481,994 (158.6 GB)",1/1,CI252
 NO,Alexander DiLeonardo (CONF),USAID,Completed,Lauren Kaplan,Immediate,"Jan 25, 2022 10:30 AM","Jan 14, 2021 01:42 AM",Standalone Collection,"189,498 (124.0 GB)",1/1,CI248
 NO,P_Johny_20210111,RITM2759970,Completed,Angela Nucci,Immediate,"Jan 25, 2022 10:30 AM","Jan 11, 2021 10:46 PM",Matter Collection,"101,283 (51.5 GB)",1/1,CI246
 NO,J_Alemany4N6,USAID,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jan 09, 2021 02:41 AM",Standalone Collection,"501,270 (168.1 GB)",1/1,CI245
 NO,G_Kuznetsov_4N6,USAID,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Jan 08, 2021 09:19 PM",Standalone Collection,"192,681 (81.4 GB)",1/1,CI244
-YES,OpioidCarlyle_Slack,Opioid Litigation  The Carlyle Group,Completed,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"42,202 (8.4 GB)",8/8,CI243
+YES,OpioidCarlyle_Slack,Opioid Litigation  The Carlyle Group,Completed,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"42,202 (8.4 GB)",8/8,CI243
 NO,Gillead  Jyoti_Saini.nsf,Gilead Sciences  Johnson & Johnson/Janssen  ZL  ,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Dec 18, 2020 01:59 AM",Matter Collection,"1,387 (98.9 MB)",1/1,CI242
 NO,ana_fernandez_abc,Information Leak,Completed,Aroma Gupta,Immediate,"Jan 25, 2022 10:30 AM","Dec 16, 2020 02:33 PM",Matter Collection,"6,260 (1.1 GB)",1/1,CI241
 NO,RITM2835040 Email 02,RITM2835040,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Dec 04, 2020 09:25 PM",Matter Collection,"1,960 (722.1 MB)",1/1,CI240
@@ -140,33 +140,33 @@ NO,RITM2835040 email,RITM2835040,Completed,Steven Gwost,Immediate,"Jan 25, 2022 
 NO,Mark Campisano collection 02,Productions  Mark Campisano,Completed,exterro support,Immediate,"Jan 25, 2022 10:30 AM","Dec 01, 2020 08:28 PM",Matter Collection,26 (11.1 MB),1/1,CI238
 NO,Mark Campisano collection,Productions  Mark Campisano,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Dec 01, 2020 03:03 AM",Matter Collection,1 (6.4 MB),1/1,CI237
 NO,TEST_sdg_box_collection,SOC_Sandbox,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 23, 2020 10:09 PM",Matter Collection,34 (1.3 GB),1/1,CI235
-NO,OneDrive 01,RITM2759970,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 23, 2020 09:40 PM",Matter Collection,1 (6.4 MB),1/1,CI234
+NO,OneDrive 01,RITM2759970,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 23, 2020 09:40 PM",Matter Collection,,1/1,CI234
 YES,GMI_EX Collection 20201113a,Project November  German Ministry of Interior,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Nov 14, 2020 12:16 AM",Matter Collection,"649,596 (264.7 GB)",2/2,CI233
 YES,German_MI_Slack_Collection,Project November  German Ministry of Interior,Partially Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Oct 30, 2020 10:53 PM",Matter Collection,"19,122 (4.4 GB)",11/14,CI229
-YES,Opioid Master Slack Collection 20201023,Opioid Slack Hold,Crawling InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"12,094 (2.5 GB)",0/3,CI228
+YES,Opioid Master Slack Collection 20201023,Opioid Slack Hold,Crawling InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"12,094 (2.5 GB)",0/3,CI228
 YES,AeroArgentinaSlack,Aerolineas Argentina,Partially Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Oct 17, 2020 01:05 AM",Matter Collection,"82,453 (22.4 GB)",91/96,CI226
 YES,Opioid Master Box Folder,Opioid eDiscovery team,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Sep 29, 2020 10:13 PM",Matter Collection,"10,716 (6.1 GB)",1/1,CI120
 NO,Legal Export Box Folder,Opioid eDiscovery team,Completed,Alvaro Zuniga,Immediate,"Jan 25, 2022 10:30 AM","Sep 29, 2020 12:38 AM",Matter Collection,"10,383 (4.1 GB)",4/4,CI119
-YES,Opioid Slack QC,Opioid Slack Hold,Partially Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Sep 25, 2020 03:16 AM",Matter Assessment,1 (6.4 MB),30/33,AI118
-YES,eDiscoveryTeamSlack,Opioid eDiscovery team,Not Started,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"225,534 (28.8 GB)",0/5,CI116
-YES,Opioid Master Slack Collection 20200918d,Opioid Slack Hold,Completed,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"57,966 (12.4 GB)",2/2,CI110
-YES,Opioid Master Slack Collection 20200918c,Opioid Slack Hold,Indexing InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"384,004 (74.3 GB)",1/27,CI109
-YES,Opioid Master Slack Collection 20200918b,Opioid Slack Hold,Indexing InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"279,242 (57.8 GB)",2/30,CI108
-YES,Opioid Master Slack Collection 20200918a,Opioid Slack Hold,Indexing InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"312,780 (54.7 GB)",2/26,CI107
+YES,Opioid Slack QC,Opioid Slack Hold,Partially Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Sep 25, 2020 03:16 AM",Matter Assessment,,30/33,AI118
+YES,eDiscoveryTeamSlack,Opioid eDiscovery team,Not Started,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"225,534 (28.8 GB)",0/5,CI116
+YES,Opioid Master Slack Collection 20200918d,Opioid Slack Hold,Completed,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"57,966 (12.4 GB)",2/2,CI110
+YES,Opioid Master Slack Collection 20200918c,Opioid Slack Hold,Indexing InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"384,004 (74.3 GB)",1/27,CI109
+YES,Opioid Master Slack Collection 20200918b,Opioid Slack Hold,Indexing InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"279,242 (57.8 GB)",2/30,CI108
+YES,Opioid Master Slack Collection 20200918a,Opioid Slack Hold,Indexing InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"312,780 (54.7 GB)",2/26,CI107
 NO,20200915a_Outlook_Items_One_Custodian,Wirecard,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Sep 15, 2020 11:50 PM",Matter Collection,"29,122 (10.6 GB)",1/1,CI85
 NO,20200909a_Emma_Hammond_Box,AmEx GBT,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Sep 10, 2020 01:33 AM",Matter Collection,"12,250 (43.7 GB)",1/1,CI78
-YES,People Team  CIB  Coalition Letter  Slack,Project C  CIBi solution  Coalition Letter,Indexing InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"129,643 (34.3 GB)",13/22,CI75
-YES,(abandoned) 20200908a_Slack_Ghatak_Elling_MPDM,Opioid Litigation,Completed,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"11,110 (4.3 GB)",2/2,CI74
-YES,20200908a_Slack_Ghatak_Elling_MPDMs,Opioid Litigation,Completed,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"12,052 (3.0 GB)",2/2,CI76
-YES,Opioid Slack Hold #3,Opioid Slack Hold,Indexing InProgress,Omer Keinan,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"3,996,051 (804.8 GB)",18/290,CI69
-YES,DemystData Slack,DemystData,Partially Completed,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"869,055 (151.6 GB)",33/46,CI70
+YES,People Team  CIB  Coalition Letter  Slack,Project C  CIBi solution  Coalition Letter,Indexing InProgress,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"129,643 (34.3 GB)",13/22,CI75
+YES,(abandoned) 20200908a_Slack_Ghatak_Elling_MPDM,Opioid Litigation,Completed,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"11,110 (4.3 GB)",2/2,CI74
+YES,20200908a_Slack_Ghatak_Elling_MPDMs,Opioid Litigation,Completed,Steven Gwost,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"12,052 (3.0 GB)",2/2,CI76
+YES,Opioid Slack Hold #3,Opioid Slack Hold,Indexing InProgress,Omer Keinan,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"3,996,051 (804.8 GB)",18/290,CI69
+YES,DemystData Slack,DemystData,Partially Completed,Alvaro Zuniga,Recurring,"Jan 25, 2022 10:30 AM",,Matter Collection,"869,055 (151.6 GB)",33/46,CI70
 NO,Celine Pais,Opioid Litigation – EA and IT Holds,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Sep 02, 2020 08:42 PM",Matter Collection,"421,792 (39.6 GB)",1/1,CI62
 YES,Opioid Slack Hold,Opioid Slack Hold,Closed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Aug 26, 2020 08:34 PM",Matter Collection,"20,108 (4.1 GB)",2/436,CI57
-YES,Opioid Slack Hold #2,Opioid Slack Hold,Partially Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Jun 27, 2021 07:34 PM",Matter Collection,"1,015,650 (208.6 GB)",412/587,CI58
+YES,Opioid Slack Hold #2,Opioid Slack Hold,Partially Completed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM",,Matter Collection,"1,015,650 (208.6 GB)",412/587,CI58
 NO,20200820a_Ghatak,Opioid Litigation,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Aug 20, 2020 10:55 PM",Matter Collection,"871,064 (166.4 GB)",1/1,CI55
 YES,20200813a_Elling_Ghatak,Opioid Litigation,Partially Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Aug 13, 2020 10:41 PM",Matter Collection,"2,726 (382.7 MB)",1/2,CI54
 NO,20200811a_Elling_Ghatak,Opioid Litigation,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Aug 11, 2020 11:21 PM",Matter Assessment,"271,011 (43.5 GB)",2/2,AI53
-NO,20200810a_Elling_Ghatak,Opioid Litigation,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Aug 10, 2020 07:10 PM",Matter Collection,1 (6.4 MB),2/2,CI52
+NO,20200810a_Elling_Ghatak,Opioid Litigation,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Aug 10, 2020 07:10 PM",Matter Collection,,2/2,CI52
 NO,Paige Hannah  Test for Inactive,USAID,Closed,Omer Keinan,Immediate,"Jan 25, 2022 10:30 AM","Aug 06, 2020 07:36 PM",Standalone Collection,"4,190 (1.2 GB)",1/1,CI49
 NO,TEST_HarpreetBox,SOC_Sandbox,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Aug 04, 2020 07:43 PM",Matter Collection,87 (228.2 MB),1/1,CI48
 NO,Smriti Arora Box,CBA,Completed,Steven Gwost,Immediate,"Jan 25, 2022 10:30 AM","Aug 04, 2020 07:06 PM",Matter Collection,370 (359.7 MB),1/1,CI47
