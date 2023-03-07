@@ -48,7 +48,7 @@ float: left;
 
 
 
-form {border: 3px solid #FF4136;
+form {border: 3px dotted #FF4136;
 width:30%;}
 
 input[type=text], input[type=password] {
