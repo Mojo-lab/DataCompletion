@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>EasyFill Analysis</title>
@@ -25,7 +25,9 @@
     </header>
 <br><br>
 <center>
-<h1 class="titletext">Analysis from EasyFill</h1>
+<h1 class="titletext">Analysis from EasyFill</h1><br>
+    <div class="container">
+        <div class="card">
     <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
  <script>
 var xValues = {{ data.bardata.xValues|tojson }};
@@ -53,6 +55,17 @@ new Chart("myChart1", {
   }
 });
  </script>
+            </div>
+        <div class="card">
+            <h1>Comparision of null values in the dataset</h1>
+            <p>The dataset consists of 50 null and 250 non null values.</p>
+        </div></div><br><br>
+    <div class="container">
+        <div class="card">
+            <h1>Missing Values Proportion</h1>
+            <p>The dataset consists of 50 null and 250 non null values.</p>
+        </div>
+        <div class="card">
 <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 <script>
 var xValues = {{ data.piedata.xValues|tojson }};
@@ -80,6 +93,11 @@ new Chart("myChart", {
   }
 });
 </script>
+        </div>
+</div>
+    <br><br>
+    <div class="container">
+        <div class="card">
 <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
 <script>
 var datagroup = {{ data.groupedbardata|tojson }};
@@ -118,7 +136,13 @@ new Chart("myChart2", {
     }
   }
 });
-</script>
+</script></div>
+    <div class="card">
+            <h1>Missing values in each columns</h1>
+
+            <p>The dataset consists of 50 null and 250 non null values.</p>
+        </div></div>
+    <br><br>
     <a href="/fillna"><button class="button">Fill Values</button></a>
     <a href="/"><button class="button">Home</button></a>
 </center>
