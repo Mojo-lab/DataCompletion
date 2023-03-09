@@ -1,191 +1,107 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ValueFill</title>
-  </head>
-  <style>
-      .user_testimony {
-        display: flex;
-      }
-      .user_image {
-        padding-left:40px;
-      }
-      .user_text {
-        font-size: 20px;
-        padding-left: 40px;
-      }
-
-      .parallax {
-  /* The image used */
-  background-image: url("static/images/image2.jpg");
-  /* Set a specific height */
-  width:100%;
-  height:100%;
-  min-height: 730px;
-
-  /* Create the parallax scrolling effect */
-  background-color: red;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.parallax_two {
-  /* The image used */
-  background-image: url("static/images/image1.jpg");
-  /* Set a specific height */
-  min-height: 730px;
-  height:100%;
-  width:100%;
-  /* Create the parallax scrolling effect */
-  background-color: red;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.parallax_three {
-  /* The image used */
-  background-image: url("static/images/image4.jpg");
-  /* Set a specific height */
-  min-height: 730px;
-  height:100%;
-  width:100%;
-  /* Create the parallax scrolling effect */
-  background-color: red;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.container_text {
-  position: relative;
-  text-align: center;
-  color: white;
-
-}
-.container_text .content {
-  position: absolute; /* Position the background text */
-  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  color: #f1f1f1; /* Grey text */
-  width: 100%; /* Full width */
-<!--  padding: 70px; /* Some padding */-->
-
-}
-
-.container_text .center {
- position: absolute; /* Position the background text */
-  top: 150px; /* At the bottom. Use top:0 to append it to the top */
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  color: #f1f1f1; /* Grey text */
-  width: 100%; /* Full width */
-<!--  padding: 20px; /* Some padding */-->
-
-}
-
-
-.container_text .abs_center {
- position: absolute; /* Position the background text */
-  top: 30%; /* At the bottom. Use top:0 to append it to the top */
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  color: #f1f1f1; /* Grey text */
-  width: 100%; /* Full width */
-<!--  padding: 20px; /* Some padding */-->
-
-}
-
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  border-radius: 12px;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-.buttonblack {
-  background-color: white;
-  color: black;
-  border: 2px solid #555555;
-}
-.buttonblack:hover {
-  background-color: #555555;
-  color: white;
-}
-</style>
-  <body style="font-family:Times New Roman;">
-    <center>
-      <div style="background-image: url(static/images/background.jpg);height:100%;width:100%;background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;">
-        <div class="user_testimony">
-    <img style="border-radius:50%;width:90px;height:90px;background-size:90px 0px;" src="static/images/logo.png" alt="ValueFill Logo">
-    <h1 style="font-size: 35px;color:white;">ValueFill</h1>
+    <title>EasyFill</title>
+    <link rel="stylesheet" href="static/indexStyle.css" media="screen">
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <div class="logodiv">
+        <a href="/" class="logo" data-image-width="10" data-image-height="28">
+          <img src="static/images/logo.png" class="logoimg">
+        </a>
         </div>
-    <div class="container_text">
-      <div class="center">
-      <h1 style="font-size: 65px;">Increase data accuracy with ValueFill</h1>
-    <p style="font-size: 35px;">Missing values are like missing puzzle pieces, we help you get the most accurate predictions from your datasets.</p>
-      <br>
-      <br>
+        <div class="optionNav">
+        <a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
+        <a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+        <a href="login"><i class="fa fa-fw fa-user"></i> Login</a>
+        </div>
+        </div>
+    </header>
+<div class="container">
+    <div class="text">
+        <h1 class="title">Increase data accuracy with EasyFill.</h1>
+        <p>Missing values are like missing puzzle pieces, we help you get the most accurate predictions from your datasets.</p>
+        <a class="button login" href="login">Login</a>
+        <a class="button demo" href="demo">demo</a>
+        <p><a href="register">New user? Signup here</a></p>
     </div>
-      </div>
+    <div class="image">
         </div>
-<!--    <div class="user_testimony">-->
-<!--      <div class="user_image">-->
-<!--    <img style="border-radius:50%;width:160px;height:160px;background-size:90px 0px;" src="static/images/gova.png" alt="govardhan">-->
-<!--    </div>-->
-<!--      <div class="user_text">-->
-<!--      <h3 style="font-size: 35px;">"ValueFill has revolutionized my data analysis process."</h3>-->
-<!--        <p style="font-size: 25px;">- Govardhan</p>-->
-<!--        </div>-->
-<!--    </div>-->
-      <div class="container_text">
-      <div class="parallax"></div>
+    </div>
 
-    <div class="content" >
-      <h1 style="font-size: 65px;">Improve data accuracy.</h1>
-  <p style="font-size: 35px;">
-    ValueFill helps to eliminate missing values and increase accuracy in datasets. Our algorithm identifies potential issues and automatically fills in missing values.</p>
-      </div>
-      </div>
-      <div class="container_text">
-        <div class="parallax_two"></div>
-        <div class="content">
-  <h1 style="font-size: 65px;" >Streamline data analysis.</h1>
-  <p style="font-size: 35px;">ValueFill ensures that your data analysis is more accurate, reliable, and efficient.With our algorithm, you get faster, more accurate results.</p>
+    <br><br><br><br><br>
+
+<div class="container">
+    <div class="text">
+        <h1 class="title">Improve data accuracy.</h1>
+        <p>EasyFill helps to eliminate missing values and increase accuracy in datasets. Our algorithm identifies potential issues and automatically fills in missing values.</p>
+    </div>
+    <div class="image2">
+        </div>
 </div>
+<div class="container">
+    <div class="image3">
         </div>
-      <div class="container_text">
-  <div class="parallax_three"></div>
-        <div class="abs_center">
-        <h1 style="font-size:65px;">Get Started with ValueFill</h1>
-        <a href="login"><button class="button buttonblack">Login</button></a>
-        <a href="register"><button class="button buttonblack">Signup</button></a>
-          <a href="demo"><button class="button buttonblack">Demo</button></a>
-          <br>
-          <br>
-          <br>
-          <br>
+    <div class="text" style="padding-left:10px;">
+        <h1 class="title">Streamline data analysis.</h1>
+        <p>EasyFill ensures that your data analysis is more accurate,reliable, and efficient. With our algorithm, you get faster, more accurate results.</p>
+    </div>
+</div>
+<br><br>
+        <h1 class="titleBold">Why use EasyFill</h1>
+    <div class="headboxer">
+    <div class="headbox">
+    <img src="static/images/8776368-98b28002.png" alt="">
+                <h3 class="titlehead">Easy</h3>
+                <p>Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+    </div>
+    <div class="headbox">
+    <img src="static/images/3203214-e2632a45.png" alt="">
+                <h3 class="titlehead">Fast</h3>
+                <p>Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+    </div>
+        <div class="headbox">
+            <img src="static/images/9874478-cf582b6e.png" alt="">
+                <h3 class="titlehead">Accurate</h3>
+                <p>Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
         </div>
-<!--        <div class="client2testimony" style="background-color:red;width:50%;">-->
-<!--  <div class="content">-->
-<!--    <h3 style="padding-left: 40px;">"I now get the most accurate results with a fraction of the effort."</h3>-->
-<!--  <img style="border-radius:50%;width:160px;height:160px;background-size:90px 0px;" src="static/images/gova.png" alt="govardhan">-->
-<!--    <p>- Gloria Partridge</p>-->
-<!--    </div>-->
-      </div>
-        </div>
-  </center>
-  </body>
+</div>
+<br><br><br>
+<h3 style="font-family: 'Open Sans',sans-serif;text-align: center;">TESTIMONIALS</h3>
+<h1 style="color: #FF4136;font-weight: bold;font-size: 4rem;line-height: 1.1;margin-top: 20px;margin-bottom: 20px;font-family: 'Open Sans',sans-serif;text-align: center;">What Clients Say</h1>
+<p style="font-family: 'Open Sans',sans-serif;font-size: 20px;width:50%;padding-left: 400px;text-align: center;position:left;">We place huge value on strong relationships and have seen the benefit they bring to our business. Customer feedback is vital in helping us to get it right.</p>
+<div class="headboxer">
+    <div class="testimonialtab">
+        <p>" EasyFill has revolutionized my data analysis process."</p>
+        <h3>Karthikeyan</h3>
+        <p>Machine Learning Engineer</p>
+    </div>
+    <div class="testimonialtab">
+        <p>" I now get the most accurate results with a fraction of the effort. "</p>
+        <h3>Hariharan.K.V</h3>
+        <p>Data Scientist</p>
+    </div>
+    <div class="testimonialtab">
+        <p>" EasyFill has become my go-to tool for handling missing values."</p>
+        <h3>John Mendes</h3>
+        <p>AI Researcher</p>
+    </div>
+    <div class="testimonialtab">
+        <p>" Thanks to EasyFill, for saving hours of my time spending on handling missing values."</p>
+        <h3>Selena Gomez</h3>
+        <p>Statistician</p>
+    </div>
+</div>
+
+</body>
 </html>
+
+
+
+
+
+

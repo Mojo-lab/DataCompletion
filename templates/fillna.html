@@ -1,79 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-    .button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  border-radius: 12px;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-.buttonblack {
-  background-color: white;
-  color: black;
-  border: 2px solid #555555;
-}
-.buttonblack:hover {
-  background-color: #555555;
-  color: white;
-}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 40%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>EasyFill-Magic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/fillna.css" media="screen">
 </head>
 <body>
+<header>
+    <div class="navbar">
+        <div class="logodiv">
+        <a href="/" class="logo" data-image-width="10" data-image-height="28">
+          <img src="static/images/logo.png" class="logoimg">
+        </a>
+        </div>
+        <div class="optionNav">
+        <a href="/"><i class="fa fa-fw fa-home"></i> Home</a>
+        <a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
+        <a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+        <a href="login"><i class="fa fa-fw fa-user"></i> Login</a>
+        </div>
+        </div>
+    </header>
 <center>
-    <h1>Fill Missing values</h1>
+    <h1 class="titletext">Fill Missing values</h1>
     <form action = "/fillna" method = "POST" enctype="multipart/form-data">
     <table>
         <tr>
-    <th>Column</th>
-    <th>Filling Method</th>
-  </tr>
-    {% for col in cols %}
+            <th>Column Name</th>
+                <th>Filling Method</th>
+        </tr>
+        {% for col in cols %}
         <tr>
             <td>
-        <p>{{col}}</p>
-                </td>
-            <td>
-        <select name="{{col}}" method="GET" action="/">
-        {% for colour in colours %}
-            <option value="{{colour}}" SELECTED>{{colour}}</option>"
-        {% endfor %}
-        </select>
+                {{ col }}
             </td>
-            </tr>
-    {% endfor %}
-        </table>
+            <td>
+            {% for colour in colours %}
+                <input type="radio" id="{{colour}}__{{col}}" name="{{col}}" value="{{colour}}__{{col}}">
+                <label>{{colour}}</label>
+            {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
         <br><br>
-        <input  type = "submit" value="Upload">
+        <input  type = "submit" value="Submit">
     </form>
     <br><br>
-<a href="/"><button class="button buttonblack">Home</button></a>
+    <div class="respmes">
+    <h3>{{downloadmessage}}</h3>
+    <a href="{{ downloadlink }}">{{filestatus}}</a>
+    </div>
 </center>
+
 </body>
 </html>
