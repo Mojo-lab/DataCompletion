@@ -28,6 +28,7 @@
     <table>
         <tr>
             <th>Column Name</th>
+            <th>Data Type</th>
                 <th>Filling Method</th>
         </tr>
         {% for col in cols %}
@@ -35,15 +36,51 @@
             <td>
                 {{ col }}
             </td>
+
             <td>
-            {% for colour in colours %}
-                <input type="radio" id="{{colour}}__{{col}}" name="{{col}}" value="{{colour}}__{{col}}">
-                <label>{{colour}}</label>
-            {% endfor %}
+                <input type="radio" id="fillmethodCategorical" name="{{col}}__fillmethod" value="fillmethodCategorical" onclick="verifyCats(id,name)">
+                <label>Categorical</label>
+                <input type="radio" id="fillmethodContinuous" name="{{col}}__fillmethod" value="fillmethodContinuous" onclick="verifyCats(id,name)">
+                <label>Continuous</label>
+
+            </td>
+            <td>
+                <input type="radio" id="fillmethodMean" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Mean">
+                <label>Mean</label>
+                <input type="radio" id="fillmethodMedian" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Median">
+                <label>Median</label>
+                <input type="radio" id="fillmethodMode" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Mode">
+                <label>Mode</label>
+                <input type="radio" id="fillmethodNone" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___None">
+                <label>None</label>
             </td>
         </tr>
         {% endfor %}
+        <script>
+            function verifyCats(id,name) {
+            const elementCollection = new Array();
+            const newName = name+"_";
+            const allElements = document.getElementsByName(newName);
+            console.log(id);
+            console.log(name);
+            if (id == "fillmethodCategorical") {
+            console.log("catgeorical selection");
+            allElements[0].disabled = true;
+            allElements[1].disabled = true;
+            allElements[2].disabled = false;
+            allElements[3].disabled = false;
+            }
+            else{
+            console.log("continuous selection");
+            allElements[0].disabled = false;
+            allElements[1].disabled = false;
+            allElements[2].disabled = true;
+            allElements[3].disabled = true;
+            }
+            }
+        </script>
     </table>
+
         <br><br>
         <input  type = "submit" value="Submit">
     </form>

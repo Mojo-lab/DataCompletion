@@ -215,6 +215,7 @@ def newwork():
 @app.route('/fillna',methods = ['GET','POST'])
 def fillnaValue():
     colours = ['Mean','Median','Mode','None']
+    fillmeth = ['Categorical','Continuous']
     col = session.get("Column_names")
     print(col)
     folder_path = session.get('folder_path')
@@ -240,7 +241,7 @@ def fillnaValue():
         print("Method GET")
         # print(df.isnull().sum())
     return render_template('fillna.html',colours=colours,cols=cols,filestatus=download_file_status,
-                           downloadlink=downloadlink,downloadmessage=downloadmessage)
+                           downloadlink=downloadlink,downloadmessage=downloadmessage,fillmeth=fillmeth)
 
 @app.route("/getdata")
 def getdata():
