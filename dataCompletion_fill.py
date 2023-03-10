@@ -7,17 +7,15 @@ def main(filepath, col, type):
     else:
         df = pd.read_excel(filepath, engine="openpyxl")
 
-    for c, ty in zip(eval(col), type):
+    for ty in type:
         try:
             print("&&" * 20)
             print(ty)
             meth = ty[1].split('___')
             colname = ty[1].split("__")
-            print(c)
-            print(meth)
-            print(colname)
             c = colname[0]
             meth = meth[1]
+            print(f"colum name - {c} , filling method - {meth}")
             if meth == "Mean":
                 fillV = df[c].mean()
                 df[c].fillna(fillV, inplace=True)

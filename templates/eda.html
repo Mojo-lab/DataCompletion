@@ -143,8 +143,20 @@ new Chart("myChart2", {
             <p>The dataset consists of 50 null and 250 non null values.</p>
         </div></div>
     <br><br>
-    <a href="/fillna"><button class="button">Fill Values</button></a>
+    <div class="sabji">
+        <a href="/fillna"><button class="button">Fill Values</button></a>
     <a href="/"><button class="button">Home</button></a>
+    </div>
+    <script>
+    const loginstatus = '{{ loggedin }}';
+                console.log(loginstatus);
+                if (loginstatus == "True") {
+                const collection = document.getElementsByClassName("sabji");
+                collection[0].outerHTML = '<div class="sabji"><a href="/fillna"><button class="button">Fill Values</button></a><a href="/userHome/{{usrname}}"><button class="button">User Home</button></a>';
+                const collection_ = document.getElementsByClassName("optionNav");
+                collection_[0].outerHTML = '<div class="optionNav"><a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a><a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a><a href="/userHome/{{usrname}}" ><i class="fa fa-fw fa-user">User Home</i></a><a href="/logout" ><i class="fa fa-fw fa-logout">Log Out</i></a></div>';
+    }
+    </script>
 </center>
 </body>
 </html>
