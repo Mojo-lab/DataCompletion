@@ -17,7 +17,15 @@
         <div class="optionNav">
         <a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
         <a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-        <a href="login"><i class="fa fa-fw fa-user"></i> Login</a>
+        <a href="login"><i class="fa fa-fw fa-user">Login</i></a>
+            <script>
+                const loginstatus = '{{ loggedin }}';
+                console.log(loginstatus);
+                if (loginstatus == "True") {
+                const collection = document.getElementsByClassName("optionNav");
+                collection[0].outerHTML = '<div class="optionNav"><a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a><a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a><a href="/userHome/{{usrname}}" ><i class="fa fa-fw fa-user">User Home</i></a><a href="/logout" ><i class="fa fa-fw fa-logout">Log Out</i></a></div>';
+                }
+            </script>
         </div>
         </div>
     </header>
@@ -27,7 +35,19 @@
         <p>Missing values are like missing puzzle pieces, we help you get the most accurate predictions from your datasets.</p>
         <a class="button login" href="login">Login</a>
         <a class="button demo" href="demo">demo</a>
-        <p><a href="register">New user? Signup here</a></p>
+        <p class="signuptitle"><a href="register">New user? Signup here</a></p>
+        <script>
+                const loginstatus_ = '{{ loggedin }}';
+                if (loginstatus_ == "True") {
+                const collection_ = document.getElementsByClassName("button login");
+                collection_[0].href = "/userHome/{{usrname}}";
+                collection_[0].innerHTML = "User Home";
+                const collection1 = document.getElementsByClassName("button demo");
+                collection1[0].style.visibility = 'hidden';
+                const collection2 = document.getElementsByClassName("signuptitle");
+                collection2[0].style.visibility = 'hidden';
+                }
+            </script>
     </div>
     <div class="image">
         </div>

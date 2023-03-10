@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/useraccounts"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/file_uploads'
 app.secret_key = config.secret_key
-
+logged_in = "False"
 db = SQLAlchemy(app)
 
 class signup(db.Model):
@@ -43,7 +43,12 @@ def allowed_file(filename):
 
 @app.route('/')
 def homepage():
-    return render_template('index.html')
+    print(f"status - {logged_in}")
+    try:
+        usrname = username
+    except:
+        usrname = ''
+    return render_template('index.html',loggedin=logged_in,usrname=usrname)
 
 
 def is_valid_email(email):
@@ -92,9 +97,48 @@ def check_password_strength(password):
     return True, "Password is strong"
 
 
+def pageEdacharts(filepath,filename):
+    if 'csv' in filename:
+        df = pd.read_csv(filepath)
+    else:
+        df = pd.read_excel(filepath, engine="openpyxl")
+
+    null_values = pd.DataFrame(df.isnull().sum(), columns=['values'])
+    null_values = null_values[null_values['values'] != 0]
+    xValues = list(null_values.index)
+    yValues = list(null_values['values'])
+    session["Column_names"] = str(xValues)
+    piedata = {"xValues": xValues, "yValues": yValues,
+               "barColors": ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"]}
+
+    bardata = {"xValues": ["Not Null Values", "Null Values"],
+               "yValues": [(df.shape[0] * df.shape[1]) - sum(yValues), sum(yValues)],
+               "barColors": ["#b91d47", "#2b5797"]}
+
+    group_not_null_values = []
+    for idx in yValues:
+        group_not_null_values.append(len(df) - idx)
+
+    groupedbardata = [
+        {
+            "label": 'Not Null Values',
+            "data": group_not_null_values,
+            "borderColor": "#b91d47",
+            "backgroundColor": "#b91d47"
+        },
+        {
+            "label": 'Null Values',
+            "data": yValues,
+            "borderColor": "#2b5797",
+            "backgroundColor": "#2b5797"
+        }]
+
+    data = {"bardata": bardata, "piedata": piedata, 'groupedbardata': groupedbardata, 'grouplabels': xValues}
+    return data
 
 @app.route("/demo", methods=['GET','POST'])
 def demo():
+    print("***---"*30)
     print(request.method)
     print(request.values)
     print(request.form)
@@ -120,41 +164,7 @@ def demo():
                 print("File already opened in another software")
             filepath = f'static/file_uploads/{filename}'
             session['folder_path'] = filepath
-            if 'csv' in filename:
-                df = pd.read_csv(filepath)
-            else:
-                df = pd.read_excel(filepath,engine="openpyxl")
-
-            null_values = pd.DataFrame(df.isnull().sum(),columns = ['values'])
-            null_values = null_values[null_values['values'] != 0]
-            xValues = list(null_values.index)
-            yValues = list(null_values['values'])
-            session["Column_names"] = str(xValues)
-            piedata = {"xValues":xValues,"yValues":yValues,
-                    "barColors":["#b91d47","#00aba9","#2b5797","#e8c3b9","#1e7145"]}
-
-            bardata = {"xValues":["Not Null Values","Null Values"],"yValues":[(df.shape[0]*df.shape[1])-sum(yValues),sum(yValues)],
-                    "barColors":["#b91d47","#2b5797"]}
-
-            group_not_null_values = []
-            for idx in yValues:
-                group_not_null_values.append(len(df) - idx)
-
-            groupedbardata = [
-                {
-                    "label": 'Not Null Values',
-                    "data": group_not_null_values,
-                    "borderColor": "#b91d47",
-                    "backgroundColor": "#b91d47"
-                },
-                {
-                    "label": 'Null Values',
-                    "data": yValues,
-                    "borderColor": "#2b5797",
-                    "backgroundColor": "#2b5797"
-                }]
-
-            data = {"bardata":bardata,"piedata":piedata,'groupedbardata':groupedbardata,'grouplabels':xValues}
+            data = pageEdacharts(filepath, filename)
             print(request.endpoint)
             return render_template('eda.html',data = data)
         else:
@@ -171,46 +181,39 @@ def eda(fname):
     filename = fname
     filepath = f'static/file_uploads/{filename}'
     session['folder_path'] = filepath
-    if 'csv' in filename:
-        df = pd.read_csv(filepath)
-    else:
-        df = pd.read_excel(filepath,engine="openpyxl")
+    data = pageEdacharts(filepath, filename)
+    return render_template("eda.html",data = data,usrname=username,loggedin=logged_in)
 
-    null_values = pd.DataFrame(df.isnull().sum(),columns = ['values'])
-    null_values = null_values[null_values['values'] != 0]
-    xValues = list(null_values.index)
-    yValues = list(null_values['values'])
-    session["Column_names"] = str(xValues)
-    piedata = {"xValues":xValues,"yValues":yValues,
-            "barColors":["#b91d47","#00aba9","#2b5797","#e8c3b9","#1e7145"]}
-
-    bardata = {"xValues":["Not Null Values","Null Values"],"yValues":[(df.shape[0]*df.shape[1])-sum(yValues),sum(yValues)],
-            "barColors":["#b91d47","#2b5797"]}
-
-    group_not_null_values = []
-    for idx in yValues:
-        group_not_null_values.append(len(df) - idx)
-
-    groupedbardata = [
-        {
-            "label": 'Not Null Values',
-            "data": group_not_null_values,
-            "borderColor": "#b91d47",
-            "backgroundColor": "#b91d47"
-        },
-        {
-            "label": 'Null Values',
-            "data": yValues,
-            "borderColor": "#2b5797",
-            "backgroundColor": "#2b5797"
-        }]
-
-    data = {"bardata":bardata,"piedata":piedata,'groupedbardata':groupedbardata,'grouplabels':xValues}
-    return render_template("eda.html",data = data)
-
-@app.route('/newwork')
+@app.route('/newwork',methods=['GET','POST'])
 def newwork():
-    return render_template('newwork.html')
+    if request.method == 'POST':
+        print("***---" * 30)
+        print(request.method)
+        print(request.values)
+        print(request.form)
+        print(request.url)
+        print("sub")
+        print(request.files)
+        files_db = pd.read_excel('static/user_file_db.xlsx',engine="openpyxl")
+        name = request.form['fname']
+        file = request.files['file']
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            try:
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            except PermissionError:
+                print("File already opened in another software")
+        new_record = {"username": username, "name": name, "filename": filename}
+        files_db = files_db.append(new_record, ignore_index=True)
+        files_db.to_excel('static/user_file_db.xlsx', index=False)
+        filepath = f'static/file_uploads/{filename}'
+        session['folder_path'] = filepath
+        data = pageEdacharts(filepath, filename)
+        print(request.endpoint)
+        return render_template('eda.html',data=data,usrname=username,loggedin=logged_in)
+    else:
+        return render_template('newwork.html')
 
 @app.route('/fillna',methods = ['GET','POST'])
 def fillnaValue():
@@ -259,6 +262,7 @@ def getdata():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    global logged_in, username
     msg = ''
     flag = 0
     print("Jellp login")
@@ -274,9 +278,12 @@ def login():
                     msg = "Logged in successfully!"
                     print(msg)
                     username = dd['name']
-                    createdFiles_ = ['xyz.csv','CollectionMonitoringReport20220121101935.xlsx']
-                    filenamedas_ = ['Energy filler','Modular func']
-                    createdFiles = [{"file":'xyz.csv',"name":'energy'},{"file":'CollectionMonitoringReport20220121101935.xlsx',"name":'massa'}]
+                    logged_in = "True"
+                    user_db = pd.read_excel("static/user_file_db.xlsx",engine="openpyxl")
+                    user_db = user_db[user_db['username'] == username]
+                    createdFiles = []
+                    for idx in range(len(user_db)):
+                        createdFiles.append({"file":user_db['filename'].iloc[idx],"name":user_db['name'].iloc[idx]})
                     return render_template("userHome.html",user=username,createdFiles=createdFiles)
                 else:
                     msg = "Password Incorrect"
@@ -287,6 +294,14 @@ def login():
 
     return render_template('login.html', msg=msg)
 
+@app.route('/userHome/<string:name>',methods=['GET'])
+def userHome(name):
+    user_db = pd.read_excel("static/user_file_db.xlsx", engine="openpyxl")
+    user_db = user_db[user_db['username'] == username]
+    createdFiles = []
+    for idx in range(len(user_db)):
+        createdFiles.append({"file": user_db['filename'].iloc[idx], "name": user_db['name'].iloc[idx]})
+    return render_template("userHome.html", user=name, createdFiles=createdFiles)
 
 @app.route("/contact")
 def contact():
