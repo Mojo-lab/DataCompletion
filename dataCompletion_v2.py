@@ -329,11 +329,18 @@ def login():
 
 @app.route('/userHome/<string:name>',methods=['GET'])
 def userHome(name):
-    user_db = pd.read_excel("static/user_file_db.xlsx", engine="openpyxl")
-    user_db = user_db[user_db['username'] == username]
-    createdFiles = []
-    for idx in range(len(user_db)):
-        createdFiles.append({"file": user_db['filename'].iloc[idx], "name": user_db['name'].iloc[idx]})
+    for i, s in enumerate(db.session.query(fileMetadata).all()):
+        ss = s.__dict__
+        createdFiles = []
+        if ss["username"] == username:
+            # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
+            createdFiles.append({"file":ss['filename'],"name":ss['name']})
+
+    # user_db = pd.read_excel("static/user_file_db.xlsx", engine="openpyxl")
+    # user_db = user_db[user_db['username'] == username]
+    # createdFiles = []
+    # for idx in range(len(user_db)):
+    #     createdFiles.append({"file": user_db['filename'].iloc[idx], "name": user_db['name'].iloc[idx]})
     return render_template("userHome.html", user=name, createdFiles=createdFiles)
 
 @app.route("/contact")
