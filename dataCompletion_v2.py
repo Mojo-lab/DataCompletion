@@ -215,7 +215,7 @@ def newwork():
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            paths = os.path.join(os.getcwd() ,"static","file_uploads","user_raw_data",name)
+            paths = os.path.join(os.getcwd() ,"static","file_uploads","user_raw_data",username)
         # paths = os.path.join(paths, "chemistry")
             try:
                 os.mkdir(paths)
@@ -305,11 +305,18 @@ def login():
                     print(msg)
                     username = dd['name']
                     logged_in = "True"
-                    user_db = pd.read_excel("static/user_file_db.xlsx",engine="openpyxl")
-                    user_db = user_db[user_db['username'] == username]
-                    createdFiles = []
-                    for idx in range(len(user_db)):
-                        createdFiles.append({"file":user_db['filename'].iloc[idx],"name":user_db['name'].iloc[idx]})
+                    # user_db = pd.read_excel("static/user_file_db.xlsx",engine="openpyxl")
+                    for i, s in enumerate(db.session.query(fileMetadata).all()):
+                        ss = s.__dict__
+                        createdFiles = []
+                        if ss["username"] == username:
+                            # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
+                            createdFiles.append({"file":ss['filename'],"name":ss['name']})
+
+
+                    # user_db = user_db[user_db['username'] == username]
+                    
+                    
                     return render_template("userHome.html",user=username,createdFiles=createdFiles)
                 else:
                     msg = "Password Incorrect"
