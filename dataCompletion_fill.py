@@ -7,21 +7,28 @@ def main(filepath, col, type):
     else:
         df = pd.read_excel(filepath, engine="openpyxl")
 
-    for c, ty in zip(eval(col), type):
-        print(c, ty)
-        print("&&"*20)
-        print(ty)
-        if ty[1].split("__")[0] == "Mean":
-            fillV = df[c].mean()
-            df[c].fillna(fillV, inplace=True)
-            print(f"filled missing value - {c}")
-        if ty[1].split("__")[0] == "Mode":
-            print(df[c].mode().loc[0])
-            fillV = df[c].mode()
-            df[c].fillna(fillV[0], inplace=True)
-            print(f"filled missing value - {c}")
-        if ty[1].split("__")[0] == "Median":
-            fillV = df[c].median()
-            df[c].fillna(fillV, inplace=True)
-            print(f"filled missing value - {c}")
+    for ty in type:
+        try:
+            print("&&" * 20)
+            print(ty)
+            meth = ty[1].split('___')
+            colname = ty[1].split("__")
+            c = colname[0]
+            meth = meth[1]
+            print(f"colum name - {c} , filling method - {meth}")
+            if meth == "Mean":
+                fillV = df[c].mean()
+                df[c].fillna(fillV, inplace=True)
+                print(f"filled missing value - {c}")
+            if meth == "Mode":
+                print(df[c].mode().loc[0])
+                fillV = df[c].mode()
+                df[c].fillna(fillV[0], inplace=True)
+                print(f"filled missing value - {c}")
+            if meth == "Median":
+                fillV = df[c].median()
+                df[c].fillna(fillV, inplace=True)
+                print(f"filled missing value - {c}")
+        except IndexError:
+            pass
     return df
