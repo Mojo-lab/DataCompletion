@@ -15,7 +15,7 @@ ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 app = Flask(__name__)
 CORS(app)
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/datacompletion" % quote(config.sql_password)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/useraccounts" % quote(config.sql_password)
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/datacompletion" % quote(config.sql_password)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/file_uploads'
 app.secret_key = config.secret_key
@@ -36,6 +36,19 @@ class signup(db.Model):
         self.name = name
         self.password = password
         self.usr_id = usr_id
+
+class fileMetadata(db.Model):
+    __tablename__ = 'fileMetadata'
+    id = db.Column('id',db.Integer, primary_key = True)
+    username = db.Column(db.String(125))
+    name = db.Column(db.String(125))
+    filename = db.Column(db.String(125))
+
+
+    def __init__(self, username, name, filename):
+        self.username = username
+        self.name = name
+        self.filename = filename
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -101,7 +114,9 @@ def pageEdacharts(filepath,filename):
     if 'csv' in filename:
         df = pd.read_csv(filepath)
     else:
-        df = pd.read_excel(filepath, engine="openpyxl")
+        print("Filepath:",filepath)
+        print("**************)))))))**********************")
+        df = pd.read_excel(filepath)
 
     null_values = pd.DataFrame(df.isnull().sum(), columns=['values'])
     null_values = null_values[null_values['values'] != 0]
@@ -194,23 +209,36 @@ def newwork():
         print(request.url)
         print("sub")
         print(request.files)
-        files_db = pd.read_excel('static/user_file_db.xlsx',engine="openpyxl")
+        # files_db = pd.read_excel('static/user_file_db.xlsx',engine="openpyxl")
         name = request.form['fname']
         file = request.files['file']
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            paths = os.path.join(os.getcwd() ,"static","file_uploads","user_raw_data",name)
+        # paths = os.path.join(paths, "chemistry")
             try:
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            except PermissionError:
-                print("File already opened in another software")
-        new_record = {"username": username, "name": name, "filename": filename}
-        files_db = files_db.append(new_record, ignore_index=True)
-        files_db.to_excel('static/user_file_db.xlsx', index=False)
-        filepath = f'static/file_uploads/{filename}'
+                os.mkdir(paths)
+            except FileExistsError:
+                pass
+
+            filepath = os.path.join(paths, filename)
+            file.save(filepath)
+            
+        # new_record = {"username": username, "name": name, "filename": filename}
+        pp = fileMetadata(
+            username=username,
+            name=name,
+            filename=filename
+        )
+        db.session.add(pp)
+        db.session.commit()
+
+        # files_db = files_db.append(new_record, ignore_index=True)
+        # files_db.to_excel('static/user_file_db.xlsx', index=False)
+        # filepath = f'static/file_uploads/{filename}'
         session['folder_path'] = filepath
         data = pageEdacharts(filepath, filename)
-        print(request.endpoint)
         return render_template('eda.html',data=data,usrname=username,loggedin=logged_in)
     else:
         return render_template('newwork.html')
@@ -231,7 +259,6 @@ def fillnaValue():
         print(request.values)
         folder_path = session.get('folder_path')
         col = session.get("Column_names")
-        print(col)
         for val in request.values.items():
             fill_methods.append(val)
         df = dataCompletion_fill.main(folder_path, col, fill_methods)
@@ -265,7 +292,6 @@ def login():
     global logged_in, username
     msg = ''
     flag = 0
-    print("Jellp login")
     print(request.form)
     if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
         email_id = request.form['email']
