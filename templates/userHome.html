@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UserHome</title>
+    <title>EasyFill-Magic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/static/userHome.css" media="screen">
 </head>
@@ -16,32 +16,104 @@
         </div>
         <div class="optionNav">
         <a href="/"><i class="fa fa-fw fa-home"></i> Home</a>
-        <a href="/pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
+        <a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
         <a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-            <a href="/logout" ><i class="fa fa-fw fa-logout">Log Out</i></a>
+        <a href="login"><i class="fa fa-fw fa-user"></i> Login</a>
         </div>
         </div>
-</header>
+    </header>
 <center>
-<h1>hello {{user}}</h1>
+    <h1>Hello {{user}}</h1>
 <h1>Your Workspaces</h1>
-<div class="container">
-    <a href="/newwork">
-    <div class="card">
-<button>
-<div class="plus">
-    </div><span style="color: #FF4136;font-size: 30px;">New</span>
 
-        </button>
-</div></a>
-        {% for f in createdFiles %}
-            <a href="/eda/{{f.file}}" name="file" value="senpai">
-            <div class="card">
-                <img style="object-fit:fill;width:150px;height:160px;padding:20px;" src="/static/images/bars.png" alt=""></img>
-            <h4>{{f.name}}</h4>
-            </div></a>
-        {% endfor %}
-</div>
+            <table>
+                <tr>
+                    <div class="tableheaders">
+
+                    <button class="htmlkeys" onclick="window.location.href='{{ url_for('newwork') }}';">&#43; New Workspace</button>
+                        <button class="deletebutton" name="deletebutton" hidden="true" onclick="alert('button pressed');">&#x1F5D1; Delete</button>
+
+                </div>
+                </tr>
+
+
+            <thead><tr><th><input type="checkbox" name="selectall"  onchange="selectall(this);"></th>
+            <th>Workspace Name</th>
+            <th>Raw Data</th>
+            <th>Imputed Data</th>
+            <th>File size</th>
+            <th>Created At</th>
+                <th>Modified At</th></tr></thead>
+
+
+            {% for f in createdFiles %}
+                <tr>
+          <td><input type="checkbox" name="foo" onchange="selectfew();"></td>
+            <td><a href="/eda/{{f.file}}">{{f.name}}</a></td>
+            <td><a href="/eda/{{f.file}}">/eda/{{f.file}}</a></td>
+            <td><a href="/eda/{{f.file}}">/eda/{{f.file}}</a></td>
+            <td>200mb</td>
+            <td>feb26</td>
+                <td>feb26</td>
+            </tr>
+            {% endfor %}
+
+
+    </table>
+    <script>
+    function selectall(source){
+    allselect = document.getElementsByName("selectall");
+    console.log(allselect[0].checked);
+    if (allselect[0].checked == false){
+        console.log("not selected");
+        deletebtn = document.getElementsByName('deletebutton');
+        deletebtn[0].setAttribute("hidden", true);
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = false;
+    }}
+    else{
+        console.log("is selected");
+        checkboxes = document.getElementsByName('foo');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+    }
+        deletebtn = document.getElementsByName('deletebutton');
+        deletebtn[0].removeAttribute("hidden");
+        deletebtn[0].style.fontSize = '25px';
+        deletebtn[0].style.color = '#FF4136';
+        deletebtn[0].style.backgroundColor = 'white';
+        deletebtn[0].style.border = '2px solid #FF4136';
+        deletebtn[0].style.cursor =  'pointer';
+        deletebtn[0].style.padding =  '0px 20px';
+    }
+    }
+
+    function selectfew(){
+    allselect = document.getElementsByName('foo');
+    console.log(allselect);
+    noopt = false;
+    for(var i=0, n=allselect.length;i<n;i++){
+        if(allselect[i].checked == true){
+        noopt = true;}
+        }
+    if(noopt == true){
+        deletebtn = document.getElementsByName('deletebutton');
+        deletebtn[0].removeAttribute("hidden");
+        deletebtn[0].style.fontSize = '25px';
+        deletebtn[0].style.color = '#FF4136';
+        deletebtn[0].style.backgroundColor = 'white';
+        deletebtn[0].style.border = '2px solid #FF4136';
+        deletebtn[0].style.cursor =  'pointer';
+        deletebtn[0].style.padding =  '0px 20px';
+    }
+    else{
+        deletebtn = document.getElementsByName('deletebutton');
+        deletebtn[0].setAttribute("hidden", true);
+        allselect_ = document.getElementsByName("selectall");
+        allselect_[0].checked = false;
+    }
+    }
+    </script>
 </center>
 </body>
 </html>

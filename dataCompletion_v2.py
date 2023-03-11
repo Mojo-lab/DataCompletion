@@ -15,7 +15,7 @@ ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 app = Flask(__name__)
 CORS(app)
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/datacompletion" % quote(config.sql_password)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/datacompletion" % quote(config.sql_password)
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/userAccounts" % quote(config.sql_password)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/file_uploads'
 app.secret_key = config.secret_key
@@ -306,9 +306,9 @@ def login():
                     username = dd['name']
                     logged_in = "True"
                     # user_db = pd.read_excel("static/user_file_db.xlsx",engine="openpyxl")
+                    createdFiles = []
                     for i, s in enumerate(db.session.query(fileMetadata).all()):
                         ss = s.__dict__
-                        createdFiles = []
                         if ss["username"] == username:
                             # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
                             createdFiles.append({"file":ss['filename'],"name":ss['name']})
@@ -316,7 +316,10 @@ def login():
 
                     # user_db = user_db[user_db['username'] == username]
                     
-                    
+                    try:
+                        createdFiles
+                    except UnboundLocalError:
+                        createdFiles = []
                     return render_template("userHome.html",user=username,createdFiles=createdFiles)
                 else:
                     msg = "Password Incorrect"
@@ -329,9 +332,9 @@ def login():
 
 @app.route('/userHome/<string:name>',methods=['GET'])
 def userHome(name):
+    createdFiles = []
     for i, s in enumerate(db.session.query(fileMetadata).all()):
         ss = s.__dict__
-        createdFiles = []
         if ss["username"] == username:
             # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
             createdFiles.append({"file":ss['filename'],"name":ss['name']})
