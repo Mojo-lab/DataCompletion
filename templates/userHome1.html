@@ -25,14 +25,12 @@
 <center>
     <h1>Hello {{user}}</h1>
 <h1>Your Workspaces</h1>
-            <form action="/userHome/{{usrname}}" method="post">
-
+            <form action="/userHome/{{user}}" method="post">
             <table>
                 <tr>
                     <div class="tableheaders">
-
                     <button class="htmlkeys" onclick="window.location.href='{{ url_for('newwork') }}';">&#43; New Workspace</button>
-                        <button class="deletebutton" name="deletebutton" hidden="true" type="submit">&#x1F5D1; Delete</button>
+                        <button class="deletebutton" name="deletebutton" hidden="true" type="submit" onclick="return confirm('Are you sure you want to delete selected items?');">&#x1F5D1; Delete</button>
                     <input style="border: 3px solid #ddd;font-size: 14px;padding: 10px 20px 12px 140px;position:absolute;left:1000px;text-align:left;" type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for workspaces.." title="Type in a name">
 
                 </div>
@@ -50,7 +48,7 @@
             <tbody>
             {% for f in createdFiles %}
                 <tr>
-          <td><input type="checkbox" name="foo" onchange="selectfew();" value="{{f.name}}"></td>
+          <td><input type="checkbox" class="foo" name="{{f.name}}" onchange="selectfew();" value="{{f.name}}"></td>
             <td><a href="/eda/{{f.file}}">{{f.name}}</a></td>
             <td><a href="/eda/{{f.file}}">/eda/{{f.file}}</a></td>
             <td><a href="/eda/{{f.file}}">/eda/{{f.file}}</a></td>
@@ -62,7 +60,8 @@
             </tbody>
 
     </table>
-            </form>
+  </form>
+
     <script>
     function selectalll(source){
     allselect = document.getElementsByName("selectall");
@@ -76,7 +75,7 @@
     }}
     else{
         console.log("is selected");
-        checkboxes = document.getElementsByName('foo');
+        checkboxes = document.getElementsByClassName('foo');
         for(var i=0, n=checkboxes.length;i<n;i++) {
         checkboxes[i].checked = source.checked;
     }
@@ -92,7 +91,7 @@
     }
 
     function selectfew(){
-    allselect = document.getElementsByName('foo');
+    allselect = document.getElementsByClassName("foo");
     console.log(allselect);
     noopt = false;
     for(var i=0, n=allselect.length;i<n;i++){

@@ -61,6 +61,9 @@ def homepage():
         usrname = username
     except:
         usrname = ''
+    print("**---"*30)
+    print(usrname,logged_in)
+    print("**---" * 30)
     return render_template('index.html',loggedin=logged_in,usrname=usrname)
 
 
@@ -320,7 +323,7 @@ def login():
                         createdFiles
                     except UnboundLocalError:
                         createdFiles = []
-                    return render_template("userHome.html",user=username,createdFiles=createdFiles)
+                    return render_template("userHome1.html",user=username,createdFiles=createdFiles)
                 else:
                     msg = "Password Incorrect"
                     print(msg)
@@ -330,7 +333,7 @@ def login():
 
     return render_template('login.html', msg=msg)
 
-@app.route('/userHome/<string:name>',methods=['GET'])
+@app.route('/userHome/<string:name>',methods=['GET','POST'])
 def userHome(name):
     createdFiles = []
     for i, s in enumerate(db.session.query(fileMetadata).all()):
@@ -338,13 +341,25 @@ def userHome(name):
         if ss["username"] == username:
             # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
             createdFiles.append({"file":ss['filename'],"name":ss['name']})
+    if request.method == 'POST':
+        print("delete button was clicked...")
+        print(request.form)
+        form_data = [i for i in request.form.keys()]
+        print(form_data)
+        print(createdFiles)
+        if "deletebutton" in form_data:
+            createdFiles_ = []
+            for idx in createdFiles:
+                if idx['name'] in form_data:
+                    pass
+                else:
+                    createdFiles_.append(idx)
+            createdFiles = createdFiles_
+            print("some files were removed...")
+            print(createdFiles)
 
-    # user_db = pd.read_excel("static/user_file_db.xlsx", engine="openpyxl")
-    # user_db = user_db[user_db['username'] == username]
-    # createdFiles = []
-    # for idx in range(len(user_db)):
-    #     createdFiles.append({"file": user_db['filename'].iloc[idx], "name": user_db['name'].iloc[idx]})
-    return render_template("userHome.html", user=name, createdFiles=createdFiles)
+
+    return render_template("userHome1.html", user=name, createdFiles=createdFiles)
 
 @app.route("/contact")
 def contact():
@@ -400,7 +415,8 @@ def logout():
 
 @app.route("/pricing")
 def pricing():
-    return render_template("pricing.html")
+    # return render_template("pricing.html")
+    return redirect('/')
 
 if __name__ == '__main__':
     app.debug = True
