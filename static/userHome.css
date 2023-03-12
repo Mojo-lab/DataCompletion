@@ -100,7 +100,8 @@ font-size: 20px;}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-
+  display:block;
+    table-layout: fixed;
 }
 
 td{
@@ -110,6 +111,7 @@ td{
 thead {
   background-color: #FF4136;
   border-radius: 8px 8px 0px 0px;
+
 }
 
 thead > tr {
@@ -125,6 +127,10 @@ th {
   color: white;
 
 }
+
+tbody{
+overflow-y: scroll;
+    overflow-x: hidden;}
 
 tr{
 border: 1px solid #e1e1e1;}
