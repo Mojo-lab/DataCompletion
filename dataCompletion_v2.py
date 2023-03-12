@@ -394,6 +394,9 @@ def register():
         msg = 'Please fill all the required fields from the form !'
     return render_template('register.html', msg=msg)
 
+@app.route("/logout",methods=['GET'])
+def logout():
+    return render_template('index.html')
 
 @app.route("/pricing")
 def pricing():

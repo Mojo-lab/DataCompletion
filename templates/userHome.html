@@ -18,20 +18,20 @@
         <a href="/"><i class="fa fa-fw fa-home"></i> Home</a>
         <a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
         <a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-        <a href="login"><i class="fa fa-fw fa-user"></i> Login</a>
+        <a href="/logout"><i class="fa fa-fw fa-user"></i> Logout</a>
         </div>
         </div>
     </header>
 <center>
     <h1>Hello {{user}}</h1>
 <h1>Your Workspaces</h1>
-
             <table>
                 <tr>
                     <div class="tableheaders">
 
                     <button class="htmlkeys" onclick="window.location.href='{{ url_for('newwork') }}';">&#43; New Workspace</button>
                         <button class="deletebutton" name="deletebutton" hidden="true" onclick="alert('button pressed');">&#x1F5D1; Delete</button>
+                    <input style="border: 3px solid #ddd;font-size: 14px;padding: 10px 20px 12px 140px;position:absolute;left:1000px;text-align:left;" type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for workspaces.." title="Type in a name">
 
                 </div>
                 </tr>
@@ -45,7 +45,7 @@
             <th>Created At</th>
                 <th>Modified At</th></tr></thead>
 
-
+            <tbody>
             {% for f in createdFiles %}
                 <tr>
           <td><input type="checkbox" name="foo" onchange="selectfew();"></td>
@@ -57,7 +57,7 @@
                 <td>feb26</td>
             </tr>
             {% endfor %}
-
+            </tbody>
 
     </table>
     <script>
@@ -113,6 +113,25 @@
         allselect_[0].checked = false;
     }
     }
+
+    function searchFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementsByTagName("table");
+  tr = document.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
     </script>
 </center>
 </body>
