@@ -323,7 +323,7 @@ def login():
                         createdFiles
                     except UnboundLocalError:
                         createdFiles = []
-                    return render_template("userHome1.html",user=username,createdFiles=createdFiles)
+                    return render_template("userHome.html",user=username,createdFiles=createdFiles)
                 else:
                     msg = "Password Incorrect"
                     print(msg)
@@ -359,7 +359,7 @@ def userHome(name):
             print(createdFiles)
 
 
-    return render_template("userHome1.html", user=name, createdFiles=createdFiles)
+    return render_template("userHome.html", user=name, createdFiles=createdFiles)
 
 @app.route("/contact")
 def contact():
