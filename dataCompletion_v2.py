@@ -20,7 +20,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/file_uploads'
 app.secret_key = config.secret_key
 logged_in = "False"
+username = ''
 db = SQLAlchemy(app)
+
 
 class signup(db.Model):
     __tablename__ = 'signup'
@@ -53,19 +55,6 @@ class fileMetadata(db.Model):
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/')
-def homepage():
-    print(f"status - {logged_in}")
-    try:
-        usrname = username
-    except:
-        usrname = ''
-    print("**---"*30)
-    print(usrname,logged_in)
-    print("**---" * 30)
-    return render_template('index.html',loggedin=logged_in,usrname=usrname)
-
 
 def is_valid_email(email):
     pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
@@ -112,14 +101,11 @@ def check_password_strength(password):
     # All checks passed
     return True, "Password is strong"
 
-
 def pageEdacharts(filepath,filename):
     if 'csv' in filename:
         df = pd.read_csv(filepath)
     else:
-        print("Filepath:",filepath)
-        print("**************)))))))**********************")
-        df = pd.read_excel(filepath)
+        df = pd.read_excel(filepath, engine="openpyxl")
 
     null_values = pd.DataFrame(df.isnull().sum(), columns=['values'])
     null_values = null_values[null_values['values'] != 0]
@@ -154,9 +140,20 @@ def pageEdacharts(filepath,filename):
     data = {"bardata": bardata, "piedata": piedata, 'groupedbardata': groupedbardata, 'grouplabels': xValues}
     return data
 
-@app.route("/demo", methods=['GET','POST'])
+
+@app.route('/')
+def homepage():
+    print("--**--"*30)
+    print("Home page : ")
+    print(f"user logged in - {logged_in}")
+    print(f"Current user - {username}")
+    print("--**--"*30)
+    return render_template('index.html',loggedin=logged_in,usrname=username)
+
+
+@app.route("/demo", methods=['GET', 'POST'])
 def demo():
-    print("***---"*30)
+    print("***---" * 30)
     print(request.method)
     print(request.values)
     print(request.form)
@@ -184,25 +181,27 @@ def demo():
             session['folder_path'] = filepath
             data = pageEdacharts(filepath, filename)
             print(request.endpoint)
-            return render_template('eda.html',data = data)
+            return render_template('eda.html', data=data)
         else:
             flash("Wrong file format!!!")
             return redirect(request.url)
     else:
         return render_template("demo.html")
 
-@app.route('/eda/<string:fname>',methods=['GET'])
+
+@app.route('/eda/<string:fname>', methods=['GET'])
 def eda(fname):
-    print("88"*20)
+    print("88" * 20)
     print(request.method)
     print(request.endpoint)
     filename = fname
     filepath = f'static/file_uploads/{filename}'
     session['folder_path'] = filepath
     data = pageEdacharts(filepath, filename)
-    return render_template("eda.html",data = data,usrname=username,loggedin=logged_in)
+    return render_template("eda.html", data=data, usrname=username, loggedin=logged_in)
 
-@app.route('/newwork',methods=['GET','POST'])
+
+@app.route('/newwork', methods=['GET', 'POST'])
 def newwork():
     if request.method == 'POST':
         print("***---" * 30)
@@ -218,8 +217,8 @@ def newwork():
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            paths = os.path.join(os.getcwd() ,"static","file_uploads","user_raw_data",username)
-        # paths = os.path.join(paths, "chemistry")
+            paths = os.path.join(os.getcwd(), "static", "file_uploads", "user_raw_data", username)
+            # paths = os.path.join(paths, "chemistry")
             try:
                 os.mkdir(paths)
             except FileExistsError:
@@ -227,7 +226,7 @@ def newwork():
 
             filepath = os.path.join(paths, filename)
             file.save(filepath)
-            
+
         # new_record = {"username": username, "name": name, "filename": filename}
         pp = fileMetadata(
             username=username,
@@ -242,14 +241,15 @@ def newwork():
         # filepath = f'static/file_uploads/{filename}'
         session['folder_path'] = filepath
         data = pageEdacharts(filepath, filename)
-        return render_template('eda.html',data=data,usrname=username,loggedin=logged_in)
+        return render_template('eda.html', data=data, usrname=username, loggedin=logged_in)
     else:
         return render_template('newwork.html')
 
-@app.route('/fillna',methods = ['GET','POST'])
+
+@app.route('/fillna', methods=['GET', 'POST'])
 def fillnaValue():
-    colours = ['Mean','Median','Mode','None']
-    fillmeth = ['Categorical','Continuous']
+    colours = ['Mean', 'Median', 'Mode', 'None']
+    fillmeth = ['Categorical', 'Continuous']
     col = session.get("Column_names")
     print(col)
     folder_path = session.get('folder_path')
@@ -266,15 +266,16 @@ def fillnaValue():
             fill_methods.append(val)
         df = dataCompletion_fill.main(folder_path, col, fill_methods)
         print(df.isnull().sum())
-        df.to_csv(folder_path,index = False)
+        df.to_csv(folder_path, index=False)
         download_file_status = "Download File"
         downloadlink = '/getdata'
         downloadmessage = 'EasyFill has finished filling the missing values!'
     else:
         print("Method GET")
         # print(df.isnull().sum())
-    return render_template('fillna.html',colours=colours,cols=cols,filestatus=download_file_status,
-                           downloadlink=downloadlink,downloadmessage=downloadmessage,fillmeth=fillmeth)
+    return render_template('fillna.html', colours=colours, cols=cols, filestatus=download_file_status,
+                           downloadlink=downloadlink, downloadmessage=downloadmessage, fillmeth=fillmeth,loggedin=logged_in,usrname=username)
+
 
 @app.route("/getdata")
 def getdata():
@@ -314,16 +315,20 @@ def login():
                         ss = s.__dict__
                         if ss["username"] == username:
                             # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
-                            createdFiles.append({"file":ss['filename'],"name":ss['name']})
-
+                            createdFiles.append({"file": ss['filename'], "name": ss['name']})
 
                     # user_db = user_db[user_db['username'] == username]
-                    
+
                     try:
                         createdFiles
                     except UnboundLocalError:
                         createdFiles = []
-                    return render_template("userHome.html",user=username,createdFiles=createdFiles)
+                    if len(createdFiles) == 0:
+                        lenofdata = "No records found..."
+                    else:
+                        lenofdata = ''
+                    return render_template("userHome.html", user=username, createdFiles=createdFiles,
+                                           lenofdata=lenofdata)
                 else:
                     msg = "Password Incorrect"
                     print(msg)
@@ -333,20 +338,18 @@ def login():
 
     return render_template('login.html', msg=msg)
 
-@app.route('/userHome/<string:name>',methods=['GET','POST'])
+
+@app.route('/userHome/<string:name>', methods=['GET', 'POST'])
 def userHome(name):
     createdFiles = []
     for i, s in enumerate(db.session.query(fileMetadata).all()):
         ss = s.__dict__
         if ss["username"] == username:
             # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
-            createdFiles.append({"file":ss['filename'],"name":ss['name']})
+            createdFiles.append({"file": ss['filename'], "name": ss['name']})
     if request.method == 'POST':
         print("delete button was clicked...")
-        print(request.form)
         form_data = [i for i in request.form.keys()]
-        print(form_data)
-        print(createdFiles)
         if "deletebutton" in form_data:
             createdFiles_ = []
             for idx in createdFiles:
@@ -357,15 +360,20 @@ def userHome(name):
             createdFiles = createdFiles_
             print("some files were removed...")
             print(createdFiles)
+    if len(createdFiles) == 0:
+        lenofdata = "No records found..."
+    else:
+        lenofdata = ''
 
+    return render_template("userHome.html", user=name, createdFiles=createdFiles, lenofdata=lenofdata)
 
-    return render_template("userHome.html", user=name, createdFiles=createdFiles)
 
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
 
-@app.route('/register', methods =['GET', 'POST'])
+
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     msg = ''
     print(request.form)
@@ -378,10 +386,10 @@ def register():
         '''Check whether the email is a valid email or not if not make them enter the valid email'''
         if is_valid_username(username):
             if is_valid_email(email):
-                res,msg = check_password_strength(psw)
+                res, msg = check_password_strength(psw)
                 if res:
                     flag = 0
-                    for i,d in enumerate(db.session.query(signup).all()):
+                    for i, d in enumerate(db.session.query(signup).all()):
                         dd = d.__dict__
                         if dd['email_id'] == email:
                             msg = 'Account already exists Email Id taken!'
@@ -393,10 +401,10 @@ def register():
                             break
                     if flag == 0:
                         pp = signup(
-                            usr_id = UserId,
-                            email_id = email,
-                            name = username,
-                            password = psw
+                            usr_id=UserId,
+                            email_id=email,
+                            name=username,
+                            password=psw
                         )
                         db.session.add(pp)
                         db.session.commit()
@@ -409,14 +417,20 @@ def register():
         msg = 'Please fill all the required fields from the form !'
     return render_template('register.html', msg=msg)
 
-@app.route("/logout",methods=['GET'])
+
+@app.route("/logout", methods=['GET'])
 def logout():
-    return render_template('index.html')
+    global logged_in,username
+    logged_in = False
+    username = ''
+    return redirect('/')
+
 
 @app.route("/pricing")
 def pricing():
     # return render_template("pricing.html")
     return redirect('/')
+
 
 if __name__ == '__main__':
     app.debug = True
