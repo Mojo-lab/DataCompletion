@@ -323,7 +323,11 @@ def login():
                         createdFiles
                     except UnboundLocalError:
                         createdFiles = []
-                    return render_template("userHome.html",user=username,createdFiles=createdFiles)
+                    if len(createdFiles) == 0:
+                        lenofdata = "No records found..."
+                    else:
+                        lenofdata = ''
+                    return render_template("userHome.html",user=username,createdFiles=createdFiles,lenofdata=lenofdata)
                 else:
                     msg = "Password Incorrect"
                     print(msg)
@@ -357,9 +361,12 @@ def userHome(name):
             createdFiles = createdFiles_
             print("some files were removed...")
             print(createdFiles)
+    if len(createdFiles) == 0:
+        lenofdata = "No records found..."
+    else:
+        lenofdata = ''
 
-
-    return render_template("userHome.html", user=name, createdFiles=createdFiles)
+    return render_template("userHome.html", user=name, createdFiles=createdFiles,lenofdata=lenofdata)
 
 @app.route("/contact")
 def contact():
