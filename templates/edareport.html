@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EDA Report | EasyFill</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/edareport.css" media="screen" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+         /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 1550px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;}
+    }
+    h4{
+    color:#ff4316;}
+    h1{
+    color:#ff4316;
+    font-weight:bold;}
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">EasyFill</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Dashboard</a></li>
+        <li><a href="#">Age</a></li>
+        <li><a href="#">Gender</a></li>
+        <li><a href="#">Geo</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2>EasyFill</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Dashboard</a></li>
+        <li><a href="#section2">Age</a></li>
+        <li><a href="#section3">Gender</a></li>
+        <li><a href="#section3">Geo</a></li>
+      </ul><br>
+    </div>
+    <br>
+
+    <div class="col-sm-9">
+      <div class="well">
+        <h1>Analysis from EasyFill</h1>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Number of rows</h4>
+            <p>{{ data.shape.rows }}</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Number of columns</h4>
+            <p>{{ data.shape.columns }}</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Missing Values in total</h4>
+            <p>200</p>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Missing values in %</h4>
+            <p>30%</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="well">
+                <h4>Descriptive Stats</h4>
+                  <table class="styled-table">
+        <thead>
+        <tr>
+            {% for tablehead in data.statsHeader %}
+            <th>{{ tablehead }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for tablerow in data.stats %}
+        <tr>
+            <td class="amulu">{{tablerow.index}}</td>
+            {% for val in tablerow.valuess %}
+            <td>{{val}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+</table>
+
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="well">
+              <h4>{{ data1.bardata.title }}</h4>
+            <canvas id="myChart1" style="width:100%;max-width:600px;"></canvas>
+              <br>
+            <p>{{ data1.bardata.content }}</p>
+
+              <script>
+var xValues = {{ data1.bardata.xValues|tojson }};
+var yValues = {{ data1.bardata.yValues|tojson }};
+var barColors = {{ data1.bardata.barColors|tojson }};
+
+new Chart("myChart1", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues,
+      borderWidth: 1
+    }]
+  },
+  options: {
+  legend: {
+        display: false
+    },
+    title: {
+      display: false
+    }
+  }
+});
+ </script>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="well">
+              <h4>{{ data1.piedata.title }}</h4>
+            <canvas id="myChart" style="width:100%;max-width:600px;"></canvas>
+              <br>
+              <script>
+var xValues = {{ data1.piedata.xValues|tojson }};
+var yValues = {{ data1.piedata.yValues|tojson }};
+var barColors = {{ data1.piedata.barColors|tojson }};
+
+new Chart("myChart", {
+  type: "doughnut",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+  legend: {
+        display: true,
+        position: 'right'
+    },
+    title: {
+      display: false
+    },
+  }
+});
+</script>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="well">
+              <h4>{{ data1.groupedmetadata.title }}</h4>
+            <canvas id="myChart2" style="width:100%;"></canvas>
+              <br>
+              <p>{{ data1.groupedmetadata.content }}</p>
+<script>
+var datagroup = {{ data1.groupedbardata|tojson }};
+var grouplabels = {{ data1.grouplabels|tojson }};
+new Chart("myChart2", {
+  type: "horizontalBar",
+  data: {
+    labels: grouplabels,
+    datasets: datagroup
+  },
+  options: {
+  scales: {
+            xAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 100
+                }
+            }],
+            yAxes: [{
+                stacked: false
+            }]
+        },
+  indexAxis: 'y',
+  legend: {
+        display: true,
+        position: 'right'
+    },
+  elements: {
+      bar: {
+        borderWidth: 2,
+      }
+    },
+    title: {
+      display: false,
+    }
+  }
+});
+</script>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="well">
+            <p>Text</p>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p>
+          </div>
+        </div>
+
+          {{data2|safe}}
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

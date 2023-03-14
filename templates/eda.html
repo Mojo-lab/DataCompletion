@@ -27,8 +27,7 @@
 <center>
 <h1 class="titletext">Analysis from EasyFill</h1><br>
     <div class="container">
-        <div class="card">
-    <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+    <canvas id="myChart1" style="width:100%;max-width:600px;padding:50px;"></canvas>
  <script>
 var xValues = {{ data.bardata.xValues|tojson }};
 var yValues = {{ data.bardata.yValues|tojson }};
@@ -49,24 +48,46 @@ new Chart("myChart1", {
         display: false
     },
     title: {
-      display: true,
-      text: "Comparision of null values in the dataset"
+      display: false
     }
   }
 });
  </script>
-            </div>
         <div class="card">
-            <h1>Comparision of null values in the dataset</h1>
-            <p>The dataset consists of 50 null and 250 non null values.</p>
+            <h1 style="padding:30px;">{{ data.bardata.title }}</h1>
+            <p>{{ data.bardata.content }}</p>
         </div></div><br><br>
     <div class="container">
         <div class="card">
-            <h1>Missing Values Proportion</h1>
-            <p>The dataset consists of 50 null and 250 non null values.</p>
+            <h1 style="padding:0px;">{{ data.piedata.title }}</h1>
+            <p>{{ data.piedata.content }}</p>
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>Column Name</th>
+                    <th>Missing Values</th>
+                    <th>Missing Values in %</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for val in data.piedata.datatable %}
+                <tr>
+                    <td>
+                        {{ val.ColumnName }}
+                    </td>
+                    <td>
+                        {{ val.MissingValues }}
+                    </td>
+                    <td>
+                        {{ val.MissingValuePercent }} %
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
         </div>
-        <div class="card">
-<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<canvas id="myChart" style="width:100%;max-width:650px;padding:50px;"></canvas>
 <script>
 var xValues = {{ data.piedata.xValues|tojson }};
 var yValues = {{ data.piedata.yValues|tojson }};
@@ -87,18 +108,15 @@ new Chart("myChart", {
         position: 'right'
     },
     title: {
-      display: true,
-      text: "Missing Values Proportion"
+      display: false
     },
   }
 });
 </script>
-        </div>
 </div>
     <br><br>
     <div class="container">
-        <div class="card">
-<canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+<canvas id="myChart2" style="width:100%;max-width:600px;padding:50px;"></canvas>
 <script>
 var datagroup = {{ data.groupedbardata|tojson }};
 var grouplabels = {{ data.grouplabels|tojson }};
@@ -131,20 +149,44 @@ new Chart("myChart2", {
       }
     },
     title: {
-      display: true,
-      text: "Missing values in each columns"
+      display: false,
     }
   }
 });
-</script></div>
+</script>
     <div class="card">
-            <h1>Missing values in each columns</h1>
+            <h1>{{ data.groupedmetadata.title }}</h1>
+            <p>{{ data.groupedmetadata.content }}</p>
+        <table class="styled-table">
+                <thead>
+                <tr>
+                    <th>Column Name</th>
+                    <th>Missing Values in %</th>
+                    <th>EasyFill's Recommendation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for val in data.groupedmetadata.grouptable %}
+                <tr>
+                    <td>
+                        {{ val.ColumnName }}
+                    </td>
+                    <td>
+                        {{ val.MissingValuePercent }}
+                    </td>
+                    <td>
+                        {{ val.Recommendation }}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
 
-            <p>The dataset consists of 50 null and 250 non null values.</p>
+            </table>
         </div></div>
     <br><br>
     <div class="sabji">
-        <a href="/fillna"><button class="button">Fill Values</button></a>
+        <a href="/edareport"><button class="button">EDA Report</button></a>
+        <a href="/fillna"><button class="button">Impute Values</button></a>
     <a href="/"><button class="button">Home</button></a>
     </div>
     <script>

@@ -16,15 +16,15 @@
         </a>
         </div>
         <div class="optionNav">
-        <a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
-        <a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a>
+            <a href="/"><i class="fa fa-home"></i>Home</a>
+        <a href="pricing"><i class="fa fa-tags"></i> Pricing</a>
         <a href="login"><i class="fa fa-fw fa-user">Login</i></a>
             <script>
                 const loginstatus = '{{ loggedin }}';
                 console.log(loginstatus);
                 if (loginstatus == "True") {
                 const collection = document.getElementsByClassName("optionNav");
-                collection[0].outerHTML = '<div class="optionNav"><a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a><a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a><a href="/userHome/{{usrname}}" ><i class="fa fa-fw fa-user">User Home</i></a><a href="/logout"><i class="fa fa-fw fa-logout">Log Out</i></a></div>';
+                collection[0].outerHTML = '<div class="optionNav"><a href="/"><i class="fa fa-home"></i>Home</a><a href="pricing"><i class="fa fa-tags"></i> Pricing</a><a href="/userHome/{{usrname}}" ><i class="fa fa-fw fa-user">User Home</i></a><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true">Log Out</i></a></div>';
                 }
             </script>
         </div>
@@ -42,25 +42,25 @@
         <div class="address details">
           <i class="fas fa-map-marker-alt" style="color:#ff4316;"></i>
           <div class="topic">Address</div>
-          <div class="text-one">Surkhet, NP12</div>
-          <div class="text-two">Birendranagar 06</div>
+          <div class="text-one">Anna Nagar,</div>
+          <div class="text-two">Chennai</div>
         </div>
         <div class="phone details">
           <i class="fas fa-phone-alt" style="color:#ff4316;"></i>
           <div class="topic">Phone</div>
-          <div class="text-one">+0098 9893 5647</div>
+          <div class="text-one">+91 9025817537</div>
           <div class="text-two">+0096 3434 5678</div>
         </div>
         <div class="email details">
           <i class="fas fa-envelope" style="color:#ff4316;"></i>
           <div class="topic">Email</div>
-          <div class="text-one">codinglab@gmail.com</div>
+          <div class="text-one">govardhan_selvaraj@yahoo.com</div>
           <div class="text-two">info.codinglab@gmail.com</div>
         </div>
       </div>
       <div class="right-side">
         <div class="topic-text">Send us a message</div>
-        <p>If you have any work from me or any types of quries related to my tutorial, you can send me message from here. It's my pleasure to help you.</p>
+        <p>We'd love to talk about how we can work together.</p>
       <form action="Contact" method="POST">
         <div class="input-box">
           <input id="uname" name="uname" type="text" placeholder="Enter your name">
