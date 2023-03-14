@@ -9,6 +9,7 @@ from urllib.parse import quote
 import config, dataCompletion_fill
 from sqlalchemy.dialects.mysql import LONGTEXT
 from flask_mail import Mail, Message
+from eda_charts import null_value_graphs
 
 ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 
@@ -110,45 +111,6 @@ def check_password_strength(password):
     # All checks passed
     return True, "Password is strong"
 
-def pageEdacharts(filepath,filename):
-    if 'csv' in filename:
-        df = pd.read_csv(filepath)
-    else:
-        df = pd.read_excel(filepath, engine="openpyxl")
-
-    null_values = pd.DataFrame(df.isnull().sum(), columns=['values'])
-    null_values = null_values[null_values['values'] != 0]
-    xValues = list(null_values.index)
-    yValues = list(null_values['values'])
-    session["Column_names"] = str(xValues)
-    piedata = {"xValues": xValues, "yValues": yValues,
-               "barColors": ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"]}
-
-    bardata = {"xValues": ["Not Null Values", "Null Values"],
-               "yValues": [(df.shape[0] * df.shape[1]) - sum(yValues), sum(yValues)],
-               "barColors": ["#b91d47", "#2b5797"]}
-
-    group_not_null_values = []
-    for idx in yValues:
-        group_not_null_values.append(len(df) - idx)
-
-    groupedbardata = [
-        {
-            "label": 'Not Null Values',
-            "data": group_not_null_values,
-            "borderColor": "#b91d47",
-            "backgroundColor": "#b91d47"
-        },
-        {
-            "label": 'Null Values',
-            "data": yValues,
-            "borderColor": "#2b5797",
-            "backgroundColor": "#2b5797"
-        }]
-
-    data = {"bardata": bardata, "piedata": piedata, 'groupedbardata': groupedbardata, 'grouplabels': xValues}
-    return data
-
 
 @app.route('/')
 def homepage():
@@ -188,7 +150,7 @@ def demo():
                 print("File already opened in another software")
             filepath = f'static/file_uploads/{filename}'
             session['folder_path'] = filepath
-            data = pageEdacharts(filepath, filename)
+            data = null_value_graphs(filepath, filename,session)
             print(request.endpoint)
             return render_template('eda.html', data=data)
         else:
@@ -206,7 +168,7 @@ def eda(fname):
     filename = fname
     filepath = f'static/file_uploads/{filename}'
     session['folder_path'] = filepath
-    data = pageEdacharts(filepath, filename)
+    data = null_value_graphs(filepath, filename,session)
     return render_template("eda.html", data=data, usrname=username, loggedin=logged_in)
 
 
@@ -249,7 +211,7 @@ def newwork():
         # files_db.to_excel('static/user_file_db.xlsx', index=False)
         # filepath = f'static/file_uploads/{filename}'
         session['folder_path'] = filepath
-        data = pageEdacharts(filepath, filename)
+        data = null_value_graphs(filepath, filename,session)
         return render_template('eda.html', data=data, usrname=username, loggedin=logged_in)
     else:
         return render_template('newwork.html')
@@ -443,7 +405,7 @@ def Contact():
         successtxt = "Message sent successfully. We will get back to you shortly!"
     else:
         successtxt = ''
-    return render_template("Contact.html",successtxt=successtxt)
+    return render_template("Contact.html",successtxt=successtxt,loggedin=logged_in,usrname=username)
 
 @app.route("/pricing")
 def pricing():
@@ -456,3 +418,5 @@ if __name__ == '__main__':
     app.run()
     db.create_all()
     app.app_context().push()
+
+
