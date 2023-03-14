@@ -9,7 +9,7 @@ from urllib.parse import quote
 import config, dataCompletion_fill
 from sqlalchemy.dialects.mysql import LONGTEXT
 from flask_mail import Mail, Message
-from eda_charts import null_value_graphs
+from eda_charts import null_value_graphs,eda_report
 
 ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 
@@ -171,6 +171,11 @@ def eda(fname):
     data = null_value_graphs(filepath, filename,session)
     return render_template("eda.html", data=data, usrname=username, loggedin=logged_in)
 
+@app.route('/edareport',methods=['GET'])
+def edareport():
+    filepath = session.get("folder_path")
+    data = eda_report(filepath)
+    return render_template('edareport.html',data=data[0],data1=data[1],data2=data[2])
 
 @app.route('/newwork', methods=['GET', 'POST'])
 def newwork():
