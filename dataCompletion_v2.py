@@ -8,17 +8,26 @@ from flask_cors import CORS
 from urllib.parse import quote
 import config, dataCompletion_fill
 from sqlalchemy.dialects.mysql import LONGTEXT
-
+from flask_mail import Mail, Message
 
 ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 
 app = Flask(__name__)
 CORS(app)
+mail = Mail()
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = config.MAIL_USERNAME
+app.config['MAIL_PASSWORD'] = config.MAIL_PASSWORD
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/datacompletion" % quote(config.sql_password)
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:%s@localhost/userAccounts" % quote(config.sql_password)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/file_uploads'
 app.secret_key = config.secret_key
+
+mail.init_app(app)
 logged_in = "False"
 username = ''
 db = SQLAlchemy(app)
@@ -367,12 +376,6 @@ def userHome(name):
 
     return render_template("userHome.html", user=name, createdFiles=createdFiles, lenofdata=lenofdata)
 
-
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     msg = ''
@@ -425,6 +428,22 @@ def logout():
     username = ''
     return redirect('/')
 
+@app.route("/Contact",methods=['GET','POST'])
+def Contact():
+    if request.method == 'POST':
+        feedback = dict(request.form)
+        print(feedback)
+        msg = Message(
+            'EasyFill Feedback',
+            sender=config.MAIL_USERNAME,
+            recipients=config.MAIL_Recepients
+        )
+        msg.body = f"Feedback from user:\n name - {feedback['uname']}\n mail - {feedback['email']}\n message - {feedback['subject']}"
+        mail.send(msg)
+        successtxt = "Message sent successfully. We will get back to you shortly!"
+    else:
+        successtxt = ''
+    return render_template("Contact.html",successtxt=successtxt)
 
 @app.route("/pricing")
 def pricing():
