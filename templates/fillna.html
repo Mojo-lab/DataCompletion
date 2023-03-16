@@ -129,13 +129,26 @@
     </table>
 
         <br><br>
-        <input  type = "submit" value="Submit">
+        <input  class="btn btn-danger btn-lg" type = "submit" value="Submit">
     </form>
     <br><br>
-    <div class="respmes">
-    <h3>{{downloadmessage}}</h3>
-    <a href="{{ downloadlink }}">{{filestatus}}</a>
-    </div>
+    <div class="container mt-2">
+  <div class="alert alert-success">
+    <strong>Success!</strong> {{downloadmessage}} <a href="{{ downloadlink }}" class="alert-link">{{ filestatus }}</a>.
+  </div></div>
+    <script>
+        const mesg = {{ downloadmessage|tojson }};
+      const cardToast = document.getElementsByClassName("container mt-2")[0];
+      console.log("message",mesg);
+      if (mesg == ''){
+            cardToast.setAttribute('hidden',true);
+            console.log("hiddden");
+            }
+      else{
+            cardToast.removeAttribute('hidden');
+            console.log("shownn");
+      }
+    </script>
 </center>
 
 </body>
