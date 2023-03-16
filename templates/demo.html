@@ -2,47 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EasyFill-Demo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="static/indexStyle.css" media="screen">
+    <title>EasyFill | Dataset</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<header>
-    <div class="navbar">
-        <div class="logodiv">
-        <a href="/" class="logo" data-image-width="10" data-image-height="28">
-          <img src="static/images/logo.png" class="logoimg">
-        </a>
-        </div>
-        <div class="optionNav">
-        <a href="/"><i class="fa fa-fw fa-home"></i> Home</a>
-            <a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
-        <a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-        <a href="login"><i class="fa fa-fw fa-user"></i> Login</a>
-        </div>
-        </div>
-    </header>
-
-
-<div class="container">
-    <div class="card">
-    <h3>Upload Dataset</h3>
-    <div class="drop_box">
-      <header>
-        <h4>Select File here</h4>
-      </header>
-      <p>Files Supported: CSV, XLSX</p>
-        <form action="/demo" method="post" enctype="multipart/form-data">
-
-        <input class="formbrowse" type="file"  accept=".csv,.xlsx" id="fileID"  name="file" style="color:black;">
-
-            <input type="submit" value="Upload">
-         </form>
+<nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+      </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
+      </a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <div class="statuschecker">
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/register">Signup</a>
+          </li>
+            </div>
+          <script>
+                const loginstatus = '{{ loggedin }}';
+                console.log(loginstatus);
+                if (loginstatus == "True") {
+                const collection = document.getElementsByClassName("statuschecker");
+                collection[0].outerHTML = '<li class="nav-item"><a class="nav-link" href="/userHome/{{usrname}}">Your Profile</a></li><li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>';
+                }
+            </script>
+          <li class="nav-item">
+            <a class="nav-link" href="/pricing">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Company
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/Contact">About</a></li>
+              <li><a class="dropdown-item" href="/Contact">Contact</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Security</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
+  </div>
+</nav>
 
 
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-6" ><img style="padding:0px;" src="/static/images/indian-boy-file-transfer.svg" alt="puzzle" width="100%" height="100%" class="d-inline-block align-text-top"></div>
+    <div class="card mb-4" style="width: 30%;padding:10px;">
+      <div class="card-header" ><center>
+            <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+      </a></center></div>
+        <div class="card-body">
+          <h1 style="color:#ff4316;font-weight:bold;" >Upload Dataset</h1>
+          <h4>Select File here</h4>
+          <p>Files Supported: CSV, XLSX</p>
+        <form action="/demo" method="post" enctype="multipart/form-data">
+          <div class="input-group mb-3">
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile02" accept=".csv,.xlsx" name="file">
+  </div>
 </div>
-    <div class="image4"></div>
-</div>
+          <button type="submit" class="btn btn-danger">Submit</button>
+        </form>
+        </div>
+    </div></div>
 </body>
 </html>

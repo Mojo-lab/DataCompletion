@@ -2,126 +2,148 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>EasyFill | Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EasyFill</title>
-    <link rel="stylesheet" href="static/indexStyle.css" media="screen">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-<header>
-    <div class="navbar">
-        <div class="logodiv">
-        <a href="/" class="logo" data-image-width="10" data-image-height="28">
-          <img src="static/images/logo.png" class="logoimg">
-        </a>
-        </div>
-        <div class="optionNav">
-        <a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a>
-        <a href="Contact"><i class="fa fa-fw fa-envelope"></i> Contact</a>
-        <a href="login"><i class="fa fa-fw fa-user">Login</i></a>
-            <script>
+<nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+      </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
+      </a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <div class="statuschecker">
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/register">Signup</a>
+          </li>
+            </div>
+          <script>
                 const loginstatus = '{{ loggedin }}';
                 console.log(loginstatus);
                 if (loginstatus == "True") {
-                const collection = document.getElementsByClassName("optionNav");
-                collection[0].outerHTML = '<div class="optionNav"><a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a><a href="Contact"><i class="fa fa-fw fa-envelope"></i> Contact</a><a href="/userHome/{{usrname}}" ><i class="fa fa-fw fa-user">User Home</i></a><a href="/logout"><i class="fa fa-fw fa-logout">Log Out</i></a></div>';
+                const collection = document.getElementsByClassName("statuschecker");
+                collection[0].outerHTML = '<li class="nav-item"><a class="nav-link" href="/userHome/{{usrname}}">Your Profile</a></li><li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>';
                 }
             </script>
-        </div>
-        </div>
-    </header>
-<div class="container">
-    <div class="text">
-        <h1 class="title">Increase data accuracy with EasyFill.</h1>
-        <p>Missing values are like missing puzzle pieces, we help you get the most accurate predictions from your datasets.</p>
-        <a class="button login" href="login">Login</a>
-        <a class="button demo" href="demo">demo</a>
-        <p class="signuptitle"><a href="register">New user? Signup here</a></p>
-        <script>
-                const loginstatus_ = '{{ loggedin }}';
-                if (loginstatus_ == "True") {
-                const collection_ = document.getElementsByClassName("button login");
-                collection_[0].href = "/userHome/{{usrname}}";
-                collection_[0].innerHTML = "User Home";
-                const collection1 = document.getElementsByClassName("button demo");
-                collection1[0].style.visibility = 'hidden';
-                const collection2 = document.getElementsByClassName("signuptitle");
-                collection2[0].style.visibility = 'hidden';
-                }
-            </script>
+          <li class="nav-item">
+            <a class="nav-link" href="/pricing">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Company
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/Contact">About</a></li>
+              <li><a class="dropdown-item" href="/Contact">Contact</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Security</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
-    <div class="image">
-        </div>
-    </div>
+  </div>
+</nav>
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-7" ><img style="padding:0px;" src="/static/images/keen-performance-male.svg" alt="puzzle" width="100%" height="100%" class="d-inline-block align-text-top"></div>
+  <div class="col-md-5" style="align-items:center;"><h1 style="color:#ff4316;font-weight:bold;font-size:4rem;text-align:left;">Increase Data Accuracy with EasyFill.</h1>
+<p style="font-size:1.2rem;max-width: 37ch;">Missing values are like missing puzzle pieces, we help you get the most accurate predictions from your datasets.</p>
+    <br>
+<a class="btn btn-danger btn-lg" role="button" aria-disabled="true" href="login" style="min-width: 200px;">Login</a>
+  <a class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true" href="demo" style="min-width: 200px;">demo</a>
+    <br><br>
+  <p class="signuptitle"><a href="register" style="font-size:20px;">New user? Signup here</a></p></div>
+    <script>
+      const loginstatus_ = '{{ loggedin }}';
+      if (loginstatus_ == "True") {
+      const collection_ = document.getElementsByClassName("btn btn-danger btn-lg");
+      collection_[0].href = "/userHome/{{usrname}}";
+      collection_[0].innerHTML = "Your Profile";
+      const collection1 = document.getElementsByClassName("btn btn-outline-secondary btn-lg");
+      collection1[0].style.visibility = 'hidden';
+      const collection2 = document.getElementsByClassName("signuptitle");
+      collection2[0].style.visibility = 'hidden';
+      }
+    </script>
 
-    <br><br><br><br><br>
 
-<div class="container">
-    <div class="text">
-        <h1 class="title">Improve data accuracy.</h1>
-        <p>EasyFill helps to eliminate missing values and increase accuracy in datasets. Our algorithm identifies potential issues and automatically fills in missing values.</p>
-    </div>
-    <div class="image2">
-        </div>
 </div>
-<div class="container">
-    <div class="image3">
-        </div>
-    <div class="text" style="padding-left:10px;">
-        <h1 class="title">Streamline data analysis.</h1>
-        <p>EasyFill ensures that your data analysis is more accurate,reliable, and efficient. With our algorithm, you get faster, more accurate results.</p>
-    </div>
+
+
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-4"><h1 style="color:#ff4316;font-weight:bold;font-size:4rem;text-align:left;">Improve Data Accuracy.</h1>
+    <p style="font-size:1.2rem;max-width: 37ch;">EasyFill helps to eliminate missing values and increase accuracy in datasets. Our algorithm identifies potential issues and automatically fills in missing values.</p></div>
+<div class="col-md-7" ><img style="padding:0px;" src="/static/images/talent-requirements.svg" alt="accuracy" width="100%" height="100%" class="d-inline-block align-text-top"></div>
 </div>
+
+
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-7" ><img style="padding:0px;" src="/static/images/enterprise.svg" alt="puzzle" width="100%" height="100%" class="d-inline-block align-text-top"></div>
+  <div class="col-md-5" style="align-items:center;"><h1 style="color:#ff4316;font-weight:bold;font-size:4rem;text-align:left;">Streamline Data Analysis.</h1>
+<p style="font-size:1.2rem;max-width: 37ch;">EasyFill ensures that your data analysis is more accurate,reliable, and efficient. With our algorithm, you get faster, more accurate results.</p>
+  </div></div>
+
+  <div class="row justify-content-center align-items-center">
+  <div class="col-md-4"><h1 style="color:#ff4316;font-weight:bold;font-size:4rem;text-align:left;">Time Saving</h1>
+    <p style="font-size:1.2rem;max-width: 37ch;">EasyFill greatly reduces the time taken on manual missing value filling process, with one click you can save time and focus on modelling.</p></div>
+<div class="col-md-7" ><img style="padding:0px;" src="/static/images/time-management.svg" alt="speed" width="100%" height="100%" class="d-inline-block align-text-top"></div>
+</div>
+
+<center>
+  <h1 style="color:#ff4316;font-weight:bold;font-size:4rem;">Why Choose EasyFill?</h1>
 <br><br>
-        <h1 class="titleBold">Why use EasyFill</h1>
-    <div class="headboxer">
-    <div class="headbox">
-    <img src="static/images/8776368-98b28002.png" alt="">
-                <h3 class="titlehead">Easy</h3>
-                <p>Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+<div class="row" style="width:60%">
+    <div class="col-sm-4">
+    <div class="card bg-danger">
+      <div class="card-body text-center">
+        <i class="material-icons" style="font-size:150px;color:white;">accessibility_new</i>
+        <h2 class="card-title" style="color:white;">Easy</h2>
+      </div>
     </div>
-    <div class="headbox">
-    <img src="static/images/3203214-e2632a45.png" alt="">
-                <h3 class="titlehead">Fast</h3>
-                <p>Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
     </div>
-        <div class="headbox">
-            <img src="static/images/9874478-cf582b6e.png" alt="">
-                <h3 class="titlehead">Accurate</h3>
-                <p>Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
-        </div>
+    <div class="col-sm-4">
+    <div class="card bg-danger">
+      <div class="card-body text-center">
+        <i class="material-icons" style="font-size:150px;color:white;">speed</i>
+        <h2 class="card-title" style="color:white;">Fast</h2>
+      </div>
+    </div>
+    </div>
+  <div class="col-sm-4">
+    <div class="card bg-danger">
+      <div class="card-body text-center">
+      <i class="material-icons" style="font-size:150px;color:white;">trending_up</i>
+        <h2 class="card-title" style="color:white;">Accurate</h2>
+      </div>
+    </div>
+  </div>
 </div>
-<br><br><br>
-<h3 style="font-family: 'Open Sans',sans-serif;text-align: center;">TESTIMONIALS</h3>
-<h1 style="color: #FF4136;font-weight: bold;font-size: 4rem;line-height: 1.1;margin-top: 20px;margin-bottom: 20px;font-family: 'Open Sans',sans-serif;text-align: center;">What Clients Say</h1>
-<p style="font-family: 'Open Sans',sans-serif;font-size: 20px;width:50%;padding-left: 400px;text-align: center;position:left;">We place huge value on strong relationships and have seen the benefit they bring to our business. Customer feedback is vital in helping us to get it right.</p>
-<div class="headboxer">
-    <div class="testimonialtab">
-        <p>" EasyFill has revolutionized my data analysis process."</p>
-        <h3>Karthikeyan</h3>
-        <p>Machine Learning Engineer</p>
-    </div>
-    <div class="testimonialtab">
-        <p>" I now get the most accurate results with a fraction of the effort. "</p>
-        <h3>Hariharan.K.V</h3>
-        <p>Data Scientist</p>
-    </div>
-    <div class="testimonialtab">
-        <p>" EasyFill has become my go-to tool for handling missing values."</p>
-        <h3>John Mendes</h3>
-        <p>AI Researcher</p>
-    </div>
-    <div class="testimonialtab">
-        <p>" Thanks to EasyFill, for saving hours of my time spending on handling missing values."</p>
-        <h3>Selena Gomez</h3>
-        <p>Statistician</p>
-    </div>
+</center>
 </div>
-
 </body>
 </html>
-
-
-
-
-
-
