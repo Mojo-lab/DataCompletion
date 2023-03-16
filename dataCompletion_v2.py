@@ -187,14 +187,15 @@ def newwork():
         print(request.url)
         print("sub")
         print(request.files)
-        # files_db = pd.read_excel('static/user_file_db.xlsx',engine="openpyxl")
         name = request.form['fname']
         file = request.files['file']
 
+        print("i'm here!!")
+        print(name)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             paths = os.path.join(os.getcwd(), "static", "file_uploads", "user_raw_data", username)
-            # paths = os.path.join(paths, "chemistry")
+
             try:
                 os.mkdir(paths)
             except FileExistsError:
@@ -203,7 +204,6 @@ def newwork():
             filepath = os.path.join(paths, filename)
             file.save(filepath)
 
-        # new_record = {"username": username, "name": name, "filename": filename}
         pp = fileMetadata(
             username=username,
             name=name,
@@ -212,9 +212,6 @@ def newwork():
         db.session.add(pp)
         db.session.commit()
 
-        # files_db = files_db.append(new_record, ignore_index=True)
-        # files_db.to_excel('static/user_file_db.xlsx', index=False)
-        # filepath = f'static/file_uploads/{filename}'
         session['folder_path'] = filepath
         data = null_value_graphs(filepath, filename,session)
         return render_template('eda.html', data=data, usrname=username, loggedin=logged_in)
@@ -308,6 +305,8 @@ def login():
                 else:
                     msg = "Password Incorrect"
                     print(msg)
+            else:
+                msg ="Invalid Username or EMAIL"
         if flag == 0:
             msg = "Unable to find the email ID. Please register if not"
             print(msg)
@@ -325,6 +324,7 @@ def userHome(name):
             createdFiles.append({"file": ss['filename'], "name": ss['name']})
     if request.method == 'POST':
         print("delete button was clicked...")
+        print(request.form)
         form_data = [i for i in request.form.keys()]
         if "deletebutton" in form_data:
             createdFiles_ = []
@@ -410,7 +410,7 @@ def Contact():
         successtxt = "Message sent successfully. We will get back to you shortly!"
     else:
         successtxt = ''
-    return render_template("Contact.html",successtxt=successtxt,loggedin=logged_in,usrname=username)
+    return render_template("contact.html",successtxt=successtxt,loggedin=logged_in,usrname=username)
 
 @app.route("/pricing")
 def pricing():
