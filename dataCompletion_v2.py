@@ -420,6 +420,17 @@ def pricing():
     # return render_template("pricing.html")
     return redirect('/')
 
+@app.route("/subscribe",methods=['GET','POST'])
+def subscribe():
+    print("in subscribe func")
+    print(request.form)
+    print(request.method)
+    print(request.data)
+    if request.method == 'POST':
+        print(request.form)
+    else:
+        pass
+    return redirect('/')
 
 if __name__ == '__main__':
     app.debug = True
