@@ -69,10 +69,32 @@
   </div>
 </nav>
 
-<center>
-<h1 style="color:#ff4316;">{{msg}}</h1></center>
+
 <div class="row justify-content-center align-items-center">
-  <div class="col-md-7" ><img style="padding:0px;" src="/static/images/signin.svg" alt="puzzle" width="100%" height="100%" class="d-inline-block align-text-top"></div>
+  <div class="col-md-7" ><img style="padding:0px;" src="/static/images/signin.svg" alt="puzzle" width="100%" height="100%" class="d-inline-block align-text-top">
+  <div class="toast show text-bg-secondary" style="position:absolute;top:80%;left:10px;">
+    <div class="toast-header">
+      <strong class="me-auto">Alert!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body">
+      <p>{{ msg }}</p>
+    </div>
+  </div>
+    <script>
+      const mesg = {{ msg|tojson }};
+      const cardToast = document.getElementsByClassName("toast show")[0];
+      console.log("message",mesg);
+      if (mesg == ''){
+            cardToast.setAttribute('hidden',true);
+            console.log("hiddden");
+            }
+      else{
+            cardToast.removeAttribute('hidden');
+            console.log("shownn");
+      }
+</script>
+  </div>
     <div class="card bg-light mb-3" style="width: 30%;padding:30px;">
       <div class="card-header" ><center>
             <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">

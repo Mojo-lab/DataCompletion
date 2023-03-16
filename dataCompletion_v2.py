@@ -28,6 +28,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/file_uploads'
 app.secret_key = config.secret_key
 
+global username, logged_in
+
 mail.init_app(app)
 logged_in = "False"
 username = ''
@@ -345,6 +347,7 @@ def userHome(name):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    global username,logged_in
     msg = ''
     print(request.form)
     '''Check if all required fields are entered if not pop-up not entered condition'''
