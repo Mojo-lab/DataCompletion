@@ -152,12 +152,12 @@ def demo():
             session['folder_path'] = filepath
             data = null_value_graphs(filepath, filename,session)
             print(request.endpoint)
-            return render_template('eda.html', data=data)
+            return render_template('eda.html', data=data, loggedin=logged_in,usrname=username)
         else:
             flash("Wrong file format!!!")
             return redirect(request.url)
     else:
-        return render_template("demo.html")
+        return render_template("demo.html", loggedin=logged_in,usrname=username)
 
 
 @app.route('/eda/<string:fname>', methods=['GET'])
@@ -175,7 +175,7 @@ def eda(fname):
 def edareport():
     filepath = session.get("folder_path")
     data = eda_report(filepath)
-    return render_template('edareport.html',data=data[0],data1=data[1],data2=data[2])
+    return render_template('edareport.html',data=data[0],data1=data[1],data2=data[2], loggedin=logged_in,usrname=username)
 
 @app.route('/newwork', methods=['GET', 'POST'])
 def newwork():
@@ -216,7 +216,7 @@ def newwork():
         data = null_value_graphs(filepath, filename,session)
         return render_template('eda.html', data=data, usrname=username, loggedin=logged_in)
     else:
-        return render_template('newwork.html')
+        return render_template('newwork.html', loggedin=logged_in,usrname=username)
 
 
 @app.route('/fillna', methods=['GET', 'POST'])
@@ -301,7 +301,7 @@ def login():
                     else:
                         lenofdata = ''
                     return render_template("userHome.html", user=username, createdFiles=createdFiles,
-                                           lenofdata=lenofdata)
+                                           lenofdata=lenofdata,loggedin=logged_in,usrname=username)
                 else:
                     msg = "Password Incorrect"
                     print(msg)
@@ -311,7 +311,7 @@ def login():
             msg = "Unable to find the email ID. Please register if not"
             print(msg)
 
-    return render_template('login.html', msg=msg)
+    return render_template('login.html', msg=msg,loggedin=logged_in,usrname=username)
 
 
 @app.route('/userHome/<string:name>', methods=['GET', 'POST'])
@@ -341,7 +341,7 @@ def userHome(name):
     else:
         lenofdata = ''
 
-    return render_template("userHome.html", user=name, createdFiles=createdFiles, lenofdata=lenofdata)
+    return render_template("userHome.html", user=name, createdFiles=createdFiles, lenofdata=lenofdata ,loggedin=logged_in,usrname=username)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -385,7 +385,7 @@ def register():
             msg = "Please enter a valid username. Only support character not interger or special characters"
     elif request.method == 'POST':
         msg = 'Please fill all the required fields from the form !'
-    return render_template('register.html', msg=msg)
+    return render_template('register.html', msg=msg,loggedin=logged_in,usrname=username)
 
 
 @app.route("/logout", methods=['GET'])
