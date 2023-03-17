@@ -10,6 +10,7 @@ import config, dataCompletion_fill
 from sqlalchemy.dialects.mysql import LONGTEXT
 from flask_mail import Mail, Message
 from eda_charts import null_value_graphs,eda_report
+from blog import blogdata
 
 ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 
@@ -432,6 +433,15 @@ def subscribe():
         pass
     return redirect('/')
 
+
+@app.route("/blog",methods=['GET','POST'])
+def blog():
+    return render_template('/blog.html',blogdata=blogdata,loggedin=logged_in,usrname=username)
+
+@app.route("/blog/<string:articleid>",methods=['GET'])
+def article(articleid):
+    print(articleid)
+    return render_template(articleid,loggedin=logged_in,usrname=username)
 if __name__ == '__main__':
     app.debug = True
     app.run()

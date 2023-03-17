@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EasyFill | EDA</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EasyFill | Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="/static/edastyle.css" media="screen" type="text/css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
@@ -61,7 +59,8 @@
               <li><a class="dropdown-item" href="#">Security</a></li>
             </ul>
           </li>
-            <li class="nav-item dropdown">
+
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Resources
             </a>
@@ -70,6 +69,7 @@
               <li><a class="dropdown-item" href="/Customer">Customers</a></li>
             </ul>
           </li>
+
         </ul>
         <form class="d-flex mt-3" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -79,197 +79,9 @@
     </div>
   </div>
 </nav>
-
-
-<center>
-<h1 style="font-size:3rem;font-weight:bold;color:#ff4316;">Analysis from EasyFill</h1><br>
-    <div class="card">
-    <div class="row justify-content-center align-items-center">
-     <div class="col-md-6">
-    <canvas id="myChart1" style="width:100%;max-width:600px;padding:50px;"></canvas>
- <script>
-var xValues = {{ data.bardata.xValues|tojson }};
-var yValues = {{ data.bardata.yValues|tojson }};
-var barColors = {{ data.bardata.barColors|tojson }};
-
-new Chart("myChart1", {
-  type: "bar",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues,
-      borderWidth: 1
-    }]
-  },
-  options: {
-  legend: {
-        display: false
-    },
-    title: {
-      display: false
-    }
-  }
-});
- </script></div>
-        <div class="col-md-4">
-     <h1 style="padding:30px;">{{ data.bardata.title }}</h1>
-            <p>{{ data.bardata.content }}</p>
-        </div></div></div>
-
-<br><br>
-    <div class="card">
-    <div class="row justify-content-center align-items-center">
-     <div class="col-md-5">
-            <h1 style="padding:0px;">{{ data.piedata.title }}</h1>
-            <p>{{ data.piedata.content }}</p>
-
-            <table class="styled-table">
-                <thead>
-                <tr>
-                    <th>Column Name</th>
-                    <th>Missing Values</th>
-                    <th>Missing Values in %</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for val in data.piedata.datatable %}
-                <tr>
-                    <td>
-                        {{ val.ColumnName }}
-                    </td>
-                    <td>
-                        {{ val.MissingValues }}
-                    </td>
-                    <td>
-                        {{ val.MissingValuePercent }} %
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-
-            </table>
-        </div>
-        <div class="col-md-5">
-<canvas id="myChart" style="width:100%;max-width:650px;padding:50px;"></canvas>
-<script>
-var xValues = {{ data.piedata.xValues|tojson }};
-var yValues = {{ data.piedata.yValues|tojson }};
-var barColors = {{ data.piedata.barColors|tojson }};
-
-new Chart("myChart", {
-  type: "doughnut",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-  legend: {
-        display: true,
-        position: 'right'
-    },
-    title: {
-      display: false
-    },
-  }
-});
-</script>
-        </div></div></div>
-
-    <br><br>
-    <div class="card">
-    <div class="row justify-content-center align-items-center">
-     <div class="col-md-5">
-<canvas id="myChart2" style="width:100%;max-width:600px;padding:50px;"></canvas>
-<script>
-var datagroup = {{ data.groupedbardata|tojson }};
-var grouplabels = {{ data.grouplabels|tojson }};
-new Chart("myChart2", {
-  type: "horizontalBar",
-  data: {
-    labels: grouplabels,
-    datasets: datagroup
-  },
-  options: {
-  scales: {
-            xAxes: [{
-                ticks: {
-                    min: 0,
-                    max: 100
-                }
-            }],
-            yAxes: [{
-                stacked: false
-            }]
-        },
-  indexAxis: 'y',
-  legend: {
-        display: true,
-        position: 'right'
-    },
-  elements: {
-      bar: {
-        borderWidth: 2,
-      }
-    },
-    title: {
-      display: false,
-    }
-  }
-});
-</script>
-     </div>
-     <div class="col-md-5">
-            <h1>{{ data.groupedmetadata.title }}</h1>
-            <p>{{ data.groupedmetadata.content }}</p>
-        <table class="styled-table">
-                <thead>
-                <tr>
-                    <th>Column Name</th>
-                    <th>Missing Values in %</th>
-                    <th>EasyFill's Recommendation</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for val in data.groupedmetadata.grouptable %}
-                <tr>
-                    <td>
-                        {{ val.ColumnName }}
-                    </td>
-                    <td>
-                        {{ val.MissingValuePercent }}
-                    </td>
-                    <td>
-                        {{ val.Recommendation }}
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-
-            </table>
-     </div></div></div>
-    <br><br>
-    <div class="sabji">
-        <a href="/edareport"><button class="btn btn-danger">EDA Report</button></a>
-        <a href="/fillna"><button class="btn btn-danger">Impute Values</button></a>
-    <a href="/"><button class="btn btn-danger">Home</button></a>
-    </div>
-    <script>
-    const loginstatus = '{{ loggedin }}';
-                console.log(loginstatus);
-                if (loginstatus == "True") {
-                const collection = document.getElementsByClassName("sabji");
-                collection[0].outerHTML = '<div class="sabji"><a href="/fillna"><button class="button">Fill Values</button></a><a href="/userHome/{{usrname}}"><button class="button">User Home</button></a>';
-                const collection_ = document.getElementsByClassName("optionNav");
-                collection_[0].outerHTML = '<div class="optionNav"><a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a><a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a><a href="/userHome/{{usrname}}" ><i class="fa fa-fw fa-user">User Home</i></a><a href="/logout" ><i class="fa fa-fw fa-logout">Log Out</i></a></div>';
-    }
-    </script>
-</center>
-
+<center><h1 style="color:#ff4316;font-weight:bold;font-size:3.5rem;">Articles</h1></center>
 <br>
+{{blogdata|safe}}
 <div class="footerBox" style="color:white;width:100%;background-color:#212529;">
 <div class="container">
   <footer class="py-5">
