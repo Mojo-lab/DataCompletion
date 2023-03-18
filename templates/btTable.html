@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Table Example with Select Rows, Delete Button, Search Box, and Pagination</title>
   <meta charset="utf-8">
+  <title>EasyFill | Workspaces</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -42,7 +42,7 @@
 
 
 <center>
-<h1 style="color:#ff4316;font-weight:bold;font-size:4rem;">hello {{user}}</h1>
+<h1 style="color:#ff4316;font-weight:bold;font-size:5rem;">hello {{user}}</h1>
 </center>
   <div class="container" style="width:90%;">
   <h2>Your Workspaces</h2>
@@ -67,7 +67,9 @@
       </div>
     </div>
   </div>
-</div>
+      </div></div>
+    <div id="delalert" style="width:30%;left:10%;">
+    </div>
 <script>
         $(document).ready(function() {
   $('#confirm-delete-btn').click(function() {
@@ -104,6 +106,7 @@
             // }]
 
         });
+      $('#delalert').html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Success!</strong> Selected files were deleted.</div>');
       }
     });
 
@@ -111,7 +114,7 @@
     $('#delete-modal').modal('hide');
   });
 });
-      </script></div>
+      </script>
 
 
 <footer class="navbar navbar-inverse navbar-fixed-bottom">

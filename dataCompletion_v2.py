@@ -304,6 +304,8 @@ def login():
                         lenofdata = "No records found..."
                     else:
                         lenofdata = ''
+                    print("in login stuff")
+                    print(htmltxt)
                     return render_template("btTable.html", user=username, createdFiles=createdFiles,
                                            lenofdata=lenofdata,loggedin=logged_in,usrname=username,tablehtml=htmltxt)
                 else:
@@ -318,51 +320,53 @@ def login():
     return render_template('login.html', msg=msg,loggedin=logged_in,usrname=username)
 
 def tabledatahtml(createdFiles):
-    htmltxt ='''<table id="mytable"
-         data-toggle="table"
-         data-sort-name="name"
-         data-sort-order="desc"
-         data-show-fullscreen="true"
-         data-pagination="true"
-         data-page-size="5"
-         data-page-list="[5, 10, 20, 50, 100]"
-         data-search="true"
-         data-show-refresh="true"
-         data-show-toggle="true"
-         data-show-columns="true"
-         data-toolbar="#toolbar">
-    <thead>
-      <tr>
-        <th data-field="state" data-checkbox="true"></th>
-        <th data-field="workspaceName" data-sortable="true">Workspace Name</th>
-        <th data-field="rawData" data-filter-control="input" data-sortable="true">Raw Data</th>
-        <th data-field="imputedData" data-filter-control="select" data-sortable="true">Imputed Data</th>
-        <th data-field="fileSize" data-filter-control="select" data-sortable="true">File size</th>
-        <th data-field="createdAt" data-filter-control="select" data-sortable="true">Created At</th>
-        <th data-field="modifiedAt" data-filter-control="select" data-sortable="true">Modified At</th>
-      </tr>
-    </thead>
-    <tbody>'''
+    htmltxt = '''<table id="mytable"
+             data-toggle="table"
+             data-sort-name="name"
+             data-sort-order="desc"
+             data-show-fullscreen="true"
+             data-pagination="true"
+             data-page-size="5"
+             data-page-list="[5, 10, 20, 50, 100]"
+             data-search="true"
+             data-show-refresh="true"
+             data-show-toggle="true"
+             data-show-columns="true"
+             data-toolbar="#toolbar">
+        <thead>
+          <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="workspaceName" data-sortable="true">Workspace Name</th>
+            <th data-field="rawData" data-filter-control="input" data-sortable="true">Raw Data</th>
+            <th data-field="imputedData" data-filter-control="select" data-sortable="true">Imputed Data</th>
+            <th data-field="fileSize" data-filter-control="select" data-sortable="true">File size</th>
+            <th data-field="createdAt" data-filter-control="select" data-sortable="true">Created At</th>
+            <th data-field="modifiedAt" data-filter-control="select" data-sortable="true">Modified At</th>
+          </tr>
+        </thead>
+        <tbody>'''
     for f in createdFiles:
         htmltxt_ = f'''
-        <tr value="{f['file']}">
-              <td></td>
-                <td><a href="/eda/{f['file']}">{f['name']}</a></td>
-                <td><a href="/eda/{f['file']}">/eda/{f['file']}</a></td>
-                <td><a href="/eda/{f['file']}">/eda/{f['file']}</a></td>
-                <td>200mb</td>
-                <td>feb26</td>
+            <tr value="{f['file']}">
+                  <td></td>
+                    <td><a href="/eda/{f['file']}">{f['name']}</a></td>
+                    <td><a href="/eda/{f['file']}">/eda/{f['file']}</a></td>
+                    <td><a href="/eda/{f['file']}">/eda/{f['file']}</a></td>
+                    <td>200mb</td>
                     <td>feb26</td>
-          </tr>'''
-        htmltxt = htmltxt+htmltxt_
+                        <td>feb26</td>
+              </tr>'''
+        htmltxt = htmltxt + htmltxt_
     html_1 = '''</tbody>
-  </table>
-    <div id="toolbar">
-      <a href="/newwork" class="btn btn-success btn-md"> New Workspace</a>
-<button type="button" id="delete-selected-btn" class="btn btn-danger" data-toggle="modal" data-target="#example-modal" >Delete</button>
-      </div>'''
+      </table>
+        <div id="toolbar">
+          <a href="/newwork" class="btn btn-success btn-md"> New Workspace</a>
+    <button type="button" id="delete-selected-btn" class="btn btn-danger" data-toggle="modal" data-target="#example-modal" >Delete</button>
+          </div>'''
     htmltxt = htmltxt + html_1
     return htmltxt
+
+
 
 @app.route('/userHome/<string:name>', methods=['GET', 'POST'])
 def userHome(name):
@@ -390,7 +394,7 @@ def userHome(name):
         else:
             htmltxt = tabledatahtml(createdFiles)
             lenofdata = ''
-
+        print(htmltxt)
         return htmltxt
     else:
         if len(createdFiles) == 0:
@@ -398,6 +402,7 @@ def userHome(name):
         else:
             htmltxt = tabledatahtml(createdFiles)
             lenofdata = ''
+        print(htmltxt)
         return render_template("btTable.html", user=name, createdFiles=createdFiles, lenofdata=lenofdata ,loggedin=logged_in,usrname=username,tablehtml=htmltxt)
 
 @app.route('/register', methods=['GET', 'POST'])
