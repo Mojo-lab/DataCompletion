@@ -152,11 +152,24 @@ def chart_generator(decision_factor,df):
             pass
     html_cont = ''
     idx = 4
+    # sam = 0
     for val in consolidated_graph_data:
         idx += 1
+        # sam+=1
+        # header_text = '''<br><div class="row row-cols-1 row-cols-md-2 g-4">'''
+        # footer = '''</div><br>'''
+        # if sam == 1:
+        #     html_cont = html_cont + header_text
+        # else:
+        #     pass
+        # if sam == 2:
+        #     html_cont = html_cont + footer
+        # #     sam = 0
+        # else:
+        #     pass
         if val['chart'] == 'barchart':
-            html_txt = f'''<div class ="col-sm-6">
-                            <div class ="well">
+            html_txt = f'''<div class ="col">
+                            <div class ="card">
                             <h4> {val['title']} </h4>
                     <canvas id = "myChart{idx}" style = "width:100%;max-width:600px;"> </canvas>
                     <br>
@@ -189,8 +202,8 @@ def chart_generator(decision_factor,df):
             html_txt = html_txt+html_txt_2
             html_cont = html_cont+html_txt
         elif val['chart'] == "piechart":
-            html_txt = f'''<div class="col-sm-6">
-                          <div class="well">
+            html_txt = f'''<div class="col">
+                          <div class="card">
                               <h4>{val['title']}</h4>
                                 <br>
                             <canvas id="myChart{idx}" style="width:100%;max-width:600px;"></canvas>
@@ -225,6 +238,9 @@ def chart_generator(decision_factor,df):
                             '''
             html_txt = html_txt + html_txt_2
             html_cont = html_cont + html_txt
+    header_text = '''<br><div class="row row-cols-1 row-cols-md-2 g-4">'''
+    footer = '''</div><br>'''
+    html_cont = header_text + html_cont + footer
     return html_cont
 
 
