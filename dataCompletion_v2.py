@@ -294,7 +294,8 @@ def login():
                             createdFiles.append({"file": ss['filename'], "name": ss['name']})
 
                     # user_db = user_db[user_db['username'] == username]
-
+                    htmltxt = tabledatahtml(createdFiles)
+                    # print(htmltxt)
                     try:
                         createdFiles
                     except UnboundLocalError:
@@ -303,8 +304,8 @@ def login():
                         lenofdata = "No records found..."
                     else:
                         lenofdata = ''
-                    return render_template("userHome.html", user=username, createdFiles=createdFiles,
-                                           lenofdata=lenofdata,loggedin=logged_in,usrname=username)
+                    return render_template("btTable.html", user=username, createdFiles=createdFiles,
+                                           lenofdata=lenofdata,loggedin=logged_in,usrname=username,tablehtml=htmltxt)
                 else:
                     msg = "Password Incorrect"
                     print(msg)
@@ -316,35 +317,88 @@ def login():
 
     return render_template('login.html', msg=msg,loggedin=logged_in,usrname=username)
 
+def tabledatahtml(createdFiles):
+    htmltxt ='''<table id="mytable"
+         data-toggle="table"
+         data-sort-name="name"
+         data-sort-order="desc"
+         data-show-fullscreen="true"
+         data-pagination="true"
+         data-page-size="5"
+         data-page-list="[5, 10, 20, 50, 100]"
+         data-search="true"
+         data-show-refresh="true"
+         data-show-toggle="true"
+         data-show-columns="true"
+         data-toolbar="#toolbar">
+    <thead>
+      <tr>
+        <th data-field="state" data-checkbox="true"></th>
+        <th data-field="workspaceName" data-sortable="true">Workspace Name</th>
+        <th data-field="rawData" data-filter-control="input" data-sortable="true">Raw Data</th>
+        <th data-field="imputedData" data-filter-control="select" data-sortable="true">Imputed Data</th>
+        <th data-field="fileSize" data-filter-control="select" data-sortable="true">File size</th>
+        <th data-field="createdAt" data-filter-control="select" data-sortable="true">Created At</th>
+        <th data-field="modifiedAt" data-filter-control="select" data-sortable="true">Modified At</th>
+      </tr>
+    </thead>
+    <tbody>'''
+    for f in createdFiles:
+        htmltxt_ = f'''
+        <tr value="{f['file']}">
+              <td></td>
+                <td><a href="/eda/{f['file']}">{f['name']}</a></td>
+                <td><a href="/eda/{f['file']}">/eda/{f['file']}</a></td>
+                <td><a href="/eda/{f['file']}">/eda/{f['file']}</a></td>
+                <td>200mb</td>
+                <td>feb26</td>
+                    <td>feb26</td>
+          </tr>'''
+        htmltxt = htmltxt+htmltxt_
+    html_1 = '''</tbody>
+  </table>
+    <div id="toolbar">
+      <a href="/newwork" class="btn btn-success btn-md"> New Workspace</a>
+<button type="button" id="delete-selected-btn" class="btn btn-danger" data-toggle="modal" data-target="#example-modal" >Delete</button>
+      </div>'''
+    htmltxt = htmltxt + html_1
+    return htmltxt
 
 @app.route('/userHome/<string:name>', methods=['GET', 'POST'])
 def userHome(name):
     createdFiles = []
+    hreflinks=[]
     for i, s in enumerate(db.session.query(fileMetadata).all()):
         ss = s.__dict__
         if ss["username"] == username:
             # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
-            createdFiles.append({"file": ss['filename'], "name": ss['name']})
+            createdFiles.append({"name": ss['name'], "file": ss['filename']})
     if request.method == 'POST':
-        print("delete button was clicked...")
-        print(request.form)
-        form_data = [i for i in request.form.keys()]
-        if "deletebutton" in form_data:
-            createdFiles_ = []
-            for idx in createdFiles:
-                if idx['name'] in form_data:
-                    pass
-                else:
-                    createdFiles_.append(idx)
-            createdFiles = createdFiles_
-            print("some files were removed...")
-            print(createdFiles)
-    if len(createdFiles) == 0:
-        lenofdata = "No records found..."
-    else:
-        lenofdata = ''
+        ids = request.get_json()
+        print(ids)
+        createdFiles_ = []
+        for idx in createdFiles:
+            if idx['name'] in ids:
+                pass
+            else:
+                createdFiles_.append(idx)
+        createdFiles = createdFiles_
+        print("some files were removed...")
 
-    return render_template("userHome.html", user=name, createdFiles=createdFiles, lenofdata=lenofdata ,loggedin=logged_in,usrname=username)
+        if len(createdFiles) == 0:
+            lenofdata = "No records found..."
+        else:
+            htmltxt = tabledatahtml(createdFiles)
+            lenofdata = ''
+
+        return htmltxt
+    else:
+        if len(createdFiles) == 0:
+            lenofdata = "No records found..."
+        else:
+            htmltxt = tabledatahtml(createdFiles)
+            lenofdata = ''
+        return render_template("btTable.html", user=name, createdFiles=createdFiles, lenofdata=lenofdata ,loggedin=logged_in,usrname=username,tablehtml=htmltxt)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
