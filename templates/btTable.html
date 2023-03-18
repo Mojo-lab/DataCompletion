@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Table Example with Select Rows, Delete Button, Search Box, and Pagination</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/extensions/export/bootstrap-table-export.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/locale/bootstrap-table-en-US.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="color:#ff4316;font-size:50px;font-family:'Brush Script MT', cursive;" href="/">Easyfill</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/Contact">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<center>
+<h1 style="color:#ff4316;font-weight:bold;font-size:4rem;">hello {{user}}</h1>
+</center>
+  <div class="container" style="width:90%;">
+  <h2>Your Workspaces</h2>
+<div id="table-container">
+    {{ tablehtml | safe }}
+    </div>
+      <div class="modal fade" id="example-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="delete-modal-label">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the selected items?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="confirm-delete-btn" type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+        $(document).ready(function() {
+  $('#confirm-delete-btn').click(function() {
+    // Get the ids of the selected rows
+    console.log("delete operation in progress");
+    var rows = $('#mytable').bootstrapTable('getSelections');
+    console.log(rows[0]);
+    var ids = $.map(rows, function(row) {
+    var tempDiv = document.createElement('div');
+  tempDiv.innerHTML = row.workspaceName;
+  var aTag = tempDiv.querySelector('a');
+  return aTag ? aTag.textContent : '';
+});
+    // Send a post request to Flask to delete the selected rows
+    var dynamicValue = "{{user}}";
+    $.ajax({
+      url: "/userHome/" + dynamicValue,
+      type: 'POST',
+      data: JSON.stringify(ids),
+      contentType: 'application/json',
+      // Update the modal with a success message
+      success: function(data){
+      $('#table-container').html(data);
+      $('#mytable').bootstrapTable({
+            // Set the table options here
+            // For example:
+            // data: mydata,
+            // columns: [{
+            //     field: 'id',
+            //     title: 'ID'
+            // }, {
+            //     field: 'name',
+            //     title: 'Name'
+            // }]
+
+        });
+      }
+    });
+
+    // Close the modal
+    $('#delete-modal').modal('hide');
+  });
+});
+      </script></div>
+
+
+<footer class="navbar navbar-inverse navbar-fixed-bottom">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-left">
+      <li><a href="/">Home</a></li>
+      <li><a href="/Contact">About</a></li>
+      <li><a href="/Contact">Contact</a></li>
+      <li><a href="/blog">Blog</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Terms of Use</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+    </ul>
+  </div>
+</footer>
+
+
+</body>
+</html>
+

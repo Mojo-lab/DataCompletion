@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Table Example with Select Rows, Delete Button, Search Box, and Pagination</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/bootstrap-table.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/extensions/export/bootstrap-table-export.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.16.0/locale/bootstrap-table-en-US.min.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+  <h2>Your Workspaces</h2>
+  <table id="mytable"
+         data-toggle="table"
+         data-sort-name="name"
+         data-sort-order="desc"
+         data-show-fullscreen="true"
+         data-pagination="true"
+         data-page-size="5"
+         data-page-list="[5, 10, 20, 50, 100]"
+         data-search="true"
+         data-show-refresh="true"
+         data-show-toggle="true"
+         data-show-columns="true"
+         data-toolbar="#toolbar">
+    <thead>
+      <tr>
+        <th data-field="state" data-checkbox="true"></th>
+        <th data-field="workspaceName" data-sortable="true" data-formatter="filenameFormatter">Workspace Name</th>
+        <th data-field="rawData" data-filter-control="input" data-sortable="true">Raw Data</th>
+        <th data-field="imputedData" data-filter-control="select" data-sortable="true">Imputed Data</th>
+        <th data-field="fileSize" data-filter-control="select" data-sortable="true">File size</th>
+        <th data-field="createdAt" data-filter-control="select" data-sortable="true">Created At</th>
+        <th data-field="modifiedAt" data-filter-control="select" data-sortable="true">Modified At</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for f in createdFiles %}
+      <tr value="{{f.file}}">
+          <td></td>
+            <td><a href="/eda/{{f.file}}">{{f.name}}</a></td>
+            <td><a href="/eda/{{f.file}}">/eda/{{f.file}}</a></td>
+            <td><a href="/eda/{{f.file}}">/eda/{{f.file}}</a></td>
+            <td>200mb</td>
+            <td>feb26</td>
+                <td>feb26</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+    <div id="toolbar">
+      <a href="/newwork" class="btn btn-success btn-md"> New Workspace</a>
+<!--  <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete selected items?');">Delete</button>-->
+<button type="button" id="delete-selected-btn" class="btn btn-danger" data-toggle="modal" data-target="#example-modal" >Delete</button>
+      </div>
+      <div class="modal fade" id="example-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="delete-modal-label">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the selected items?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button id="confirm-delete-btn" type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+      <script>
+        $(document).ready(function() {
+  $('#confirm-delete-btn').click(function() {
+    // Get the ids of the selected rows
+    console.log("delete operation in progress");
+    var rows = $('#mytable').bootstrapTable('getSelections');
+    console.log(rows[0]);
+    var ids = $.map(rows, function(row) {
+    var tempDiv = document.createElement('div');
+  tempDiv.innerHTML = row.workspaceName;
+  var aTag = tempDiv.querySelector('a');
+  return aTag ? aTag.textContent : '';
+});
+    // Send a post request to Flask to delete the selected rows
+    var dynamicValue = "{{user}}";
+$.ajax({
+    url: "/userHome/" + dynamicValue,
+    type: "POST",
+    data: JSON.stringify(ids),
+    contentType: "application/json",
+    success: function (response) {
+        console.log("resp",response);
+        $('#mytable').bootstrapTable('load', response[0]);
+        $('#mytable').bootstrapTable('refresh');
+        // Update the modal with a success message
+        $('#example-modal').modal('show');
+        $('#example-modal .modal-body').html('<p class="text-success">Files were deleted successfully!</p>');
+    },
+    error: function (xhr, status, error) {
+        console.log(error);
+    }
+});
+    // Close the modal
+    $('#delete-modal').modal('hide');
+  });
+});
+</script>
+<script>
+function filenameFormatter(value, row, index) {
+    return '<a href="/eda/' + row.filename + '">' + row.name + '</a>';
+}
+
+const file = {{ hreflinks }};
+const links = files.map(file => filenameFormatter(null, file, null));
+console.log(links);
+      </script>
+</div>
+</body>
+</html>
+
