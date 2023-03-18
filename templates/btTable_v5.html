@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>EasyFill | Home</title>
-  <link rel="icon" type="image/x-icon" href="/static/images/ICO.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+  <meta charset="UTF-8">
+  <title>Bootstrap Table with Toolbar Options</title>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.3/dist/bootstrap-table.min.css">
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.21.3/dist/bootstrap-table.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
-  <div class="container-fluid">
+  <div class="container">
     <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
       </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-      <div class="offcanvas-header">
+      <div class="offcanvas-header bg-dark">
         <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
       </a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body bg-dark">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -81,84 +87,51 @@
     </div>
   </div>
 </nav>
-<div class="row justify-content-center align-items-center">
-  <div class="col-md-7" ><img style="padding:0px;" src="/static/images/keen-performance-male.svg" alt="puzzle" width="100%" height="100%" class="d-inline-block align-text-top"></div>
-  <div class="col-md-5" style="align-items:center;"><h1 style="color:#ff4316;font-weight:bold;font-size:4rem;text-align:left;">Increase Data Accuracy with EasyFill.</h1>
-<p style="font-size:1.2rem;max-width: 37ch;">Missing values are like missing puzzle pieces, we help you get the most accurate predictions from your datasets.</p>
-    <br>
-<a class="btn btn-danger btn-lg" role="button" aria-disabled="true" href="login" style="min-width: 200px;">Login</a>
-  <a class="btn btn-outline-secondary btn-lg" role="button" aria-disabled="true" href="demo" style="min-width: 200px;">demo</a>
-    <br><br>
-  <p class="signuptitle"><a href="register" style="font-size:20px;">New user? Signup here</a></p></div>
-    <script>
-      const loginstatus_ = '{{ loggedin }}';
-      if (loginstatus_ == "True") {
-      const collection_ = document.getElementsByClassName("btn btn-danger btn-lg");
-      collection_[0].href = "/userHome/{{usrname}}";
-      collection_[0].innerHTML = "Your Profile";
-      const collection1 = document.getElementsByClassName("btn btn-outline-secondary btn-lg");
-      collection1[0].style.visibility = 'hidden';
-      const collection2 = document.getElementsByClassName("signuptitle");
-      collection2[0].style.visibility = 'hidden';
-      }
-    </script>
-
-
-</div>
-
-
-<div class="row justify-content-center align-items-center">
-  <div class="col-md-4"><h1 style="color:#ff4316;font-weight:bold;font-size:4rem;text-align:left;">Improve Data Accuracy.</h1>
-    <p style="font-size:1.2rem;max-width: 37ch;">EasyFill helps to eliminate missing values and increase accuracy in datasets. Our algorithm identifies potential issues and automatically fills in missing values.</p></div>
-<div class="col-md-7" ><img style="padding:0px;" src="/static/images/talent-requirements.svg" alt="accuracy" width="100%" height="100%" class="d-inline-block align-text-top"></div>
-</div>
-
-
-<div class="row justify-content-center align-items-center">
-  <div class="col-md-7" ><img style="padding:0px;" src="/static/images/enterprise.svg" alt="puzzle" width="100%" height="100%" class="d-inline-block align-text-top"></div>
-  <div class="col-md-5" style="align-items:center;"><h1 style="color:#ff4316;font-weight:bold;font-size:4rem;text-align:left;">Streamline Data Analysis.</h1>
-<p style="font-size:1.2rem;max-width: 37ch;">EasyFill ensures that your data analysis is more accurate,reliable, and efficient. With our algorithm, you get faster, more accurate results.</p>
-  </div></div>
-
-  <div class="row justify-content-center align-items-center">
-  <div class="col-md-4"><h1 style="color:#ff4316;font-weight:bold;font-size:4rem;text-align:left;">Time Saving</h1>
-    <p style="font-size:1.2rem;max-width: 37ch;">EasyFill greatly reduces the time taken on manual missing value filling process, with one click you can save time and focus on modelling.</p></div>
-<div class="col-md-7" ><img style="padding:0px;" src="/static/images/time-management.svg" alt="speed" width="100%" height="100%" class="d-inline-block align-text-top"></div>
-</div>
 
 <center>
-  <h1 style="color:#ff4316;font-weight:bold;font-size:4rem;">Why Choose EasyFill?</h1>
-<br><br>
-<div class="row" style="width:60%">
-    <div class="col-sm-4">
-    <div class="card bg-danger">
-      <div class="card-body text-center">
-        <i class="material-icons" style="font-size:150px;color:white;">accessibility_new</i>
-        <h2 class="card-title" style="color:white;">Easy</h2>
-      </div>
-    </div>
-    </div>
-    <div class="col-sm-4">
-    <div class="card bg-danger">
-      <div class="card-body text-center">
-        <i class="material-icons" style="font-size:150px;color:white;">speed</i>
-        <h2 class="card-title" style="color:white;">Fast</h2>
-      </div>
-    </div>
-    </div>
-  <div class="col-sm-4">
-    <div class="card bg-danger">
-      <div class="card-body text-center">
-      <i class="material-icons" style="font-size:150px;color:white;">trending_up</i>
-        <h2 class="card-title" style="color:white;">Accurate</h2>
-      </div>
-    </div>
-  </div>
-</div>
+<h1 style="color:#ff4316;font-weight:bold;font-size:4rem;">hello {{user}}</h1>
 </center>
+
+  <div class="container" style="width:90%;">
+    <h2>Your Workspaces</h2>
+    <div id="table-container">
+      {{ tablehtml|safe }}
+
+
+
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-modal-label">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the selected rows?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger delete-confirm-btn">Delete</button>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+$(document).ready(function() {
+    $('#delete-btn').click(function() {
+        console.log('button clicked');
+        $('#delete-modal').modal('show');
+    });
+});
 
-
+</script>
+    <script>
+    $(function() {
+      $('#table').bootstrapTable();
+    });
+  </script>
+    </div>
+</div>
 <br>
 <div class="footerBox" style="color:white;width:100%;background-color:#212529;">
 <div class="container">
