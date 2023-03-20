@@ -108,6 +108,8 @@
                 <label>Median</label>
                 <input type="radio" id="fillmethodMode" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Mode">
                 <label>Mode</label>
+                <input type="radio" id="fillmethodMl" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Ml">
+                <label>ML</label>
                 <input type="radio" id="fillmethodNone" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___None">
                 <label>None</label>
             </td>
@@ -159,6 +161,24 @@
             console.log("shownn");
       }
     </script>
+    <div class="container mt-3">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong>{{errMsg}}
+        </div></div>
+        <script>
+        const mesg1 = {{ errMsg|tojson }};
+      const cardToast1 = document.getElementsByClassName("container mt-3")[0];
+      console.log("message",mesg1);
+      if (mesg1 == ''){
+            cardToast1.setAttribute('hidden',true);
+            console.log("hiddden");
+            }
+      else{
+            cardToast1.removeAttribute('hidden');
+            console.log("shownn");
+      }
+    </script>
+    </div>
 </center>
 
 <br>

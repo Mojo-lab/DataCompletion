@@ -31,4 +31,5 @@ def main(filepath, col, type):
                 print(f"filled missing value - {c}")
         except IndexError:
             pass
+
     return df
