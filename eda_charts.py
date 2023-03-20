@@ -14,7 +14,9 @@ def null_value_graphs(filepath,filename,session):
     3. Missing values & non null values in each column - horizontal bar chart
     '''
 
-    if 'csv' in filename:
+    print(filepath)
+    print(filename)
+    if '.csv' in filepath:
         df = pd.read_csv(filepath)
     else:
         df = pd.read_excel(filepath, engine="openpyxl")
@@ -117,7 +119,7 @@ def chart_type(dataType,unique_values):
         else:
             return 'unknown'
     else:
-        pass
+        return 'histogram'
 
 
 
@@ -134,7 +136,14 @@ def chart_imputer(df):
                 ch_type = None
             decision_factor[col] = {'dtype':'object','unique_values':unique_values,'unigraph':unigraph,'chart':ch_type}
         else:
+            #int and float dtypes:
             print("some other dtype")
+            print(col)
+            print(df[col].dtype)
+            unigraph = True
+            ch_type = chart_type('continuous',[])
+            decision_factor[col] = {"dtype":'continuous','unigraph':unigraph,'chart':ch_type,'values':list(df[col])}
+
     chart_data = chart_generator(decision_factor,df)
     return chart_data
 
@@ -146,31 +155,22 @@ def chart_generator(decision_factor,df):
                 consolidated_graph_data.append(bar_chart(col_name,df))
             elif decision_factor[col_name]['chart'] == 'pie chart':
                 consolidated_graph_data.append(pie_chart(col_name,df))
+            elif decision_factor[col_name]['chart'] == 'histogram':
+                consolidated_graph_data.append(histogram_chart(col_name,df))
             else:
                 pass
         else:
             pass
     html_cont = ''
+    html_cat = ''
+    html_conts = ''
     idx = 4
-    # sam = 0
     for val in consolidated_graph_data:
         idx += 1
-        # sam+=1
-        # header_text = '''<br><div class="row row-cols-1 row-cols-md-2 g-4">'''
-        # footer = '''</div><br>'''
-        # if sam == 1:
-        #     html_cont = html_cont + header_text
-        # else:
-        #     pass
-        # if sam == 2:
-        #     html_cont = html_cont + footer
-        # #     sam = 0
-        # else:
-        #     pass
         if val['chart'] == 'barchart':
-            html_txt = f'''<div class ="col">
+            html_txt = f'''<div class="col">
                             <div class ="card">
-                            <h4> {val['title']} </h4>
+                            <h3 class="card-title text-danger" style="txet-align:left;padding:10px;"> {val['title']} </h3>
                     <canvas id = "myChart{idx}" style = "width:100%;max-width:600px;"> </canvas>
                     <br>
                 <script>
@@ -201,10 +201,11 @@ def chart_generator(decision_factor,df):
             </div>'''
             html_txt = html_txt+html_txt_2
             html_cont = html_cont+html_txt
+            html_cat = html_cat + html_txt
         elif val['chart'] == "piechart":
             html_txt = f'''<div class="col">
                           <div class="card">
-                              <h4>{val['title']}</h4>
+                              <h3 class="card-title text-danger" style="txet-align:left;padding:10px;">{val['title']}</h3>
                                 <br>
                             <canvas id="myChart{idx}" style="width:100%;max-width:600px;"></canvas>
                               <script>
@@ -236,12 +237,96 @@ def chart_generator(decision_factor,df):
                                       </div>
                                     </div>
                             '''
+
             html_txt = html_txt + html_txt_2
             html_cont = html_cont + html_txt
+            html_cat = html_cat + html_txt
+        elif val['chart'] == "histogram":
+            html_txt = f'''<div class="col">
+                          <div class="card">
+                              <h3 class="card-title text-danger" style="txet-align:left;padding:10px;">{val['title']}</h3>
+                                
+                          <div class="card-body">
+                      <canvas id="histogram{idx}"></canvas>
+        </div><div class="card-footer">
+          <div class="form-group">
+            <label for="bin-size{idx}">Select Bin Size:</label>
+            <input type="number" id="bin-size{idx}" class="form-control" value="5" min="1" max="50"/>
+          </div></div></div><br><script>
+          $(document).ready(function()'''
+            html_txt2 = '''{
+                              var data ='''
+            html_txt3 = f'''{val['yValues']};'''
+
+            html_txt4 = f'''var binSize = 5;
+                          var chart = createHistogram(data, binSize);
+                          $('#bin-size{idx}')'''
+            html_txt5 = '''.on('input', function() {
+                binSize = parseInt($(this).val());
+                chart.destroy();
+                chart = createHistogram(data, binSize);
+              });
+              function createHistogram(data, binSize) {
+                var bins = [];
+                for (var i = 0; i < data.length; i++) {
+                  var binIndex = Math.floor(data[i] / binSize);
+                  if (bins[binIndex] == null) {
+                    bins[binIndex] = 1;
+                  } else {
+                    bins[binIndex]++;
+                  }
+                }
+            
+                var labels = [];
+                for (var i = 0; i < bins.length; i++) {
+                  var label = i * binSize + '-' + ((i + 1) * binSize - 1);
+                  labels.push(label);
+                }'''
+
+            html_txt6 = f'''var ctx = document.getElementById('histogram{idx}').getContext('2d');'''
+            html_txt7 = '''var chart = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                    labels: labels,
+                    datasets: [{
+                      label: 'Frequency',
+                      data: bins,
+                      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                      borderColor: 'rgba(54, 162, 235, 1)',
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          beginAtZero: true
+                        }
+                      }]
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                  }
+                });
+            
+                return chart;
+              }
+            });
+                    </script></div>'''
+
+
+            html_txt = html_txt + html_txt2 + html_txt3 + html_txt4 + html_txt5 +html_txt6 + html_txt7
+            html_cont = html_cont + html_txt
+            html_conts = html_conts + html_txt
+
+            print(html_txt)
+            print("----------------")
     header_text = '''<br><div class="row row-cols-1 row-cols-md-2 g-4">'''
     footer = '''</div><br>'''
     html_cont = header_text + html_cont + footer
-    return html_cont
+    html_cat = header_text + html_cat + footer
+    html_conts = header_text + html_conts + footer
+    return html_cont,html_cat,html_conts
 
 
 def bar_chart(col_name,df):
@@ -271,6 +356,17 @@ def pie_chart(col_name,df):
                "chart":"piechart"}
     return piedata
 
+
+def histogram_chart(col_name,df):
+    palette = sns.color_palette("tab10",3).as_hex()
+    column_null_values_title = f"Distribution of {col_name}"
+    yValues = list(df[col_name].dropna())
+    histdata = {"yValues": yValues,
+                "barColors":palette[0],
+                "title": column_null_values_title,
+                "chart": "histogram"
+                }
+    return histdata
 # filepath = r'static\file_uploads\CollectionMonitoringReport20220121101935.xlsx'
 # filename = 'CollectionMonitoringReport20220121101935.xlsx'
 # df = pd.read_excel(filepath,engine='openpyxl')

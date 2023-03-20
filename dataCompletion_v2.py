@@ -178,7 +178,7 @@ def eda(fname):
 def edareport():
     filepath = session.get("folder_path")
     data = eda_report(filepath)
-    return render_template('edareport.html',data=data[0],data1=data[1],data2=data[2], loggedin=logged_in,usrname=username)
+    return render_template('edareport1.html',data=data[0],data1=data[1],data2=data[2],catdata = data[2][1],contdata = data[2][2], loggedin=logged_in,usrname=username)
 
 @app.route('/newwork', methods=['GET', 'POST'])
 def newwork():

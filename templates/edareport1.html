@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>EasyFill | Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+      </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
+      </a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <div class="statuschecker">
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/register">Signup</a>
+          </li>
+            </div>
+          <script>
+                const loginstatus = '{{ loggedin }}';
+                console.log(loginstatus);
+                if (loginstatus == "True") {
+                const collection = document.getElementsByClassName("statuschecker");
+                collection[0].outerHTML = '<li class="nav-item"><a class="nav-link" href="/userHome/{{usrname}}">Your Profile</a></li><li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>';
+                }
+            </script>
+          <li class="nav-item">
+            <a class="nav-link" href="/pricing">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Company
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/Contact">About</a></li>
+              <li><a class="dropdown-item" href="/Contact">Contact</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Security</a></li>
+            </ul>
+          </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Resources
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="/blog">Blog</a></li>
+              <li><a class="dropdown-item" href="/Customer">Customers</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overall Analysis</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Categorical</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Continuous</a>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent" style="padding:10px;">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <h1>Overall Analysis</h1>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+  <div class="col">
+        <div class="card h-200" style="width: 20rem;height:10rem;">
+            <h3 class="card-title text-danger" style="text-align:left;padding:10px;">Number of rows</h3>
+            <h1 class="card-text" style="text-align:left;padding:10px;">{{ data.shape.rows }}</h1>
+        </div></div>
+  <div class="col">
+          <div class="card h-200" style="width: 20rem;height:10rem;">
+            <h3 class="card-title text-danger" style="text-align:left;padding:10px;">Number of columns</h3>
+            <h1 class="card-text" style="text-align:left;padding:10px;">{{ data.shape.columns }}</h1>
+          </div></div>
+    <div class="col">
+          <div class="card h-200" style="width: 20rem;height:10rem;">
+            <h3 class="card-title text-danger" style="text-align:left;padding:10px;">Missing Values in total</h3>
+            <h1 class="card-text" style="text-align:left;padding:10px;">200</h1>
+          </div></div>
+    <div class="col">
+          <div class="card h-200" style="width: 20rem;height:10rem;">
+            <h3 class="card-title text-danger" style="text-align:left;padding:10px;">Missing values in %</h3>
+            <h1 class="card-text" style="text-align:left;padding:10px;">30%</h1>
+          </div></div>
+  </div>
+
+<br>
+      <div class="row">
+          <div class="col">
+              <div class="card" style="width: 100%;">
+                <h3 class="text-danger" style="text-align:center;padding:10px;">Descriptive Stats</h3>
+                <center>
+                    <div class="table-responsive">
+                  <table class="table table-hover table-bordered align-middle"  style="text-align:center;width:90%;">
+        <thead>
+        <tr class="bg-secondary">
+            {% for tablehead in data.statsHeader %}
+            <th class="text-white">{{ tablehead }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for tablerow in data.stats %}
+        <tr>
+            <td class="amulu">{{tablerow.index}}</td>
+            {% for val in tablerow.valuess %}
+            <td>{{val}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+</table></div></center>
+
+              </div></div></div>
+<br>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card" style="height:360px;">
+              <h3 class="card-title text-danger" style="txet-align:left;padding:10px;">{{ data1.bardata.title }}</h3>
+            <canvas id="myChart1" style="width:100%;max-width:600px;"></canvas>
+              <br>
+            <p>{{ data1.bardata.content }}</p>
+
+              <script>
+var xValues = {{ data1.bardata.xValues|tojson }};
+var yValues = {{ data1.bardata.yValues|tojson }};
+var barColors = {{ data1.bardata.barColors|tojson }};
+
+new Chart("myChart1", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues,
+      borderWidth: 1
+    }]
+  },
+  options: {
+  legend: {
+        display: false
+    },
+    title: {
+      display: false
+    }
+  }
+});
+ </script>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card"  style="height:360px;">
+              <h3 class="card-title text-danger" style="txet-align:left;padding:10px;">{{ data1.piedata.title }}</h3>
+            <canvas id="myChart" style="width:100%;max-width:600px;"></canvas>
+              <br>
+              <script>
+var xValues = {{ data1.piedata.xValues|tojson }};
+var yValues = {{ data1.piedata.yValues|tojson }};
+var barColors = {{ data1.piedata.barColors|tojson }};
+
+new Chart("myChart", {
+  type: "doughnut",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+  legend: {
+        display: true,
+        position: 'right'
+    },
+    title: {
+      display: false
+    },
+  }
+});
+</script>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" style="height:360px;">
+              <h3 class="card-title text-danger" style="txet-align:left;padding:10px;">{{ data1.groupedmetadata.title }}</h3>
+            <canvas id="myChart2" style="width:100%;"></canvas>
+<script>
+var datagroup = {{ data1.groupedbardata|tojson }};
+var grouplabels = {{ data1.grouplabels|tojson }};
+new Chart("myChart2", {
+  type: "horizontalBar",
+  data: {
+    labels: grouplabels,
+    datasets: datagroup
+  },
+  options: {
+  scales: {
+            xAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 100
+                }
+            }],
+            yAxes: [{
+                stacked: false
+            }]
+        },
+  indexAxis: 'y',
+  legend: {
+        display: true,
+        position: 'right'
+    },
+  elements: {
+      bar: {
+        borderWidth: 2,
+      }
+    },
+    title: {
+      display: false,
+    }
+  }
+});
+</script>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <h1>Categorical</h1>
+    <p>This is the content for the Profile tab.</p>
+    {{catdata|safe}}
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+    <h1>Continuous</h1>
+    <p>This is the content for the Contact tab.</p>
+      {{contdata|safe}}
+  </div>
+</div>
+<script>
+  $('#myTab a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>
+
+
+<div class="footerBox" style="color:white;width:100%;background-color:#212529;">
+<div class="container">
+  <footer class="py-5">
+    <div class="row">
+      <div class="col-6 col-md-2 mb-3" style="color:white;">
+        <h5>Company</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="/Contact" class="nav-link p-0 text-white">About</a></li>
+          <li class="nav-item mb-2"><a href="/careers" class="nav-link p-0 text-white">Careers</a></li>
+          <li class="nav-item mb-2"><a href="/security" class="nav-link p-0 text-white">Security</a></li>
+          <li class="nav-item mb-2"><a href="/legal" class="nav-link p-0 text-white">Legal</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <h5>EasyFill</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="/pricing" class="nav-link p-0 text-white">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="/faq" class="nav-link p-0 text-white">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Resources</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="/blog" class="nav-link p-0 text-white">Blog</a></li>
+          <li class="nav-item mb-2"><a href="/customers" class="nav-link p-0 text-white">Customers</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-5 offset-md-1 mb-3">
+          <h5>Subscribe to our newsletter</h5>
+          <p>Monthly digest of what's new and exciting from us.</p>
+          <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+        <form action='/subscribe' method="post" enctype="multipart/form-data">
+            <input name="newsletter1" id="newsletter1" type="text"  placeholder="Email address">
+            <input type="submit" class="btn btn-danger" value="Subscribe"></input>
+        </form>
+          </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+      </a>
+      <p>&copy; 2023 EasyFill, Inc. All rights reserved.</p>
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a class="link-dark" href="/"><i class="fa-brands fa-twitter" style="color:white;font-size:40px;"></i></a></li>
+        <li class="ms-3"><a class="link-dark" href=""><i class="fa-brands fa-instagram" style="color:white;font-size:40px;"></i></a></li>
+        <li class="ms-3"><a class="link-dark" href="https://github.com/Mojo-lab"><i class="fa-brands fa-github" style="color:white;font-size:40px;"></i></a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+  </div>
+</body>
+</html>
