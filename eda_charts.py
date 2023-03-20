@@ -319,8 +319,7 @@ def chart_generator(decision_factor,df):
             html_cont = html_cont + html_txt
             html_conts = html_conts + html_txt
 
-            print(html_txt)
-            print("----------------")
+
     header_text = '''<br><div class="row row-cols-1 row-cols-md-2 g-4">'''
     footer = '''</div><br>'''
     html_cont = header_text + html_cont + footer

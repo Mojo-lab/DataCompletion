@@ -233,23 +233,31 @@ def fillnaValue():
     download_file_status = ""
     downloadlink = ''
     downloadmessage = ''
+    errMsg = ''
     if request.method == 'POST':
         fill_methods = []
         print(request.values)
         folder_path = session.get('folder_path')
+        print(folder_path)
         col = session.get("Column_names")
         for val in request.values.items():
             fill_methods.append(val)
-        df = dataCompletion_fill.main(folder_path, col, fill_methods)
-        print(df.isnull().sum())
-        df.to_csv(folder_path, index=False)
-        download_file_status = "Download File"
-        downloadlink = '/getdata'
-        downloadmessage = 'EasyFill has finished filling the missing values!'
+        try:
+            df = dataCompletion_fill.main(folder_path, col, fill_methods)
+            print(df.isnull().sum())
+            if '.csv' in folder_path:
+                df.to_csv(folder_path, index=False)
+            else:
+                df.to_excel(folder_path, index=False)
+            download_file_status = "Download File"
+            downloadlink = '/getdata'
+            downloadmessage = 'EasyFill has finished filling the missing values!'
+        except TypeError:
+            errMsg = f"The entered data type one or more column is wrong. Please check it again."
     else:
         print("Method GET")
         # print(df.isnull().sum())
-    return render_template('fillna.html', colours=colours, cols=cols, filestatus=download_file_status,
+    return render_template('fillna.html', colours=colours, cols=cols, filestatus=download_file_status,errMsg=errMsg,
                            downloadlink=downloadlink, downloadmessage=downloadmessage, fillmeth=fillmeth,loggedin=logged_in,usrname=username)
 
 
@@ -391,10 +399,12 @@ def userHome(name):
 
         if len(createdFiles) == 0:
             lenofdata = "No records found..."
+            htmltxt = tabledatahtml(createdFiles)
+
         else:
             htmltxt = tabledatahtml(createdFiles)
             lenofdata = ''
-        print(htmltxt)
+
         return htmltxt
     else:
         if len(createdFiles) == 0:
