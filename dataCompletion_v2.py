@@ -11,6 +11,8 @@ from sqlalchemy.dialects.mysql import LONGTEXT
 from flask_mail import Mail, Message
 from eda_charts import null_value_graphs,eda_report
 from blog import blogdata
+import jwt
+from time import time
 
 ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 
@@ -52,6 +54,7 @@ class signup(db.Model):
         self.password = password
         self.usr_id = usr_id
 
+
 class fileMetadata(db.Model):
     __tablename__ = 'fileMetadata'
     id = db.Column('id',db.Integer, primary_key = True)
@@ -64,6 +67,9 @@ class fileMetadata(db.Model):
         self.username = username
         self.name = name
         self.filename = filename
+
+
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -399,6 +405,7 @@ def userHome(name):
                 createdFiles.append({"name": ss['name'], "file": ss['filename']})
         if len(createdFiles) == 0:
             lenofdata = "No records found..."
+            htmltxt = tabledatahtml([])
         else:
             htmltxt = tabledatahtml(createdFiles)
             lenofdata = ''
@@ -416,9 +423,12 @@ def register():
         psw = request.form['password']
         email = request.form['email']
         UserId = request.form['UserId']
+        repeat_pwd = request.form['pwd1']
         '''Check whether the email is a valid email or not if not make them enter the valid email'''
         if is_valid_username(username):
-            if is_valid_email(email):
+            if psw != repeat_pwd:
+                msg = "Entered password does not match."
+            elif is_valid_email(email):
                 res, msg = check_password_strength(psw)
                 if res:
                     flag = 0
@@ -450,6 +460,26 @@ def register():
         msg = 'Please fill all the required fields from the form !'
     return render_template('register.html', msg=msg,loggedin=logged_in,usrname=username)
 
+
+@app.route("/forgotpassword",methods=['GET','POST'])
+def forgotpassword():
+    msg_=''
+    if request.method == 'POST':
+        print(request.form)
+        userMail = request.form.get("email")
+        print(userMail)
+
+        msg_ = "A new password been sent to your mail."
+        msg = Message(
+            'EasyFill Password Reset',
+            sender=config.MAIL_USERNAME,
+            recipients=[userMail]
+        )
+        rows_changed = signup.query.filter_by(email_id=userMail).update(dict(password='we1c@me@123'))
+        db.session.commit()
+        msg.body = f"Dear user, kindly use the following password to log into your account:\n  password - we1c@me@123"
+        mail.send(msg)
+    return render_template('forgotpassword.html',msg=msg_)
 
 @app.route("/logout", methods=['GET'])
 def logout():
@@ -501,9 +531,10 @@ def blog():
 def article(articleid):
     print(articleid)
     return render_template(articleid,loggedin=logged_in,usrname=username)
+
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(port=3000)
     db.create_all()
     app.app_context().push()
 
