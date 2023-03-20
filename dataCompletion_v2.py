@@ -127,11 +127,7 @@ def homepage():
 
 @app.route("/demo", methods=['GET', 'POST'])
 def demo():
-    print("***---" * 30)
-    print(request.method)
-    print(request.values)
-    print(request.form)
-    print(request.url)
+
     if request.method == 'POST':
         print(request.method)
         # check if the post request has the file part
@@ -165,9 +161,7 @@ def demo():
 
 @app.route('/eda/<string:fname>', methods=['GET'])
 def eda(fname):
-    print("88" * 20)
-    print(request.method)
-    print(request.endpoint)
+
     filename = fname
     filepath = f'static/file_uploads/{filename}'
     session['folder_path'] = filepath
@@ -183,18 +177,11 @@ def edareport():
 @app.route('/newwork', methods=['GET', 'POST'])
 def newwork():
     if request.method == 'POST':
-        print("***---" * 30)
-        print(request.method)
-        print(request.values)
-        print(request.form)
-        print(request.url)
-        print("sub")
-        print(request.files)
+
         name = request.form['fname']
         file = request.files['file']
 
-        print("i'm here!!")
-        print(name)
+
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             paths = os.path.join(os.getcwd(), "static", "file_uploads", "user_raw_data", username)
@@ -375,27 +362,23 @@ def tabledatahtml(createdFiles):
     return htmltxt
 
 
-
 @app.route('/userHome/<string:name>', methods=['GET', 'POST'])
 def userHome(name):
-    createdFiles = []
-    hreflinks=[]
-    for i, s in enumerate(db.session.query(fileMetadata).all()):
-        ss = s.__dict__
-        if ss["username"] == username:
-            # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
-            createdFiles.append({"name": ss['name'], "file": ss['filename']})
+
     if request.method == 'POST':
         ids = request.get_json()
         print(ids)
-        createdFiles_ = []
-        for idx in createdFiles:
-            if idx['name'] in ids:
-                pass
-            else:
-                createdFiles_.append(idx)
-        createdFiles = createdFiles_
-        print("some files were removed...")
+        for idx in ids:
+            fileMetadata.query.filter_by(username=username, name=idx).delete()
+            db.session.commit()
+            print(f"record {idx} deleted!")
+        createdFiles = []
+        hreflinks = []
+        for i, s in enumerate(db.session.query(fileMetadata).all()):
+            ss = s.__dict__
+            if ss["username"] == username:
+                # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
+                createdFiles.append({"name": ss['name'], "file": ss['filename']})
 
         if len(createdFiles) == 0:
             lenofdata = "No records found..."
@@ -407,6 +390,13 @@ def userHome(name):
 
         return htmltxt
     else:
+        createdFiles = []
+        hreflinks = []
+        for i, s in enumerate(db.session.query(fileMetadata).all()):
+            ss = s.__dict__
+            if ss["username"] == username:
+                # for i,path in os.listdir(os.path.join(os.getcwd(),"static","file_uploads","user_imputed_data",username)):
+                createdFiles.append({"name": ss['name'], "file": ss['filename']})
         if len(createdFiles) == 0:
             lenofdata = "No records found..."
         else:
