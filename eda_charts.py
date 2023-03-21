@@ -28,7 +28,8 @@ def null_value_graphs(filepath,filename,session):
     converted_values = [round((val / len(df)) * 100) for val in yValues]
     session["Column_names"] = str(xValues)
     palette = sns.color_palette("tab10", len(xValues)).as_hex()
-
+    print(df.isnull().sum())
+    print(f"palette - {palette}")
     df_total_rows = df.shape[0] * df.shape[1]
 
     #1. overall null values in the dataset - bar chart

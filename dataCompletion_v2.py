@@ -133,7 +133,6 @@ def homepage():
 
 @app.route("/demo", methods=['GET', 'POST'])
 def demo():
-
     if request.method == 'POST':
         print(request.method)
         # check if the post request has the file part
@@ -172,6 +171,7 @@ def eda(fname):
     filepath = f'static/file_uploads/{filename}'
     session['folder_path'] = filepath
     data = null_value_graphs(filepath, filename,session)
+    print(data)
     return render_template("eda.html", data=data, usrname=username, loggedin=logged_in)
 
 @app.route('/edareport',methods=['GET'])
@@ -204,12 +204,14 @@ def newwork():
             username=username,
             name=name,
             filename=filename
+
         )
         db.session.add(pp)
         db.session.commit()
 
         session['folder_path'] = filepath
         data = null_value_graphs(filepath, filename,session)
+        print(data)
         return render_template('eda.html', data=data, usrname=username, loggedin=logged_in)
     else:
         return render_template('newwork.html', loggedin=logged_in,usrname=username)
@@ -443,15 +445,15 @@ def register():
                             flag = 1
                             break
                     if flag == 0:
-                        pp = signup(
-                            usr_id=UserId,
-                            email_id=email,
-                            name=username,
-                            password=psw
+                        msg = Message(
+                            'EasyFill User Registration - OTP',
+                            sender=config.MAIL_USERNAME,
+                            recipients=[email]
                         )
-                        db.session.add(pp)
-                        db.session.commit()
-                        msg = 'You have successfully registered !'
+                        msg.body = f"Dear user, kindly use the following OTP to register your account:\n  OTP - 12345"
+                        mail.send(msg)
+                        return render_template("confirm_user.html",UserId=UserId,email=email,name=username,password=psw,msg='')
+
             else:
                 msg = "Please enter a valid email address"
         else:
@@ -460,6 +462,30 @@ def register():
         msg = 'Please fill all the required fields from the form !'
     return render_template('register.html', msg=msg,loggedin=logged_in,usrname=username)
 
+
+@app.route('/confirm_user',methods=['GET','POST'])
+def confirm_user():
+    msg = ''
+    if request.method == 'POST':
+        print(request.form)
+        username = request.form['username']
+        psw = request.form['password']
+        email = request.form['email']
+        UserId = request.form['UserId']
+        otp = request.form['otp']
+        if str(otp) == '12345':
+            pp = signup(
+                usr_id=UserId,
+                email_id=email,
+                name=username,
+                password=psw
+            )
+            db.session.add(pp)
+            db.session.commit()
+            msg = 'You have successfully registered !'
+        return render_template("confirm_user.html", UserId=UserId, email=email, name=username, password=psw,msg=msg)
+    else:
+        return render_template("confirm_user.html",msg=msg)
 
 @app.route("/forgotpassword",methods=['GET','POST'])
 def forgotpassword():
