@@ -168,7 +168,7 @@ def demo():
 def eda(fname):
 
     filename = fname
-    filepath = f'static/file_uploads/{filename}'
+    filepath = f'static/file_uploads/user_raw_data/{username}/{filename}'
     session['folder_path'] = filepath
     data = null_value_graphs(filepath, filename,session)
     print(data)
