@@ -91,10 +91,15 @@
           <p>Files Supported: CSV, XLSX</p>
           <div class="drop_box">
        <form action="/newwork" method="post" enctype="multipart/form-data">
-        <label for="fname">Workspace Name - </label>
-        <input type="text" id="fname" name="fname" value="Untitled1"><br><br>
-        <input style="border:1px solid grey;" class="formbrowse" type="file"  accept=".csv,.xlsx" id="fileID"  name="file" style="color:black;">
-          <br><br>
+         <div class="input-group">
+  <span class="input-group-text">Workspace Name</span>
+  <input type="text"  id="fname" name="fname" aria-label="fname" class="form-control" value="Untitled1">
+</div>
+         <br>
+         <div class="input-group mb-3">
+  <input accept=".csv,.xlsx" id="fileID"  name="file" type="file" class="form-control" id="inputGroupFile02">
+</div>
+         <br>
             <input class="btn btn-danger" type="submit" value="Upload">
          </form>
     </div>
