@@ -198,38 +198,39 @@ def bt5Tablegen(filepath):
     return html_cont
 
 
-@app.route('/eda/<string:fname>', methods=['GET'])
-def eda(fname):
-    filename = fname
+@app.route('/eda', methods=['GET'])
+def eda():
+    spacename = request.args.get('name')
+    filename = request.args.get("filepath")
+    username = request.args.get("user")
+    print(request.args)
     filepath = f'static/file_uploads/user_raw_data/{username}/{filename}'
     session['folder_path'] = filepath
-    print("----101010101---------")
-    print(request.args)
-    spacename = session.get("name")
     data = null_value_graphs(filepath, filename,session)
     homeTable = bt5Tablegen(filepath)
-    print(data)
     return render_template("multiHome.html", data=data, usrname=username, loggedin=logged_in,homeTable = homeTable,fname=filename,workSpaceName=spacename)
 
 @app.route('/multiHome', methods=['GET'])
 def multiHome():
-    filepath = session.get("folder_path")
-    filename = session.get("filename")
-    spacename = session.get("name")
-    print("----101010101---------")
-    print(request.args)
+    filename = request.args.get("filename")
+    username = request.args.get("user")
+    spacename = request.args.get("name")
+    filepath = f'static/file_uploads/user_raw_data/{username}/{filename}'
     data = null_value_graphs(filepath, filename,session)
     homeTable = bt5Tablegen(filepath)
-    print(data)
     return render_template("multiHome.html", data=data, usrname=username, loggedin=logged_in,homeTable = homeTable,fname=filename,workSpaceName=spacename)
 
 
 
 @app.route('/edareport',methods=['GET'])
 def edareport():
+    filename = request.args.get("filename")
+    username = request.args.get("user")
+    filepath = f'static/file_uploads/user_raw_data/{username}/{filename}'
+    spacename = request.args.get("name")
     filepath = session.get("folder_path")
     data = eda_report(filepath)
-    return render_template('edareport1.html',data=data[0],data1=data[1],data2=data[2],catdata = data[2][1],contdata = data[2][2], loggedin=logged_in,usrname=username)
+    return render_template('edareport1.html',data=data[0],data1=data[1],data2=data[2],catdata = data[2][1],contdata = data[2][2], loggedin=logged_in,usrname=username,fname=filename,workSpaceName=spacename)
 
 @app.route('/newwork', methods=['GET', 'POST'])
 def newwork():
@@ -375,7 +376,7 @@ def login():
 
     return render_template('login.html', msg=msg,loggedin=logged_in,usrname=username)
 
-def tabledatahtml(createdFiles):
+def tabledatahtml(createdFiles,user):
     htmltxt = '''<table id="mytable"
              data-toggle="table"
              data-sort-name="name"
@@ -405,9 +406,9 @@ def tabledatahtml(createdFiles):
         htmltxt_ = f'''
             <tr value="{f['file']}">
                   <td></td>
-                    <td><a href="/eda/{f['file']}">{f['name']}</a></td>
-                    <td><a href="/eda/{f['file']}">/eda/{f['file']}</a></td>
-                    <td><a href="/eda/{f['file']}">/eda/{f['file']}</a></td>
+                    <td><a href="/eda?filepath={f['file']}&name={f['name']}&user={user}">{f['name']}</a></td>
+                    <td><a href="/eda?filepath={f['file']}&name={f['name']}&user={user}">/eda/{f['file']}</a></td>
+                    <td><a href="/eda?filepath={f['file']}&name={f['name']}&user={user}">/eda/{f['file']}</a></td>
                     <td>200mb</td>
                     <td>feb26</td>
                         <td>feb26</td>
@@ -443,10 +444,10 @@ def userHome(name):
 
         if len(createdFiles) == 0:
             lenofdata = "No records found..."
-            htmltxt = tabledatahtml(createdFiles)
+            htmltxt = tabledatahtml(createdFiles,user)
 
         else:
-            htmltxt = tabledatahtml(createdFiles)
+            htmltxt = tabledatahtml(createdFiles,user)
             lenofdata = ''
 
         return htmltxt

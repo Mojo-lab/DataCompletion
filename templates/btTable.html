@@ -24,17 +24,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-<a class="navbar-brand" href="/"><img style="position:fixed;top:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="60" class="d-inline-block align-text-top">
+<a class="navbar-brand" href="/?user={{htmlData.user}}"><img style="position:fixed;top:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="60" class="d-inline-block align-text-top">
       </a>
-      <a class="navbar-brand" style="color:transparent;font-size:50px;font-family:'Brush Script MT', cursive;" href="/">Easyfill</a>
+      <a class="navbar-brand" style="color:transparent;font-size:50px;font-family:'Brush Script MT', cursive;" href="/?user={{htmlData.user}}">Easyfill</a>
 
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/Contact">About</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/pricing">Pricing</a></li>
+        <li class="active"><a href="/?user={{htmlData.user}}">Home</a></li>
+        <li><a href="/Contact?user={{htmlData.user}}">About</a></li>
+        <li><a href="/blog?user={{htmlData.user}}">Blog</a></li>
+        <li><a href="/pricing?user={{htmlData.user}}">Pricing</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
@@ -46,12 +46,16 @@
 
 
 <center>
-<h1 style="color:#ff4316;font-weight:bold;font-size:5rem;">hello {{user}}</h1>
+<h1 style="color:#ff4316;font-weight:bold;font-size:5rem;">hello {{htmlData.user}}</h1>
 </center>
   <div class="container" style="width:90%;">
   <h2>Your Workspaces</h2>
 <div id="table-container">
-    {{ tablehtml | safe }}
+    {{ htmlData.tablehtml | safe }}
+  <div id="toolbar">
+          <a href="/newwork?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" class="btn btn-success btn-md"> New Workspace</a>
+    <button type="button" id="delete-selected-btn" class="btn btn-danger" data-toggle="modal" data-target="#example-modal" >Delete</button>
+          </div>
     </div>
       <div class="modal fade" id="example-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -88,9 +92,9 @@
   return aTag ? aTag.textContent : '';
 });
     // Send a post request to Flask to delete the selected rows
-    var dynamicValue = "{{user}}";
+    var dynamicValue = "?user={{htmlData.user}}";
     $.ajax({
-      url: "/userHome/" + dynamicValue,
+      url: "/userHome" + dynamicValue,
       type: 'POST',
       data: JSON.stringify(ids),
       contentType: 'application/json',
@@ -124,10 +128,10 @@
 <footer class="navbar navbar-inverse navbar-fixed-bottom">
   <div class="container-fluid">
     <ul class="nav navbar-nav navbar-left">
-      <li><a href="/">Home</a></li>
-      <li><a href="/Contact">About</a></li>
-      <li><a href="/Contact">Contact</a></li>
-      <li><a href="/blog">Blog</a></li>
+      <li><a href="/?user={{htmlData.user}}">Home</a></li>
+      <li><a href="/Contact?user={{htmlData.user}}">About</a></li>
+      <li><a href="/Contact?user={{htmlData.user}}">Contact</a></li>
+      <li><a href="/blog?user={{htmlData.user}}">Blog</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#">Terms of Use</a></li>
