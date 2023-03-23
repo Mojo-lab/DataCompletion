@@ -11,7 +11,7 @@ def blog_post(title,bloglink,imagelink,blogdate):
     return data
 
 titles = ['Importance of Data Quality.','Impact of Missing Values.']
-blog_links = ['/blog/article1.html','/blog/article2.html']
+blog_links = ['/blog/article1.html?user={{htmlData.user}}','/blog/article2.html?user={{htmlData.user}}']
 image_links = ['/static/images/Untitled.png','/static/images/Untitled.png']
 blog_dates = ['feb 26,2023','feb 26,2023']
 blogdata = ''

@@ -12,48 +12,48 @@
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+    <a class="navbar-brand" href="/?user={{htmlData.user}}"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
       </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="/?user={{htmlData.user}}"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
       </a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/?user={{htmlData.user}}">Home</a>
           </li>
           <div class="statuschecker">
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/login?user={{htmlData.user}}">Login</a>
           </li>
             <li class="nav-item">
-            <a class="nav-link" href="/register">Signup</a>
+            <a class="nav-link" href="/register?user={{htmlData.user}}">Signup</a>
           </li>
             </div>
           <script>
-                const loginstatus = '{{ loggedin }}';
+                const loginstatus = '{{ htmlData.user }}';
                 console.log(loginstatus);
-                if (loginstatus == "True") {
+                if (loginstatus != "None") {
                 const collection = document.getElementsByClassName("statuschecker");
-                collection[0].outerHTML = '<li class="nav-item"><a class="nav-link" href="/userHome/{{usrname}}">Your Profile</a></li><li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>';
+                collection[0].outerHTML = '<li class="nav-item"><a class="nav-link" href="/userHome?user={{htmlData.user}}">Your Profile</a></li><li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>';
                 }
             </script>
           <li class="nav-item">
-            <a class="nav-link" href="/pricing">Pricing</a>
+            <a class="nav-link" href="/pricing?user={{htmlData.user}}">Pricing</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Company
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="/Contact">About</a></li>
-              <li><a class="dropdown-item" href="/Contact">Contact</a></li>
+              <li><a class="dropdown-item" href="/Contact?user={{htmlData.user}}">About</a></li>
+              <li><a class="dropdown-item" href="/Contact?user={{htmlData.user}}">Contact</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -65,8 +65,8 @@
               Resources
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="/blog">Blog</a></li>
-              <li><a class="dropdown-item" href="/Customer">Customers</a></li>
+              <li><a class="dropdown-item" href="/blog?user={{htmlData.user}}">Blog</a></li>
+              <li><a class="dropdown-item" href="/Customer?user={{htmlData.user}}">Customers</a></li>
             </ul>
           </li>
         </ul>
@@ -87,25 +87,25 @@
 </nav>
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="/?user={{htmlData.user}}"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
       </a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/multiHome">Home</a>
+            <a class="nav-link active" aria-current="page" href="/multiHome?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}">Home</a>
           </li>
           <div class="statuschecker">
           <li class="nav-item">
-            <a class="nav-link" href="/edareport">Dashboard</a>
+            <a class="nav-link" href="/edareport??name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}">Dashboard</a>
           </li>
             <li class="nav-item">
-            <a class="nav-link" href="/fillna">Easyfill</a>
+            <a class="nav-link" href="/fillna?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}">Easyfill</a>
           </li>
             </div>
           <li class="nav-item">
-            <a class="nav-link" href="/">Scale</a>
+            <a class="nav-link" href="/?user={{htmlData.user}}">Scale</a>
           </li></ul>
     </div>
 </div>
@@ -115,14 +115,14 @@
     <br>
     <h1 style="color:#ff4316;font-weight:bold;font-size:4rem;">Impute Missing values</h1>
     <br>
-    <form action = "/fillna" method = "POST" enctype="multipart/form-data">
+    <form action = "/fillna?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" method = "POST" enctype="multipart/form-data">
     <table class="table table-striped table-hover table-bordered" style="width:70%">
         <tr class="bg-secondary">
             <th class="text-white">Column Name</th>
             <th class="text-white">Data Type</th>
                 <th class="text-white">Imputation Method</th>
         </tr>
-        {% for col in cols %}
+        {% for col in htmlData.cols %}
         <tr>
             <td>
                 {{ col }}
@@ -185,13 +185,13 @@
     <br><br>
     <div class="container mt-2">
   <div class="alert alert-success">
-    <strong>Success!</strong> {{downloadmessage}} <a href="{{ downloadlink }}" class="alert-link">{{ filestatus }}</a>.
+    <strong>Success!</strong> {{htmlData.downloadmessage}} <a href="{{ htmlData.downloadlink }}" class="alert-link">{{ htmlData.filestatus }}</a>.
   </div></div>
     <script>
         function loaderfunc(){
         const bellarc = document.getElementsByClassName("container mt-1")[0];
        bellarc.removeAttribute('hidden');}
-       const mesg = {{ downloadmessage|tojson }};
+       const mesg = {{ htmlData.downloadmessage|tojson }};
       const cardToast = document.getElementsByClassName("container mt-2")[0];
       console.log("message",mesg);
       if (mesg == ''){
@@ -205,10 +205,10 @@
     </script>
     <div class="container mt-3">
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Error!</strong>{{errMsg}}
+        <strong>Error!</strong>{{htmlData.errMsg}}
         </div></div>
         <script>
-        const mesg1 = {{ errMsg|tojson }};
+        const mesg1 = {{ htmlData.errMsg|tojson }};
       const cardToast1 = document.getElementsByClassName("container mt-3")[0];
       console.log("message",mesg1);
       if (mesg1 == ''){
@@ -233,26 +233,26 @@
       <div class="col-6 col-md-2 mb-3" style="color:white;">
         <h5>Company</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/Contact" class="nav-link p-0 text-white">About</a></li>
-          <li class="nav-item mb-2"><a href="/careers" class="nav-link p-0 text-white">Careers</a></li>
-          <li class="nav-item mb-2"><a href="/security" class="nav-link p-0 text-white">Security</a></li>
-          <li class="nav-item mb-2"><a href="/legal" class="nav-link p-0 text-white">Legal</a></li>
+          <li class="nav-item mb-2"><a href="/Contact?user={{htmlData.user}}" class="nav-link p-0 text-white">About</a></li>
+          <li class="nav-item mb-2"><a href="/careers?user={{htmlData.user}}" class="nav-link p-0 text-white">Careers</a></li>
+          <li class="nav-item mb-2"><a href="/security?user={{htmlData.user}}" class="nav-link p-0 text-white">Security</a></li>
+          <li class="nav-item mb-2"><a href="/legal?user={{htmlData.user}}" class="nav-link p-0 text-white">Legal</a></li>
         </ul>
       </div>
 
       <div class="col-6 col-md-2 mb-3">
         <h5>EasyFill</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/pricing" class="nav-link p-0 text-white">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="/faq" class="nav-link p-0 text-white">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="/pricing?user={{htmlData.user}}" class="nav-link p-0 text-white">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="/faq?user={{htmlData.user}}" class="nav-link p-0 text-white">FAQs</a></li>
         </ul>
       </div>
 
       <div class="col-6 col-md-2 mb-3">
         <h5>Resources</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/blog" class="nav-link p-0 text-white">Blog</a></li>
-          <li class="nav-item mb-2"><a href="/customers" class="nav-link p-0 text-white">Customers</a></li>
+          <li class="nav-item mb-2"><a href="/blog?user={{htmlData.user}}" class="nav-link p-0 text-white">Blog</a></li>
+          <li class="nav-item mb-2"><a href="/customers?user={{htmlData.user}}" class="nav-link p-0 text-white">Customers</a></li>
         </ul>
       </div>
 
@@ -260,7 +260,7 @@
           <h5>Subscribe to our newsletter</h5>
           <p>Monthly digest of what's new and exciting from us.</p>
           <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-        <form action='/subscribe' method="post" enctype="multipart/form-data">
+        <form action='/subscribe?user={{htmlData.user}}' method="post" enctype="multipart/form-data">
             <input name="newsletter1" id="newsletter1" type="text"  placeholder="Email address">
             <input type="submit" class="btn btn-danger" value="Subscribe"></input>
         </form>
@@ -269,11 +269,11 @@
     </div>
 
     <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-      <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+      <a class="navbar-brand" href="/?user={{htmlData.user}}"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
       </a>
       <p>&copy; 2023 EasyFill, Inc. All rights reserved.</p>
       <ul class="list-unstyled d-flex">
-        <li class="ms-3"><a class="link-dark" href="/"><i class="fa-brands fa-twitter" style="color:white;font-size:40px;"></i></a></li>
+        <li class="ms-3"><a class="link-dark" href="/?user={{htmlData.user}}"><i class="fa-brands fa-twitter" style="color:white;font-size:40px;"></i></a></li>
         <li class="ms-3"><a class="link-dark" href=""><i class="fa-brands fa-instagram" style="color:white;font-size:40px;"></i></a></li>
         <li class="ms-3"><a class="link-dark" href="https://github.com/Mojo-lab"><i class="fa-brands fa-github" style="color:white;font-size:40px;"></i></a></li>
       </ul>

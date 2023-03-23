@@ -14,21 +14,21 @@
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+    <a class="navbar-brand" href="/?user={{htmlData.user}}"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
       </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
+        <a class="navbar-brand" href="/?user={{htmlData.user}}"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
       </a>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/?user={{htmlData.user}}">Home</a>
           </li>
           <div class="statuschecker">
           <li class="nav-item">
@@ -39,23 +39,23 @@
           </li>
             </div>
           <script>
-                const loginstatus = '{{ loggedin }}';
+                const loginstatus = '{{ htmlData.user }}';
                 console.log(loginstatus);
-                if (loginstatus == "True") {
+                if (loginstatus != "None") {
                 const collection = document.getElementsByClassName("statuschecker");
-                collection[0].outerHTML = '<li class="nav-item"><a class="nav-link" href="/userHome/{{usrname}}">Your Profile</a></li><li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>';
+                collection[0].outerHTML = '<li class="nav-item"><a class="nav-link" href="/userHome?user={{htmlData.user}}">Your Profile</a></li><li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>';
                 }
             </script>
           <li class="nav-item">
-            <a class="nav-link" href="/pricing">Pricing</a>
+            <a class="nav-link" href="/pricing?user={{htmlData.user}}">Pricing</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Company
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="/Contact">About</a></li>
-              <li><a class="dropdown-item" href="/Contact">Contact</a></li>
+              <li><a class="dropdown-item" href="/Contact?user={{htmlData.user}}">About</a></li>
+              <li><a class="dropdown-item" href="/Contact?user={{htmlData.user}}">Contact</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -67,8 +67,8 @@
               Resources
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="/blog">Blog</a></li>
-              <li><a class="dropdown-item" href="/Customer">Customers</a></li>
+              <li><a class="dropdown-item" href="/blog?user={{htmlData.user}}">Blog</a></li>
+              <li><a class="dropdown-item" href="/Customer?user={{htmlData.user}}">Customers</a></li>
             </ul>
           </li>
         </ul>
@@ -90,9 +90,9 @@
      <div class="col-md-6">
     <canvas id="myChart1" style="width:100%;max-width:600px;padding:50px;"></canvas>
  <script>
-var xValues = {{ data.bardata.xValues|tojson }};
-var yValues = {{ data.bardata.yValues|tojson }};
-var barColors = {{ data.bardata.barColors|tojson }};
+var xValues = {{ htmlData.data.bardata.xValues|tojson }};
+var yValues = {{ htmlData.data.bardata.yValues|tojson }};
+var barColors = {{ htmlData.data.bardata.barColors|tojson }};
 
 new Chart("myChart1", {
   type: "bar",
@@ -115,16 +115,16 @@ new Chart("myChart1", {
 });
  </script></div>
         <div class="col-md-4">
-     <h1 style="padding:30px;">{{ data.bardata.title }}</h1>
-            <p>{{ data.bardata.content }}</p>
+     <h1 style="padding:30px;">{{ htmlData.data.bardata.title }}</h1>
+            <p>{{ htmlData.data.bardata.content }}</p>
         </div></div></div>
 
 <br><br>
     <div class="card">
     <div class="row justify-content-center align-items-center">
      <div class="col-md-5">
-            <h1 style="padding:0px;">{{ data.piedata.title }}</h1>
-            <p>{{ data.piedata.content }}</p>
+            <h1 style="padding:0px;">{{ htmlData.data.piedata.title }}</h1>
+            <p>{{ htmlData.data.piedata.content }}</p>
 
             <table class="table table-striped table-hover table-bordered" style="text-align:center;">
                 <thead>
@@ -135,7 +135,7 @@ new Chart("myChart1", {
                 </tr>
                 </thead>
                 <tbody>
-                {% for val in data.piedata.datatable %}
+                {% for val in htmlData.data.piedata.datatable %}
                 <tr>
                     <td>
                         {{ val.ColumnName }}
@@ -155,9 +155,9 @@ new Chart("myChart1", {
         <div class="col-md-5">
 <canvas id="myChart" style="width:100%;max-width:650px;padding:50px;"></canvas>
 <script>
-var xValues = {{ data.piedata.xValues|tojson }};
-var yValues = {{ data.piedata.yValues|tojson }};
-var barColors = {{ data.piedata.barColors|tojson }};
+var xValues = {{ htmlData.data.piedata.xValues|tojson }};
+var yValues = {{ htmlData.data.piedata.yValues|tojson }};
+var barColors = {{htmlData.data.piedata.barColors|tojson }};
 
 new Chart("myChart", {
   type: "doughnut",
@@ -187,8 +187,8 @@ new Chart("myChart", {
      <div class="col-md-5">
 <canvas id="myChart2" style="width:100%;max-width:600px;padding:50px;"></canvas>
 <script>
-var datagroup = {{ data.groupedbardata|tojson }};
-var grouplabels = {{ data.grouplabels|tojson }};
+var datagroup = {{ htmlData.data.groupedbardata|tojson }};
+var grouplabels = {{ htmlData.data.grouplabels|tojson }};
 new Chart("myChart2", {
   type: "horizontalBar",
   data: {
@@ -225,8 +225,8 @@ new Chart("myChart2", {
 </script>
      </div>
      <div class="col-md-5">
-            <h1>{{ data.groupedmetadata.title }}</h1>
-            <p>{{ data.groupedmetadata.content }}</p>
+            <h1>{{ htmlData.data.groupedmetadata.title }}</h1>
+            <p>{{ htmlData.data.groupedmetadata.content }}</p>
         <table class="table table-striped table-hover table-bordered align-middle"  style="text-align:center;">
                 <thead>
                 <tr class="bg-secondary">
@@ -236,7 +236,7 @@ new Chart("myChart2", {
                 </tr>
                 </thead>
                 <tbody>
-                {% for val in data.groupedmetadata.grouptable %}
+                {% for val in htmlData.data.groupedmetadata.grouptable %}
                 <tr>
                     <td>
                         {{ val.ColumnName }}
@@ -260,13 +260,12 @@ new Chart("myChart2", {
 
     </div>
     <script>
-    const loginstatus = '{{ loggedin }}';
-                console.log(loginstatus);
-                if (loginstatus == "True") {
+    const loginstatus = '{{ htmlData.user }}';
+                if (loginstatus != "None") {
                 const collection = document.getElementsByClassName("sabji");
-                collection[0].outerHTML = '<div class="sabji"><a href="/fillna"><button class="button">Fill Values</button></a><a href="/userHome/{{usrname}}"><button class="button">User Home</button></a>';
+                collection[0].outerHTML = '<div class="sabji"><a href="/fillna?user={{htmlData.user}}"><button class="button">Fill Values</button></a><a href="/userHome?user={{htmlData.user}}"><button class="button">User Home</button></a>';
                 const collection_ = document.getElementsByClassName("optionNav");
-                collection_[0].outerHTML = '<div class="optionNav"><a href="pricing"><i class="fa fa-fw fa-search"></i> Pricing</a><a href="/"><i class="fa fa-fw fa-envelope"></i> Contact</a><a href="/userHome/{{usrname}}" ><i class="fa fa-fw fa-user">User Home</i></a><a href="/logout" ><i class="fa fa-fw fa-logout">Log Out</i></a></div>';
+                collection_[0].outerHTML = '<div class="optionNav"><a href="/pricing?user={{htmlData.user}}"><i class="fa fa-fw fa-search"></i> Pricing</a><a href="/?user={{htmlData.user}}"><i class="fa fa-fw fa-envelope"></i> Contact</a><a href="/userHome?user={{htmlData.user}}" ><i class="fa fa-fw fa-user">User Home</i></a><a href="/logout" ><i class="fa fa-fw fa-logout">Log Out</i></a></div>';
     }
     </script>
 </center>
@@ -279,26 +278,26 @@ new Chart("myChart2", {
       <div class="col-6 col-md-2 mb-3" style="color:white;">
         <h5>Company</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/Contact" class="nav-link p-0 text-white">About</a></li>
-          <li class="nav-item mb-2"><a href="/careers" class="nav-link p-0 text-white">Careers</a></li>
-          <li class="nav-item mb-2"><a href="/security" class="nav-link p-0 text-white">Security</a></li>
-          <li class="nav-item mb-2"><a href="/legal" class="nav-link p-0 text-white">Legal</a></li>
+          <li class="nav-item mb-2"><a href="/Contact?user={{htmlData.user}}" class="nav-link p-0 text-white">About</a></li>
+          <li class="nav-item mb-2"><a href="/careers?user={{htmlData.user}}" class="nav-link p-0 text-white">Careers</a></li>
+          <li class="nav-item mb-2"><a href="/security?user={{htmlData.user}}" class="nav-link p-0 text-white">Security</a></li>
+          <li class="nav-item mb-2"><a href="/legal?user={{htmlData.user}}" class="nav-link p-0 text-white">Legal</a></li>
         </ul>
       </div>
 
       <div class="col-6 col-md-2 mb-3">
         <h5>EasyFill</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/pricing" class="nav-link p-0 text-white">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="/faq" class="nav-link p-0 text-white">FAQs</a></li>
+          <li class="nav-item mb-2"><a href="/pricing?user={{htmlData.user}}" class="nav-link p-0 text-white">Pricing</a></li>
+          <li class="nav-item mb-2"><a href="/faq?user={{htmlData.user}}" class="nav-link p-0 text-white">FAQs</a></li>
         </ul>
       </div>
 
       <div class="col-6 col-md-2 mb-3">
         <h5>Resources</h5>
         <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/blog" class="nav-link p-0 text-white">Blog</a></li>
-          <li class="nav-item mb-2"><a href="/customers" class="nav-link p-0 text-white">Customers</a></li>
+          <li class="nav-item mb-2"><a href="/blog?user={{htmlData.user}}" class="nav-link p-0 text-white">Blog</a></li>
+          <li class="nav-item mb-2"><a href="/customers?user={{htmlData.user}}" class="nav-link p-0 text-white">Customers</a></li>
         </ul>
       </div>
 
@@ -306,7 +305,7 @@ new Chart("myChart2", {
           <h5>Subscribe to our newsletter</h5>
           <p>Monthly digest of what's new and exciting from us.</p>
           <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-        <form action='/subscribe' method="post" enctype="multipart/form-data">
+        <form action='/subscribe?user={{htmlData.user}}' method="post" enctype="multipart/form-data">
             <input name="newsletter1" id="newsletter1" type="text"  placeholder="Email address">
             <input type="submit" class="btn btn-danger" value="Subscribe"></input>
         </form>
@@ -315,11 +314,11 @@ new Chart("myChart2", {
     </div>
 
     <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-      <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
+      <a class="navbar-brand" href="/?user={{htmlData.user}}"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="140" height="70" class="d-inline-block align-text-top">
       </a>
       <p>&copy; 2023 EasyFill, Inc. All rights reserved.</p>
       <ul class="list-unstyled d-flex">
-        <li class="ms-3"><a class="link-dark" href="/"><i class="fa-brands fa-twitter" style="color:white;font-size:40px;"></i></a></li>
+        <li class="ms-3"><a class="link-dark" href="/?user={{htmlData.user}}"><i class="fa-brands fa-twitter" style="color:white;font-size:40px;"></i></a></li>
         <li class="ms-3"><a class="link-dark" href=""><i class="fa-brands fa-instagram" style="color:white;font-size:40px;"></i></a></li>
         <li class="ms-3"><a class="link-dark" href="https://github.com/Mojo-lab"><i class="fa-brands fa-github" style="color:white;font-size:40px;"></i></a></li>
       </ul>
