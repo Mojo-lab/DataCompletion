@@ -82,6 +82,38 @@
     </div>
   </div>
 </nav>
+<nav class="navbar navbar-expand-sm bg-light">
+    <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="padding:10px;">
+    <i class="fa-solid fa-bars" style="padding:20px;font-size:25px;color:#212529;"></i>
+</a>
+<h1 style="left:40%;position:relative;">Dashboard</h1>
+</nav>
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <a class="navbar-brand" href="/"><img style="padding:0px;" src="/static/images/logo.svg" alt="Logo" width="120" height="70" class="d-inline-block align-text-top">
+      </a>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/multiHome">Home</a>
+          </li>
+          <div class="statuschecker">
+          <li class="nav-item">
+            <a class="nav-link" href="/edareport">Dashboard</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/fillna">Easyfill</a>
+          </li>
+            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Scale</a>
+          </li></ul>
+    </div>
+</div>
+
+<div class="container" style="width:90%">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Overall Analysis</a>
@@ -278,8 +310,7 @@ new Chart("myChart2", {
   $(this).tab('show')
 })
 </script>
-
-
+</div>
 <div class="footerBox" style="color:white;width:100%;background-color:#212529;">
 <div class="container">
   <footer class="py-5">

@@ -164,16 +164,66 @@ def demo():
     else:
         return render_template("demo.html", loggedin=logged_in,usrname=username)
 
+def bt5Tablegen(filepath):
+    if ".csv" in filepath:
+        df = pd.read_csv(filepath)
+    else:
+        df = pd.read_excel(filepath,engine="openpyxl")
+
+    tableheader = '''<table
+            data-toggle="table"
+                id="table-container"
+              data-toolbar="#toolbar"
+              data-search="true"
+              data-show-refresh="true"
+              data-show-toggle="true"
+              data-show-fullscreen="true"
+              data-show-columns="true"
+              data-show-columns-toggle-all="true"
+              data-detail-view="false"
+              data-show-export="true"
+              data-click-to-select="true"
+              data-minimum-count-columns="2"
+              data-show-pagination-switch="true"
+              data-pagination="true"
+              data-id-field="id"
+              data-page-list="[5,10, 25, 50, 100, all]"
+                data-show-footer="false"
+               locale="en-US">
+            
+                    <thead class="bg-secondary text-white">'''
+    html_cont = df.to_html()
+    html_cont = html_cont.split("<thead>")[1]
+    html_cont = tableheader + html_cont
+    return html_cont
+
 
 @app.route('/eda/<string:fname>', methods=['GET'])
 def eda(fname):
-
     filename = fname
     filepath = f'static/file_uploads/user_raw_data/{username}/{filename}'
     session['folder_path'] = filepath
+    print("----101010101---------")
+    print(request.args)
+    spacename = session.get("name")
     data = null_value_graphs(filepath, filename,session)
+    homeTable = bt5Tablegen(filepath)
     print(data)
-    return render_template("eda.html", data=data, usrname=username, loggedin=logged_in)
+    return render_template("multiHome.html", data=data, usrname=username, loggedin=logged_in,homeTable = homeTable,fname=filename,workSpaceName=spacename)
+
+@app.route('/multiHome', methods=['GET'])
+def multiHome():
+    filepath = session.get("folder_path")
+    filename = session.get("filename")
+    spacename = session.get("name")
+    print("----101010101---------")
+    print(request.args)
+    data = null_value_graphs(filepath, filename,session)
+    homeTable = bt5Tablegen(filepath)
+    print(data)
+    return render_template("multiHome.html", data=data, usrname=username, loggedin=logged_in,homeTable = homeTable,fname=filename,workSpaceName=spacename)
+
+
 
 @app.route('/edareport',methods=['GET'])
 def edareport():
@@ -213,7 +263,7 @@ def newwork():
         session['folder_path'] = filepath
         data = null_value_graphs(filepath, filename,session)
         print(data)
-        return render_template('eda.html', data=data, usrname=username, loggedin=logged_in)
+        return render_template('multiHome.html', data=data, usrname=username, loggedin=logged_in,fname=filename)
     else:
         return render_template('newwork.html', loggedin=logged_in,usrname=username)
 
@@ -230,11 +280,13 @@ def fillnaValue():
     downloadlink = ''
     downloadmessage = ''
     errMsg = ''
+    filename =''
     if request.method == 'POST':
         fill_methods = []
         print(request.values)
         folder_path = session.get('folder_path')
         print(folder_path)
+        filename = session.get("filename")
         col = session.get("Column_names")
         for val in request.values.items():
             fill_methods.append(val)
@@ -254,7 +306,7 @@ def fillnaValue():
         print("Method GET")
         # print(df.isnull().sum())
     return render_template('fillna.html', colours=colours, cols=cols, filestatus=download_file_status,errMsg=errMsg,
-                           downloadlink=downloadlink, downloadmessage=downloadmessage, fillmeth=fillmeth,loggedin=logged_in,usrname=username)
+                           downloadlink=downloadlink, downloadmessage=downloadmessage, fillmeth=fillmeth,loggedin=logged_in,usrname=username,fname=filename)
 
 
 @app.route("/getdata")
