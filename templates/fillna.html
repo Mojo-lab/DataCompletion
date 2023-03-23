@@ -109,7 +109,14 @@
           </li></ul>
     </div>
 </div>
-
+<script>
+    const userStat = {{ htmlData.user|tojson }};
+    console.log("userStat",userStat);
+    const sear = document.getElementsByClassName("navbar navbar-expand-sm bg-light")[0];
+    if (userStat == null){
+        sear.setAttribute("hidden",true);
+    }
+</script>
 
 <center>
     <br>
