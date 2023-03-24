@@ -50,12 +50,13 @@
 </center>
   <div class="container" style="width:90%;">
   <h2>Your Workspaces</h2>
-<div id="table-container">
-    {{ htmlData.tablehtml | safe }}
-  <div id="toolbar">
-          <a href="/newwork?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" class="btn btn-success btn-md"> New Workspace</a>
+
+    <a href="/newwork?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" class="btn btn-success btn-md"> New Workspace</a>
     <button type="button" id="delete-selected-btn" class="btn btn-danger" data-toggle="modal" data-target="#example-modal" >Delete</button>
-          </div>
+
+      <div id="table-container">
+    {{ htmlData.tablehtml | safe }}
+
     </div>
       <div class="modal fade" id="example-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-label" aria-hidden="true">
   <div class="modal-dialog" role="document">
