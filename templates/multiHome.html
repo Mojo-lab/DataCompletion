@@ -145,12 +145,22 @@
       </a>
     </div>
     <div class="line"></div>
-    <div class="step" data-target="#information-part">
+    <div class="step" data-target="#information-part" id="easyfillval">
       <a href="/fillna?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
         <span class="bs-stepper-circle">3</span>
         <span class="bs-stepper-label">EasyFill</span>
       </a>
     </div>
+    <script>
+      const easyFilledval = {{ htmlData.easyFilled }};
+      console.log("easyfilled",easyFilledval);
+      if (easyFilledval == true){
+      console.log(true);
+      const easylog = document.getElementById("easyfillval");
+      easylog.outerHTML = '<div class="step" data-target="#information-part" id="easyfillval"><a href="/fillna?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" style="color:green;"><i class="fa-solid fa-circle-check" style="font-size:30px;"></i><span class="bs-stepper-label" style="color:green;">EasyFill</span></a></div>';
+      }
+
+    </script>
     <div class="line"></div>
     <div class="step" data-target="#information-part">
       <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">

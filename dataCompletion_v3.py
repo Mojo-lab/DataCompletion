@@ -32,7 +32,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/file_uploads'
 app.secret_key = config.secret_key
 
-global username, logged_in
 
 mail.init_app(app)
 db = SQLAlchemy(app)
@@ -403,19 +402,27 @@ def fillnaValue():
     if request.method == 'POST':
         fill_methods = []
         folder_path = session.get('folder_path')
-        filename = session.get("filename")
+        # filename = session.get("filename")
         col = session.get("Column_names")
         for val in request.values.items():
             fill_methods.append(val)
         try:
             df = dataCompletion_fill.main(folder_path, col, fill_methods)
             print(df.isnull().sum())
+            filled_dataset_path = f"static/file_uploads/filled_datasets/{user}"
+            try:
+                os.mkdir(filled_dataset_path)
+            except FileExistsError:
+                pass
+            filled_dataset_path = filled_dataset_path+f"/{filename}"
+            print(f"file saved at this loc - {filled_dataset_path}")
             if '.csv' in folder_path:
-                df.to_csv(folder_path, index=False)
+                df.to_csv(filled_dataset_path, index=False)
             else:
-                df.to_excel(folder_path, index=False)
+                df.to_excel(filled_dataset_path, index=False)
+            print(f"file saved at this loc - {filled_dataset_path}")
             download_file_status = "Download File"
-            downloadlink = '/getdata'
+            downloadlink = f'/getdata?user={user}&filename={filename}'
             downloadmessage = 'EasyFill has finished filling the missing values!'
         except TypeError:
             errMsg = f"The entered data type one or more column is wrong. Please check it again."
@@ -428,6 +435,11 @@ def fillnaValue():
 @app.route("/getdata")
 def getdata():
     folder_path = session.get('folder_path')
+    print(session)
+    print(request.args)
+    user = request.args.get("user")
+    filename = request.args.get("filename")
+    folder_path = f"static/file_uploads/filled_datasets/{user}/{filename}"
     if '.csv' in folder_path:
         file_type = 'text/csv'
     else:
@@ -483,7 +495,9 @@ def eda():
     session['folder_path'] = filepath
     data = null_value_graphs(filepath, filename,session)
     homeTable = bt5Tablegen(filepath)
-    htmlData = {"data":data, "user":username, "homeTable":homeTable,"filename":filename,"workSpaceName":spacename}
+    easyFilledPath = f"static/file_uploads/filled_data/{username}/{filename}"
+    easyFilled = str(os.path.exists(easyFilledPath)).lower()
+    htmlData = {"data":data, "user":username, "homeTable":homeTable,"filename":filename,"workSpaceName":spacename,"easyFilled":easyFilled}
     return render_template("multiHome.html",htmlData=htmlData)
 
 @app.route('/multiHome', methods=['GET'])
@@ -494,7 +508,9 @@ def multiHome():
     filepath = f'static/file_uploads/user_raw_data/{username}/{filename}'
     data = null_value_graphs(filepath, filename,session)
     homeTable = bt5Tablegen(filepath)
-    htmlData = { "data":data, "user":username, "homeTable":homeTable,"filename":filename,"workSpaceName":spacename}
+    easyFilledPath = f"static/file_uploads/filled_datasets/{username}/{filename}"
+    easyFilled = str(os.path.exists(easyFilledPath)).lower()
+    htmlData = { "data":data, "user":username, "homeTable":homeTable,"filename":filename,"workSpaceName":spacename,"easyFilled":easyFilled}
     return render_template("multiHome.html",htmlData =htmlData)
 
 
