@@ -385,6 +385,24 @@ def userHome():
         return render_template("btTable.html",htmlData=htmlData )
 
 
+def valueFillTablehtml(filled_values):
+    htmltxt = '''<h2>Easyfill's Report</h2>
+    <table class="table table-hover table-bordered" style="width:70%">
+        <tr class="bg-secondary">
+            <th class="text-white">Column Name</th>
+            <th class="text-white">Method</th>
+            <th class="text-white">Filled Value</th>
+        </tr>'''
+    for idx in filled_values:
+        htmltxt1= f'''<tr>
+            <td>{idx[0]}</td>
+            <td>{idx[1]}</td>
+            <td>{idx[2]}</td>
+                </tr>'''
+        htmltxt = htmltxt + htmltxt1
+    htmltxt = htmltxt + "</table>"
+    return htmltxt
+
 @app.route('/fillna', methods=['GET', 'POST'])
 def fillnaValue():
     colours = ['Mean', 'Median', 'Mode', 'None']
@@ -400,6 +418,7 @@ def fillnaValue():
     user = request.args.get("user")
     workSpaceName = request.args.get("name")
     print(request.args)
+    filled_values = ''
     if request.method == 'POST':
         fill_methods = []
         folder_path = session.get('folder_path')
@@ -409,6 +428,8 @@ def fillnaValue():
             fill_methods.append(val)
         try:
             df = dataCompletion_fill.main(folder_path, col, fill_methods)
+            filled_values = df[1]
+            df = df[0]
             print(df.isnull().sum())
             filled_dataset_path = f"static/file_uploads/filled_datasets/{user}"
             try:
@@ -425,12 +446,21 @@ def fillnaValue():
             download_file_status = "Download File"
             downloadlink = f'/getdata?user={user}&filename={filename}'
             downloadmessage = 'EasyFill has finished filling the missing values!'
+            print(filled_values)
+            if len(filled_values) != 0:
+                filled_values_html = valueFillTablehtml(filled_values)
+                filled_values = filled_values_html
+
+            else:
+                pass
+
         except TypeError:
             errMsg = f"The entered data type one or more column is wrong. Please check it again."
     else:
         print("Method GET")
     htmlData = {"colours":colours, "cols":cols, "filestatus":download_file_status,"errMsg":errMsg,
-                "downloadlink":downloadlink, "downloadmessage":downloadmessage, "fillmeth":fillmeth,"user":user,"filename":filename,"workSpaceName":workSpaceName}
+                "downloadlink":downloadlink, "downloadmessage":downloadmessage, "fillmeth":fillmeth,"user":user,
+                "filename":filename,"workSpaceName":workSpaceName,"filledValues":filled_values}
     return render_template('fillna.html',htmlData=htmlData)
 
 @app.route("/getdata")

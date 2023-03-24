@@ -7,6 +7,7 @@ def main(filepath, col, type):
     else:
         df = pd.read_excel(filepath, engine="openpyxl")
 
+    filled_value = []
     for ty in type:
         try:
             print("&&" * 20)
@@ -29,7 +30,8 @@ def main(filepath, col, type):
                 fillV = df[c].median()
                 df[c].fillna(fillV, inplace=True)
                 print(f"filled missing value - {c}")
+            filled_value.append((c,meth,fillV))
         except IndexError:
             pass
 
-    return df
+    return df,filled_value
