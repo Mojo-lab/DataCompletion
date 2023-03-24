@@ -446,7 +446,7 @@ def fillnaValue():
             download_file_status = "Download File"
             downloadlink = f'/getdata?user={user}&filename={filename}'
             downloadmessage = 'EasyFill has finished filling the missing values!'
-            print(filled_values)
+            print(f"the filled values are - {filled_values}")
             if len(filled_values) != 0:
                 filled_values_html = valueFillTablehtml(filled_values)
                 filled_values = filled_values_html
