@@ -728,6 +728,14 @@ def getTransformeddata():
         download_name='ScaleFilledData.csv',
         as_attachment=True)
 
+@app.route("/textNer",methods=['GET','POST'])
+def textNer():
+    if request.method == 'POST':
+        print(request.get_json())
+        data = request.get_json()
+        return jsonify(status="success", data=data)
+    return render_template('textDrag.html',htmlData={})
+
 if __name__ == '__main__':
     app.debug = True
     app.run(port=3000)
