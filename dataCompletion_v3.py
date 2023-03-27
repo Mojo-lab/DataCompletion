@@ -13,7 +13,7 @@ from eda_charts import null_value_graphs,eda_report
 from blog import blogdata
 import jwt
 from time import time
-
+from dataCompletion_scale import col_transformer
 
 
 ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
@@ -528,7 +528,10 @@ def eda():
     homeTable = bt5Tablegen(filepath)
     easyFilledPath = f"static/file_uploads/filled_data/{username}/{filename}"
     easyFilled = str(os.path.exists(easyFilledPath)).lower()
-    htmlData = {"data":data, "user":username, "homeTable":homeTable,"filename":filename,"workSpaceName":spacename,"easyFilled":easyFilled}
+    scaledPath = f"static/file_uploads/scaled_data/{username}/{filename}"
+    scaledPath = str(os.path.exists(scaledPath)).lower()
+    htmlData = {"data":data, "user":username, "homeTable":homeTable,"filename":filename,
+                "workSpaceName":spacename,"easyFilled":easyFilled,"scaledPath":scaledPath}
     return render_template("multiHome.html",htmlData=htmlData)
 
 @app.route('/multiHome', methods=['GET'])
@@ -541,7 +544,10 @@ def multiHome():
     homeTable = bt5Tablegen(filepath)
     easyFilledPath = f"static/file_uploads/filled_datasets/{username}/{filename}"
     easyFilled = str(os.path.exists(easyFilledPath)).lower()
-    htmlData = { "data":data, "user":username, "homeTable":homeTable,"filename":filename,"workSpaceName":spacename,"easyFilled":easyFilled}
+    scaledPath = f"static/file_uploads/scaled_data/{username}/{filename}"
+    scaledPath = str(os.path.exists(scaledPath)).lower()
+    htmlData = { "data":data, "user":username, "homeTable":homeTable,"filename":filename,
+                 "workSpaceName":spacename,"easyFilled":easyFilled,"scaledPath":scaledPath}
     return render_template("multiHome.html",htmlData =htmlData)
 
 
@@ -652,6 +658,75 @@ def article(articleid):
     print(htmlData)
     return render_template(articleid,htmlData=htmlData)
 
+
+@app.route("/scale",methods=["GET","POST"])
+def scale():
+    user = request.args.get("user")
+    filename = request.args.get("filename")
+    filepath = f"static/file_uploads/user_raw_data/{user}/{filename}"
+    if ".csv" in filename:
+        df = pd.read_csv(filepath)
+    else:
+        df = pd.read_excel(filepath)
+    col_names = []
+    for col in df.columns:
+        print(df[col].dtype)
+        if df[col].dtype == float or df[col].dtype == int:
+            col_names.append(col)
+        else:
+            pass
+    download_file_status = ""
+    downloadlink = ""
+    downloadmessage = ''
+    errMsg = ''
+    htmlData = {"user":user,"filename":filename,"colNames":col_names,"downloadlink":downloadlink,
+                "downloadmessage":downloadmessage,"errMsg":errMsg}
+    if request.method == "POST":
+        print(request.form)
+        col_scale = [idx for idx in request.form.items()]
+        print(col_scale)
+        try:
+            df = col_transformer(df,col_scale)
+
+            scale_loc = f"static/file_uploads/scaled_data/{user}"
+            try:
+                os.mkdir(scale_loc)
+            except FileExistsError:
+                pass
+            scale_loc = f"static/file_uploads/scaled_data/{user}/{filename}"
+            if ".csv" in filename:
+                df.to_csv(scale_loc,index=False)
+            else:
+                df.to_excel(scale_loc,index=False)
+            print("transformation completed!!")
+            download_file_status = "Download File"
+            downloadlink = f'/getTransformeddata?user={user}&filename={filename}'
+            downloadmessage = 'EasyFill has finished scaling the dataset!'
+            htmlData['downloadlink'] = downloadlink
+            htmlData['downloadmessage'] = downloadmessage
+            htmlData['filestatus'] = download_file_status
+        except ValueError:
+            errMsg = "One or mor columns has null values. Please check it again."
+            htmlData['errMsg'] = errMsg
+    return render_template('scale.html',htmlData=htmlData)
+
+@app.route("/getTransformeddata")
+def getTransformeddata():
+    folder_path = session.get('folder_path')
+    print(session)
+    print(request.args)
+    user = request.args.get("user")
+    filename = request.args.get("filename")
+    folder_path = f"static/file_uploads/scaled_data/{user}/{filename}"
+    if '.csv' in folder_path:
+        file_type = 'text/csv'
+    else:
+        file_type = "text/xlsx"
+    return send_file(
+        folder_path,
+        mimetype=file_type,
+        download_name='ScaleFilledData.csv',
+        as_attachment=True)
 
 if __name__ == '__main__':
     app.debug = True

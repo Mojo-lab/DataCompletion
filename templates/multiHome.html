@@ -162,12 +162,20 @@
 
     </script>
     <div class="line"></div>
-    <div class="step" data-target="#information-part">
-      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+    <div class="step" data-target="#information-part" id="scaledFilledValue">
+      <a href="/scale?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
         <span class="bs-stepper-circle">4</span>
         <span class="bs-stepper-label">Scale</span>
-      </button>
+      </a>
     </div>
+    <script>
+      const scaledPath = {{ htmlData.scaledPath }};
+      if (scaledPath == true){
+      const easylog = document.getElementById("scaledFilledValue");
+      easylog.outerHTML = '<div class="step" data-target="#information-part" id="scaledFilledValue"><a href="/scale?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" style="color:green;"><i class="fa-solid fa-circle-check" style="font-size:30px;"></i><span class="bs-stepper-label" style="color:green;">Scale</span></a></div>';
+      }
+
+    </script>
     <div class="line"></div>
     <div class="step" data-target="#information-part">
       <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
