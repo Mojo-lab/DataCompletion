@@ -83,7 +83,7 @@
     <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="padding:10px;">
     <i class="fa-solid fa-bars" style="padding:20px;font-size:25px;color:#212529;"></i>
 </a>
-<h1 style="left:40%;position:relative;">EasyFill</h1>
+<h1 style="left:40%;position:relative;">Scale</h1>
 </nav>
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
@@ -117,85 +117,37 @@
         sear.setAttribute("hidden",true);
     }
 </script>
-
+<br>
 <center>
-    <br>
-    <h1 style="color:#ff4316;font-weight:bold;font-size:4rem;">Impute Missing values</h1>
-    <br>
-    <form action = "/fillna?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" method = "POST" enctype="multipart/form-data">
-    <table class="table table-striped table-hover table-bordered" style="width:70%">
-        <tr class="bg-secondary">
-            <th class="text-white">Column Name</th>
-            <th class="text-white">Data Type</th>
-                <th class="text-white">Imputation Method</th>
-        </tr>
-        {% for col in htmlData.cols %}
+<form action = "/scale?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" method = "POST" enctype="multipart/form-data">
+<table class="table table-bordered table-light table-hover border-secondary align-middle" style="width:40%;">
+    <thead>
         <tr>
-            <td>
-                {{ col }}
-            </td>
-
-            <td>
-                <input type="radio" id="fillmethodCategorical" name="{{col}}__fillmethod" value="fillmethodCategorical" onclick="verifyCats(id,name)">
-                <label>Categorical</label><br>
-                <input type="radio" id="fillmethodContinuous" name="{{col}}__fillmethod" value="fillmethodContinuous" onclick="verifyCats(id,name)">
-                <label>Continuous</label>
-
-            </td>
-            <td>
-                <input type="radio" id="fillmethodMean" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Mean">
-                <label>Mean</label><br>
-                <input type="radio" id="fillmethodMedian" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Median">
-                <label>Median</label><br>
-                <input type="radio" id="fillmethodMode" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Mode">
-                <label>Mode</label><br>
-                <div><input type="radio" id="fillmethodMl" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___Ml">
-                    <label>ML - </label>
-                <select class="form-select-sm">
-  <option value="0" selected>Linear Regression</option>
-  <option value="1">SVR</option>
-  <option value="2">Gradient Boosting</option>
-  <option value="3">Decision Tree</option>
-</select></input></div>
-                <input type="radio" id="fillmethodNone" name="{{col}}__fillmethod_" value="{{col}}__fillmethod___None">
-                <label>None</label>
+            <th scope="col">Column Name</th>
+            <th scope="col">Scaling Method</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for col in htmlData.colNames %}
+        <tr>
+            <td>{{col}}</td>
+            <td style="width:60%;">
+                <select class="form-select" aria-label="Default select example"  name="{{col}}" id="{{col}}">
+  <option value="None" active>None</option>
+  <option value="Standardization">Standardization</option>
+  <option value="Normalization">Normalization</option>
+  <option value="Min-Max Scaling">Min-Max Scaling</option>
+  <option value="Absolute Maximum Scaling">Absolute Maximum Scaling</option>
+  <option value="Robust Scaling">Robust Scaling</option>
+</select>
             </td>
         </tr>
-        {% endfor %}
-        <script>
-            function verifyCats(id,name) {
-            const elementCollection = new Array();
-            const newName = name+"_";
-            const allElements = document.getElementsByName(newName);
-            console.log(id);
-            console.log(name);
-            if (id == "fillmethodCategorical") {
-            console.log("catgeorical selection");
-            allElements[0].disabled = true;
-            allElements[1].disabled = true;
-            allElements[2].disabled = false;
-            allElements[3].disabled = false;
-            }
-            else{
-            console.log("continuous selection");
-            allElements[0].disabled = false;
-            allElements[1].disabled = false;
-            allElements[2].disabled = true;
-            allElements[3].disabled = true;
-            }
-            }
-        </script>
-    </table>
-
-        <br>
-        <input  class="btn btn-outline-success btn-lg" type = "submit" value="Submit" onclick="loaderfunc();">
+    {% endfor %}
+    </tbody>
+</table>
+    <input  class="btn btn-outline-success" type = "submit" value="Submit">
     </form>
-    <div class="container mt-1" hidden="true">
-    <div class="spinner-grow text-danger"></div>
-  <div class="spinner-grow text-secondary"></div>
-  <div class="spinner-grow text-dark"></div>
-</div>
-    <br><br>
+
     <div class="container mt-2">
   <div class="alert alert-success">
     <strong>Success!</strong> {{htmlData.downloadmessage}} <a href="{{ htmlData.downloadlink }}" class="alert-link">{{ htmlData.filestatus }}</a>.
@@ -233,13 +185,7 @@
             console.log("shownn");
       }
     </script>
-    </div>
-<div>
-    {{htmlData.filledValues|safe}}
-</div>
 </center>
-
-
 <br>
 <div class="footerBox" style="color:white;width:100%;background-color:#212529;">
 <div class="container">
