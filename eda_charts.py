@@ -85,7 +85,13 @@ def null_value_graphs(filepath,filename,session):
     groupedbartitle = 'Comparision of null & non null values in each column'
     groupedbarcontent = 'EasyFill has analyzed the data and the recommendations are given in the table'
     groupedbar_meta_data = {"title":groupedbartitle,"content":groupedbarcontent,"grouptable":grouptable}
-    data = {"bardata": overall_null_values, "piedata": piedata, 'groupedbardata': groupedbardata, 'grouplabels': xValues ,'groupedmetadata':groupedbar_meta_data}
+    print(df.corr())
+    corr_table = df.corr().to_html()
+    table_header = '''<table class="table table-bordered table-hover table-light"><thead>'''
+    corr_table = corr_table.split("<thead>")[1]
+    corr_table = table_header+corr_table
+    print(corr_table)
+    data = {"bardata": overall_null_values, "piedata": piedata, 'groupedbardata': groupedbardata, 'grouplabels': xValues ,'groupedmetadata':groupedbar_meta_data,"corrTable":corr_table}
     return data
 
 

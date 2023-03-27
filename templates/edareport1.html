@@ -301,8 +301,13 @@ new Chart("myChart2", {
 </script>
           </div>
         </div>
-      </div>
-  </div>
+      </div><br>
+
+    <div class="card" style="padding:10px;">
+        <h2 class="text-danger">Correlation</h2>
+        {{htmlData.data1.corrTable|safe}}
+    </div>
+</div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <h1>Categorical variables analysis</h1>
     {{htmlData.catdata|safe}}
