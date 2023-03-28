@@ -2,27 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EasyFill | EDA</title>
+    <title>EasyFill | Magic</title>
     <link rel="icon" type="image/x-icon" href="/static/images/easyfill_icon.png">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
-
-
-    <link href="https://unpkg.com/bootstrap-table@1.21.3/dist/bootstrap-table.min.css" rel="stylesheet">
-
-<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.21.3/dist/bootstrap-table.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.21.3/dist/bootstrap-table-locale-en.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.21.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-<script src="https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css">
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
@@ -98,7 +83,7 @@
     <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" style="padding:10px;">
     <i class="fa-solid fa-bars" style="padding:20px;font-size:25px;color:#212529;"></i>
 </a>
-<h1 style="left:35%;position:relative;">Workspace - {{htmlData.workSpaceName}}</h1>
+<h1 style="left:40%;position:relative;">Encode</h1>
 </nav>
 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
@@ -113,102 +98,94 @@
           </li>
           <div class="statuschecker">
           <li class="nav-item">
-            <a class="nav-link" href="/edareport?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}">Dashboard</a>
+            <a class="nav-link" href="/edareport??name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}">Dashboard</a>
           </li>
             <li class="nav-item">
             <a class="nav-link" href="/fillna?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}">Easyfill</a>
           </li>
             </div>
           <li class="nav-item">
-            <a class="nav-link" href="/?name={{htmlData.user}}">Scale</a>
+            <a class="nav-link" href="/?user={{htmlData.user}}">Scale</a>
           </li></ul>
     </div>
 </div>
-<center>
+<script>
+    const userStat = {{ htmlData.user|tojson }};
+    console.log("userStat",userStat);
+    const sear = document.getElementsByClassName("navbar navbar-expand-sm bg-light")[0];
+    if (userStat == null){
+        sear.setAttribute("hidden",true);
+    }
+</script>
 <br>
-  <h3>Workflow status of your dataset</h3>
-  <br>
-<div class="bs-stepper" style="width:90%;">
-  <div class="bs-stepper-header" role="tablist">
-    <!-- your steps here -->
-    <div class="step" data-target="#logins-part">
-      <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger" style="color:green;">
-        <i class="fa-solid fa-circle-check" style="font-size:30px;"></i>
-        <span class="bs-stepper-label" style="color:green;">Data Upload</span>
-      </button>
-    </div>
-    <div class="line" ></div>
-    <div class="step" data-target="#information-part">
-      <a href="/edareport?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" style="color:green;">
-        <i class="fa-solid fa-circle-check" style="font-size:30px;"></i>
-        <span class="bs-stepper-label" style="color:green;">Dashboard</span>
-      </a>
-    </div>
-    <div class="line"></div>
-    <div class="step" data-target="#information-part" id="easyfillval">
-      <a href="/fillna?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-        <span class="bs-stepper-circle">3</span>
-        <span class="bs-stepper-label">EasyFill</span>
-      </a>
-    </div>
-    <script>
-      const easyFilledval = {{ htmlData.easyFilled }};
-      console.log("easyfilled",easyFilledval);
-      if (easyFilledval == true){
-      console.log(true);
-      const easylog = document.getElementById("easyfillval");
-      easylog.outerHTML = '<div class="step" data-target="#information-part" id="easyfillval"><a href="/fillna?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" style="color:green;"><i class="fa-solid fa-circle-check" style="font-size:30px;"></i><span class="bs-stepper-label" style="color:green;">EasyFill</span></a></div>';
-      }
-
-    </script>
-    <div class="line"></div>
-    <div class="step" data-target="#information-part" id="scaledFilledValue">
-      <a href="/scale?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-        <span class="bs-stepper-circle">4</span>
-        <span class="bs-stepper-label">Scale</span>
-      </a>
-    </div>
-    <script>
-      const scaledPath = {{ htmlData.scaledPath }};
-      if (scaledPath == true){
-      const easylog = document.getElementById("scaledFilledValue");
-      easylog.outerHTML = '<div class="step" data-target="#information-part" id="scaledFilledValue"><a href="/scale?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" style="color:green;"><i class="fa-solid fa-circle-check" style="font-size:30px;"></i><span class="bs-stepper-label" style="color:green;">Scale</span></a></div>';
-      }
-
-    </script>
-
-    <div class="line"></div>
-    <div class="step" data-target="#information-part">
-      <a href="/encode?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-        <span class="bs-stepper-circle">5</span>
-        <span class="bs-stepper-label">Encode</span>
-      </a>
-    </div>
-
-    <div class="line"></div>
-    <div class="step" data-target="#information-part">
-      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-        <span class="bs-stepper-circle">6</span>
-        <span class="bs-stepper-label">Complete</span>
-      </button>
-    </div>
-  </div>
+<center>
+    <div class="card card-light" style="padding:10px;">
+<form action = "/encode?name={{htmlData.workSpaceName}}&user={{htmlData.user}}&filename={{htmlData.filename}}" method = "POST" enctype="multipart/form-data">
+<table class="table table-bordered table-light table-hover border-secondary align-middle" style="width:40%;">
+    <thead>
+        <tr>
+            <th scope="col">Column Name</th>
+            <th scope="col">Encoding Method</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for col in htmlData.colNames %}
+        <tr>
+            <td>{{col}}</td>
+            <td style="width:60%;">
+                <select class="form-select" aria-label="Default select example"  name="{{col}}" id="{{col}}">
+  <option value="None" active>None</option>
+  <option value="Binary Encoding">Binary Encoding</option>
+  <option value="Label Encoding">Label Encoding</option>
+  <option value="Nominal Encoding">Nominal Encoding</option>
+</select>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    <input  class="btn btn-outline-success" type = "submit" value="Submit">
+    </form>
 </div>
-  <br><br>
-
-      <h3 class="card-title">Raw dataset</h3>
-    {{ htmlData.homeTable|safe }}
-
-  <script>
+    <div class="container mt-2">
+  <div class="alert alert-success">
+    <strong>Success!</strong> {{htmlData.downloadmessage}} <a href="{{ htmlData.downloadlink }}" class="alert-link">{{ htmlData.filestatus }}</a>.
+  </div></div>
     <script>
-    $(function() {
-      $('#table-container').bootstrapTable();
-    });
-  </script>
+        function loaderfunc(){
+        const bellarc = document.getElementsByClassName("container mt-1")[0];
+       bellarc.removeAttribute('hidden');}
+       const mesg = {{ htmlData.downloadmessage|tojson }};
+      const cardToast = document.getElementsByClassName("container mt-2")[0];
+      console.log("message",mesg);
+      if (mesg == ''){
+            cardToast.setAttribute('hidden',true);
+            console.log("hiddden");
+            }
+      else{
+            cardToast.removeAttribute('hidden');
+            console.log("shownn");
+      }
+    </script>
+    <div class="container mt-3">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong>{{htmlData.errMsg}}
+        </div></div>
+        <script>
+        const mesg1 = {{ htmlData.errMsg|tojson }};
+      const cardToast1 = document.getElementsByClassName("container mt-3")[0];
+      console.log("message",mesg1);
+      if (mesg1 == ''){
+            cardToast1.setAttribute('hidden',true);
+            console.log("hiddden");
+            }
+      else{
+            cardToast1.removeAttribute('hidden');
+            console.log("shownn");
+      }
+    </script>
 </center>
-
-<br><br>
-
+<br>
 <div class="footerBox" style="color:white;width:100%;background-color:#212529;">
 <div class="container">
   <footer class="py-5">
