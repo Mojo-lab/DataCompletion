@@ -14,7 +14,7 @@ from blog import blogdata
 import jwt
 from time import time
 from dataCompletion_scale import col_transformer
-
+from dataCompletion_encode import encode_catdata
 
 ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 
@@ -727,6 +727,82 @@ def getTransformeddata():
         mimetype=file_type,
         download_name='ScaleFilledData.csv',
         as_attachment=True)
+
+
+@app.route("/encode",methods=['GET','POST'])
+def encode():
+    user = request.args.get("user")
+    filename = request.args.get("filename")
+    filepath = f"static/file_uploads/user_raw_data/{user}/{filename}"
+    if ".csv" in filename:
+        df = pd.read_csv(filepath)
+    else:
+        df = pd.read_excel(filepath)
+    col_names = []
+    for col in df.columns:
+        print(df[col].dtype)
+        if df[col].dtype != float and df[col].dtype != int:
+            col_names.append(col)
+        else:
+            pass
+    download_file_status = ""
+    downloadlink = ""
+    downloadmessage = ''
+    errMsg = ''
+    htmlData = {"user": user, "filename": filename, "colNames": col_names, "downloadlink": downloadlink,
+                "downloadmessage": downloadmessage, "errMsg": errMsg}
+    if request.method == "POST":
+        print(request.form)
+        col_scale = [idx for idx in request.form.items()]
+        print(col_scale)
+        try:
+            df = encode_catdata(df, col_scale)
+
+            scale_loc = f"static/file_uploads/encoded_data/{user}"
+            try:
+                os.mkdir(scale_loc)
+            except FileExistsError:
+                pass
+            scale_loc = f"static/file_uploads/encoded_data/{user}/{filename}"
+            if ".csv" in filename:
+                df.to_csv(scale_loc, index=False)
+            else:
+                df.to_excel(scale_loc, index=False)
+            print("transformation completed!!")
+            download_file_status = "Download File"
+            downloadlink = f'/getencodeddata?user={user}&filename={filename}'
+            downloadmessage = 'EasyFill has finished encoding the dataset!'
+            htmlData['downloadlink'] = downloadlink
+            htmlData['downloadmessage'] = downloadmessage
+            htmlData['filestatus'] = download_file_status
+        except ValueError:
+            errMsg = "One or mor columns has null values. Please check it again."
+            htmlData['errMsg'] = errMsg
+    return render_template('encode.html', htmlData=htmlData)
+
+
+
+@app.route("/getencodeddata")
+def getencodeddata():
+    folder_path = session.get('folder_path')
+    print(session)
+    print(request.args)
+    user = request.args.get("user")
+    filename = request.args.get("filename")
+    folder_path = f"static/file_uploads/encoded_data/{user}/{filename}"
+    if '.csv' in folder_path:
+        file_type = 'text/csv'
+    else:
+        file_type = "text/xlsx"
+    return send_file(
+        folder_path,
+        mimetype=file_type,
+        download_name='ScaleEncodedData.csv',
+        as_attachment=True)
+
+
+
+
 
 @app.route("/textNer",methods=['GET','POST'])
 def textNer():
